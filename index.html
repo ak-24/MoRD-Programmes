@@ -11,17 +11,360 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="MoRD Programmes">
 <meta property="og:description" content="A plain-language guide, in six Indian languages, to seven Ministry of Rural Development programmes: what each does, how it works, its reach across states, and where it falls short. Independent explainer, not an official website.">
-<meta property="og:image" content="img/og.jpg">
+<meta property="og:image" content="og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23693D30'/%3E%3Cpath d='M14 34 32 18l18 16M19 30v17h26V30' fill='none' stroke='%23FFF8F0' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap">
-<link rel="stylesheet" href="assets/style.css">
-<link rel="preload" as="image" type="image/webp" href="img/hero-662.webp" imagesrcset="img/hero-480.webp 480w, img/hero-662.webp 662w" imagesizes="(max-width:800px) 100vw, 46vw">
-<script defer src="assets/i18n.js"></script>
-<script defer src="assets/map-data.js"></script>
-<script defer src="assets/app.js"></script>
+<style>
+/* MoRD Programmes · independent explainer · data: PRS Legislative Research, Lok Sabha answers (2025) */
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+
+/* Layout: split hero (headline left, photograph right) → three ease tiles → 4+3 photo grid →
+   sand budget panel → year rail → photo band. Programme page: photo banner, fact strip, pill tabs, step cards. */
+:root{
+  --paper:#F7F1E8; --surface:#FFFCF7; --sand:#EFE4D4; --line:#E4D6C3;
+  --ink:#260D07; --muted:#6E5A4F; --brand:#693D30; --brand-ink:#FFF8F0;
+  --ochre:#B97A2A; --ochre-soft:#F4E4C8; --shade:rgba(38,13,7,.14);
+  --on-photo:#FFF8F0; --photo-ink:#2A120A; --glass:rgba(255,248,240,.18); --glass-line:rgba(255,248,240,.34);
+  --scrim:rgba(24,9,4,.80);
+  --m1:#F0DFC4; --m2:#DDB98C; --m3:#C08757; --m4:#925638; --m5:#5C2C1D;
+  --f-display:'Fraunces','Noto Serif Devanagari','Noto Serif Bengali','Noto Serif Tamil','Noto Serif Telugu',Georgia,'Times New Roman',serif;
+  --f-body:'DM Sans','Noto Sans Devanagari','Noto Sans Bengali','Noto Sans Tamil','Noto Sans Telugu',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --r-lg:1.75rem; --r-md:1.125rem; --r-sm:.75rem;
+  --gut:max(clamp(1rem,4vw,2.5rem), env(safe-area-inset-left,0px));
+  --gut-r:max(clamp(1rem,4vw,2.5rem), env(safe-area-inset-right,0px));
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#17100C; --surface:#211710; --sand:#2B1F17; --line:#3A2B21;
+  --ink:#F4EADF; --muted:#BDA999; --brand:#DDA27F; --brand-ink:#1C110B;
+  --ochre:#E2A957; --ochre-soft:#3A2B17; --shade:rgba(0,0,0,.45); --m1:#3B2B1F; --m2:#6B4731; --m3:#A06B45; --m4:#D09669; --m5:#F2C99D; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --paper:#17100C; --surface:#211710; --sand:#2B1F17; --line:#3A2B21;
+  --ink:#F4EADF; --muted:#BDA999; --brand:#DDA27F; --brand-ink:#1C110B;
+  --ochre:#E2A957; --ochre-soft:#3A2B17; --shade:rgba(0,0,0,.45); --m1:#3B2B1F; --m2:#6B4731; --m3:#A06B45; --m4:#D09669; --m5:#F2C99D; color-scheme:dark }
+
+html{font-size:100%} html.lg{font-size:118.75%}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:1rem;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--paper)}
+html:not([lang="en"]) body{line-height:1.7}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:6px}
+.wrap{max-width:76rem;margin:0 auto;padding-left:var(--gut);padding-right:var(--gut-r)}
+.ico{width:1.25rem;height:1.25rem;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.h2{font-family:var(--f-display);font-weight:500;font-size:clamp(1.75rem,3.2vw,2.5rem);line-height:1.15;letter-spacing:-.01em;margin:0;text-wrap:balance}
+.eyebrow{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brand);margin:0 0 .6rem}
+
+/* header */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);background:color-mix(in srgb,var(--paper) 90%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:.75rem;min-height:4.25rem}
+.brand{display:flex;flex-direction:column;align-items:flex-start;background:none;border:0;cursor:pointer;text-align:left;padding:0;margin-right:auto;min-width:0}
+.brand b{white-space:nowrap;font-family:var(--f-display);font-size:1.3rem;font-weight:600;letter-spacing:-.01em;line-height:1.2}
+.brand small{font-size:.75rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.tools{display:flex;gap:.5rem;align-items:center;flex:none}
+.pill{display:inline-flex;align-items:center;gap:.5rem;height:2.5rem;padding:0 1rem;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-weight:500;font-size:.875rem;cursor:pointer;transition:border-color .2s,background .2s}
+.pill:hover{border-color:var(--brand)}
+.pill.accent{border-color:var(--brand);color:var(--brand)}
+.pill.on,.pill[aria-pressed="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.aa{font-family:var(--f-display);font-weight:600;font-size:1rem;line-height:1}
+.sel{position:relative;display:inline-flex;align-items:center}
+.sel select{appearance:none;-webkit-appearance:none;height:2.5rem;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:500 .875rem var(--f-body);padding:0 2.1rem 0 2.35rem;cursor:pointer}
+.sel select:hover{border-color:var(--brand)}
+.sel .ico{position:absolute;pointer-events:none;width:1.05rem;height:1.05rem;color:var(--brand)}
+.sel .ico.g{left:.85rem} .sel .ico.c{right:.8rem;color:var(--muted)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.02fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center;padding-block:clamp(2rem,5vw,4rem) 0}
+.hero h1{font-family:var(--f-display);font-weight:500;font-size:clamp(2.5rem,5.4vw,4.4rem);line-height:1.03;letter-spacing:-.025em;text-wrap:balance;margin:0}
+html:not([lang="en"]) .hero h1{font-size:clamp(2rem,4.2vw,3.3rem);line-height:1.3;letter-spacing:0}
+.hero .sub{font-size:1.125rem;color:var(--muted);max-width:34rem;margin:1.25rem 0 2rem}
+.cta{display:inline-flex;align-items:center;gap:.65rem;min-height:3.25rem;padding:.5rem 1.5rem;border-radius:999px;background:var(--brand);color:var(--brand-ink);border:0;font-weight:600;font-size:1rem;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.cta:hover{transform:translateY(-1px);box-shadow:0 12px 24px -14px var(--brand)}
+.cta .ico{transition:transform .2s} .cta:hover .ico{transform:translateX(3px)}
+.hero figure{margin:0;position:relative;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:1/1.04;max-width:100%;box-shadow:0 40px 70px -40px var(--shade)}
+.hero figure img{width:100%;height:100%;object-fit:cover;object-position:52% 40%;display:block}
+.chip{position:absolute;left:1rem;bottom:1rem;right:auto;background:var(--surface);background:color-mix(in srgb,var(--surface) 88%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-radius:var(--r-md);padding:.8rem 1.1rem;display:flex;flex-direction:column;max-width:calc(100% - 2rem)}
+.chip b{font-family:var(--f-display);font-weight:500;font-size:1.45rem;color:var(--brand);line-height:1.15;font-variant-numeric:tabular-nums}
+.chip span{font-size:.8rem;color:var(--muted)}
+
+/* ease tiles */
+.ease{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:clamp(2rem,4vw,3rem)}
+.ease button{display:flex;align-items:center;gap:1rem;padding:1.05rem 1.2rem;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--line);text-align:left;cursor:pointer;transition:border-color .2s,transform .2s;min-width:0}
+.ease button:hover{border-color:var(--brand);transform:translateY(-2px)}
+.ease .ic{width:3rem;height:3rem;border-radius:50%;background:var(--sand);color:var(--brand);display:grid;place-items:center;flex:none;transition:background .2s,color .2s}
+.ease .ic .ico{width:1.45rem;height:1.45rem}
+.ease .ic .aa{font-size:1.25rem}
+.ease b{display:block;font-weight:600;line-height:1.3}
+.ease small{color:var(--muted);font-size:.85rem}
+.ease button[aria-pressed="true"]{border-color:var(--brand)}
+.ease button[aria-pressed="true"] .ic{background:var(--brand);color:var(--brand-ink)}
+
+/* glance */
+.glance{display:grid;grid-template-columns:repeat(4,1fr);margin-top:clamp(2.5rem,5vw,3.5rem);border-block:1px solid var(--line)}
+.glance div{padding:1.4rem 1.25rem;border-left:1px solid var(--line);min-width:0}
+.glance div:first-child{border-left:0;padding-left:0}
+.glance b{font-family:var(--f-display);font-size:clamp(1.5rem,2.6vw,2.05rem);font-weight:500;color:var(--brand);display:block;line-height:1.15;font-variant-numeric:tabular-nums}
+.glance span{color:var(--muted);font-size:.875rem;line-height:1.4;display:block;margin-top:.3rem}
+
+/* sections */
+.sec{padding-top:clamp(3rem,6vw,5rem);scroll-margin-top:5rem}
+.sh{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem 2rem;margin-bottom:1.75rem;flex-wrap:wrap}
+.sh p{color:var(--muted);margin:0;max-width:30rem}
+
+/* programme grid: 4 + 3 */
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:1.25rem}
+.card{grid-column:span 3;position:relative;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;cursor:pointer;text-align:left;padding:0;transition:transform .3s ease,box-shadow .3s ease;min-width:0}
+.card:nth-child(n+5){grid-column:span 4}
+.card:hover{transform:translateY(-4px);box-shadow:0 22px 44px -28px var(--shade)}
+.card .ph{position:relative;height:12.5rem;overflow:hidden;display:block}
+.card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s ease}
+.card:hover img{transform:scale(1.05)}
+.tag{position:absolute;top:.75rem;left:.75rem;background:var(--surface);background:color-mix(in srgb,var(--surface) 88%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--brand);font-size:.7rem;font-weight:700;letter-spacing:.06em;padding:.3rem .65rem;border-radius:999px}
+.card .bd{display:grid;grid-template-columns:auto 1fr auto;column-gap:.85rem;row-gap:.2rem;align-items:start;padding:1rem 1.1rem 1.2rem;flex:1}
+.card .pi{grid-row:1/span 2;width:2.6rem;height:2.6rem;border-radius:.75rem;background:var(--sand);color:var(--brand);display:grid;place-items:center}
+.card .nm{grid-column:2;font-weight:600;font-size:1.02rem;line-height:1.3}
+.card .ln{grid-column:2;color:var(--muted);font-size:.875rem;line-height:1.45}
+.card .go{grid-column:3;grid-row:1/span 2;align-self:center;color:var(--brand);transition:transform .2s}
+.card:hover .go{transform:translateX(3px)}
+
+/* money */
+.money{background:var(--sand);border-radius:var(--r-lg);padding:clamp(1.5rem,4vw,3rem);display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(1.5rem,4vw,3.5rem)}
+.total{margin-top:1.5rem}
+.total b{display:block;font-family:var(--f-display);font-weight:500;font-size:clamp(2.2rem,4.5vw,3.25rem);color:var(--brand);line-height:1.05;font-variant-numeric:tabular-nums}
+.total span{color:var(--muted);font-size:.9rem}
+.bars{display:flex;flex-direction:column;min-width:0}
+.brow{display:grid;grid-template-columns:1fr auto;gap:.4rem 1rem;padding:.75rem 0;border:0;border-bottom:1px solid var(--line);border-bottom:1px solid color-mix(in srgb,var(--ink) 10%,transparent);background:none;width:100%;text-align:left;cursor:pointer}
+.brow:last-child{border-bottom:0}
+.brow .bl{font-weight:600;min-width:0}
+.brow .bl small{font-weight:500;color:var(--muted);margin-left:.5rem;font-size:.78rem;letter-spacing:.02em}
+.brow .bv{font-variant-numeric:tabular-nums;color:var(--muted);font-size:.95rem}
+.track{grid-column:1/-1;height:.55rem;border-radius:999px;background:var(--line);background:color-mix(in srgb,var(--ink) 8%,transparent);overflow:hidden}
+.fill{display:block;height:100%;border-radius:999px;background:var(--brand)}
+.brow.dim{cursor:default}
+.brow.dim .bl{font-weight:500;color:var(--muted)}
+.brow.dim .fill{background:repeating-linear-gradient(135deg,var(--ochre) 0 6px,color-mix(in srgb,var(--ochre) 55%,transparent) 6px 10px)}
+button.brow:hover .bl{color:var(--brand)}
+
+/* year rail */
+.rail{display:grid;grid-template-columns:repeat(8,minmax(8.75rem,1fr));overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:.75rem}
+.yr{position:relative;text-align:left;background:none;border:0;border-top:2px solid var(--line);padding:1.4rem 1rem 0 0;cursor:pointer;scroll-snap-align:start;display:flex;flex-direction:column;gap:.15rem}
+.yr::before{content:"";position:absolute;top:-7px;left:0;width:12px;height:12px;border-radius:50%;background:var(--paper);border:2px solid var(--brand)}
+.yr:last-child::before{background:var(--ochre);border-color:var(--ochre)}
+.yr .y{font-family:var(--f-display);font-size:1.7rem;font-weight:500;color:var(--brand);line-height:1.1;font-variant-numeric:tabular-nums}
+.yr b{font-size:.9rem}
+.yr span:last-child{color:var(--muted);font-size:.85rem;line-height:1.35}
+.yr:hover b{color:var(--brand)}
+
+/* band */
+.band{position:relative;border-radius:var(--r-lg);overflow:hidden;min-height:clamp(17rem,32vw,22rem);display:grid;place-items:center;text-align:center;color:var(--on-photo);isolation:isolate}
+.band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 62%;z-index:-2}
+.band::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(24,9,4,.38) 0%,rgba(24,9,4,.08) 55%,rgba(24,9,4,.25) 100%)}
+.band{place-items:start center}
+.band .in{padding:clamp(2rem,4vw,3rem) 1.5rem 7rem;display:flex;flex-direction:column;align-items:center;gap:1.4rem}
+.band h2{font-family:var(--f-display);font-weight:500;font-size:clamp(1.9rem,4.2vw,3.1rem);line-height:1.15;margin:0;text-wrap:balance;text-shadow:0 2px 24px rgba(0,0,0,.25)}
+.cta.light{background:var(--on-photo);color:var(--photo-ink)}
+
+.foot{margin-top:clamp(3rem,6vw,4.5rem);border-top:1px solid var(--line);padding-block:2rem 3rem;color:var(--muted);font-size:.875rem}
+.foot a{color:var(--brand);font-weight:600;text-decoration:none;border-bottom:1px solid currentColor}
+
+/* programme page */
+.crumbrow{padding-block:1.25rem .9rem}
+.crumb{display:inline-flex;gap:.5rem;align-items:center;background:none;border:0;color:var(--muted);font-weight:500;font-size:.92rem;cursor:pointer;padding:.25rem 0}
+.crumb:hover{color:var(--brand)}
+.pb{position:relative;border-radius:var(--r-lg);overflow:hidden;min-height:clamp(21rem,42vw,29rem);display:flex;align-items:flex-end;color:var(--on-photo);isolation:isolate}
+.pb>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.pb::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(24,9,4,.80) 0%,rgba(24,9,4,.42) 55%,rgba(24,9,4,.08) 100%),linear-gradient(0deg,rgba(24,9,4,.45),transparent 50%)}
+.pb .in{padding:clamp(1.5rem,4vw,3rem) clamp(1.5rem,4vw,3rem) clamp(3.75rem,6vw,4.5rem);max-width:42rem;display:flex;flex-direction:column;gap:.7rem}
+.pic{width:3.4rem;height:3.4rem;border-radius:1rem;background:var(--glass);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid var(--glass-line);display:grid;place-items:center}
+.pic .ico{width:1.7rem;height:1.7rem}
+.pb h1{font-family:var(--f-display);font-weight:500;font-size:clamp(2.3rem,5vw,3.8rem);line-height:1.05;letter-spacing:-.02em;margin:.3rem 0 0;text-wrap:balance}
+html:not([lang="en"]) .pb h1{line-height:1.3;letter-spacing:0;font-size:clamp(2rem,4.2vw,3.1rem)}
+.pb .full{font-size:.85rem;opacity:.85;margin:0}
+.pb .line{font-size:1.12rem;margin:0;opacity:.95;max-width:34rem}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);margin:-2.4rem clamp(1rem,3vw,2.5rem) 0;position:relative;z-index:2;box-shadow:0 24px 44px -30px var(--shade)}
+.facts>div{display:flex;align-items:center;gap:.9rem;padding:1.1rem 1.3rem;min-width:0}
+.facts>div+div{border-left:1px solid var(--line)}
+.facts .fi{width:2.6rem;height:2.6rem;border-radius:50%;background:var(--sand);color:var(--brand);display:grid;place-items:center;flex:none}
+.facts .dt{display:block;font-size:.78rem;color:var(--muted)}
+.facts .dd{display:block;margin:0;font-weight:600;font-size:1.05rem;line-height:1.3;font-variant-numeric:tabular-nums}
+.tabs{display:flex;gap:.3rem;padding:.35rem;background:var(--sand);border-radius:999px;overflow-x:auto;margin-top:2.75rem;width:max-content;max-width:100%;scrollbar-width:none}
+.tab{border:0;background:none;border-radius:999px;padding:.7rem 1.2rem;font-weight:500;font-size:.95rem;color:var(--muted);cursor:pointer;white-space:nowrap;transition:background .2s,color .2s}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 3px 10px -5px var(--shade)}
+.phead{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin:2.25rem 0 1.25rem;flex-wrap:wrap}
+.phead .h2{font-size:clamp(1.5rem,2.6vw,2rem)}
+.items{list-style:none;padding:0;margin:0;display:grid;gap:.75rem;max-width:54rem}
+.items li{display:flex;gap:1rem;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:1.1rem 1.3rem;font-size:1.05rem}
+.items .mk{width:2.1rem;height:2.1rem;border-radius:50%;background:var(--sand);color:var(--brand);display:grid;place-items:center;flex:none}
+.items .mk .ico{width:1.1rem;height:1.1rem}
+.items.warn .mk{background:var(--ochre-soft);color:var(--ochre)}
+.steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+.steps li{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:1.3rem 1.25rem 1.4rem;display:flex;flex-direction:column;gap:.55rem;min-width:0}
+.steps li:not(:last-child)::after{content:"";position:absolute;top:2.15rem;right:-1.25rem;width:1.25rem;border-top:2px dashed var(--line)}
+.steps .num{width:1.9rem;height:1.9rem;border-radius:50%;background:var(--brand);color:var(--brand-ink);display:grid;place-items:center;font-weight:700;font-size:.9rem;font-variant-numeric:tabular-nums}
+.steps .si{width:4.25rem;height:4.25rem;border-radius:1.1rem;background:var(--sand);color:var(--brand);display:grid;place-items:center;margin:.6rem 0 .35rem}
+.steps .si .ico{width:2.1rem;height:2.1rem;stroke-width:1.4}
+.steps b{font-size:1.05rem;line-height:1.3}
+.steps span{color:var(--muted);font-size:.93rem;line-height:1.5}
+.pstats{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;max-width:54rem}
+.pstats div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:1.4rem 1.5rem}
+.pstats b{display:block;font-family:var(--f-display);font-weight:500;font-size:clamp(2rem,4vw,2.75rem);color:var(--brand);line-height:1.1;font-variant-numeric:tabular-nums}
+.pstats span{color:var(--muted);font-size:.95rem}
+.meter{margin-top:1rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:1.3rem 1.5rem;max-width:54rem;box-sizing:border-box}
+.meter .top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:.85rem}
+.meter p{margin:0;font-weight:500}
+.meter b{font-family:var(--f-display);font-size:1.8rem;font-weight:500;color:var(--brand);font-variant-numeric:tabular-nums}
+.meter .tr{height:.8rem;border-radius:999px;background:var(--sand);overflow:hidden}
+.meter .fl{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--ochre),var(--brand))}
+.navrow{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-top:2.75rem;padding-top:1.5rem;border-top:1px solid var(--line);flex-wrap:wrap}
+.navbtn{display:inline-flex;align-items:center;gap:.6rem;min-height:3rem;padding:.4rem 1.3rem;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-weight:600;cursor:pointer;transition:border-color .2s}
+.navbtn:hover{border-color:var(--brand)}
+.navbtn.primary{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.dots{display:flex;gap:.4rem;align-items:center}
+.dots i{width:.5rem;height:.5rem;border-radius:999px;background:var(--line);display:block;transition:width .3s}
+.dots i.on{width:1.4rem;background:var(--brand)}
+.more{margin-top:3.5rem}
+.more .row{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(11.5rem,1fr);gap:1rem;overflow-x:auto;padding-bottom:.6rem;margin-top:1.25rem}
+.mini{border:0;background:none;padding:0;text-align:left;cursor:pointer;min-width:0}
+.mini img{aspect-ratio:4/3;width:100%;max-width:100%;object-fit:cover;border-radius:var(--r-sm);display:block;transition:transform .4s}
+.mini:hover img{transform:translateY(-3px)}
+.mini span{display:flex;gap:.5rem;align-items:center;margin-top:.65rem;font-weight:600;font-size:.95rem;line-height:1.3}
+.mini span .ico{color:var(--brand);width:1.1rem;height:1.1rem}
+
+/* language page */
+.lwrap{padding-block:1.25rem 4rem}
+.langs{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1rem;margin-top:1.75rem}
+.lang{min-height:6.5rem;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;padding:1rem 1.5rem;text-align:left;cursor:pointer;transition:border-color .2s,transform .2s}
+.lang:hover{border-color:var(--brand);transform:translateY(-2px)}
+.lang b{font-family:var(--f-display);font-size:1.7rem;font-weight:500;line-height:1.3}
+.lang small{color:var(--muted)}
+.lang[aria-pressed="true"]{border-color:var(--brand);box-shadow:inset 0 0 0 1px var(--brand)}
+
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(1.25rem + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--paper);padding:.85rem 1.2rem;border-radius:var(--r-sm);font-size:.9rem;z-index:40;max-width:min(30rem,calc(100% - 2rem));box-shadow:0 12px 30px -12px var(--shade)}
+
+.screen{animation:rise .45s ease both}
+@keyframes rise{from{opacity:.001;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+
+/* state map */
+.mtabs{margin:0 0 1.5rem}
+.mtabs .tab{display:inline-flex;align-items:center;gap:.5rem}
+.mtabs .tab .ico{width:1.1rem;height:1.1rem}
+.mapgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(1.25rem,3vw,2.5rem);align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(1rem,3vw,2rem)}
+.map{margin:0;min-width:0}
+.map svg{width:100%;height:auto;display:block;max-width:100%}
+.map path{stroke:var(--surface);stroke-width:.7;stroke-linejoin:round;cursor:pointer}
+.map path.c1{fill:var(--m1)} .map path.c2{fill:var(--m2)} .map path.c3{fill:var(--m3)} .map path.c4{fill:var(--m4)} .map path.c5{fill:var(--m5)}
+.map path.nd{fill:url(#ndp)}
+.ndp-bg{fill:var(--sand)} .ndp-ln{stroke:var(--muted);stroke-opacity:.35;stroke-width:1}
+.map path:hover{stroke:var(--ink);stroke-width:1.3}
+.map path.on{stroke:var(--ink);stroke-width:2}
+.mside{display:flex;flex-direction:column;gap:1rem;min-width:0}
+.mside .eyebrow{margin:0}
+.mside h3{font-size:.95rem;margin:.25rem 0 0}
+.scard{background:var(--sand);border-radius:var(--r-md);padding:1rem 1.2rem;display:flex;flex-direction:column;gap:.15rem}
+.scard .sn{font-weight:600}
+.scard .sv{font-family:var(--f-display);font-weight:500;font-size:2.3rem;color:var(--brand);line-height:1.1;font-variant-numeric:tabular-nums}
+.scard .s2{color:var(--muted);font-size:.9rem}
+.scard.hint{flex-direction:row;gap:.7rem;align-items:center;color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-size:.8rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:.4rem}
+.legend i{width:.9rem;height:.9rem;border-radius:.25rem;display:inline-block}
+.legend i.c1{background:var(--m1)} .legend i.c2{background:var(--m2)} .legend i.c3{background:var(--m3)} .legend i.c4{background:var(--m4)} .legend i.c5{background:var(--m5)}
+.legend i.nd{background:repeating-linear-gradient(135deg,var(--sand) 0 3px,var(--line) 3px 5px);box-shadow:inset 0 0 0 1px var(--line)}
+.mnote,.msrc{font-size:.84rem;color:var(--muted);margin:0}
+.msrc a{color:var(--brand);font-weight:600}
+.rank{list-style:none;margin:0;padding:0 .25rem 0 0;max-height:17rem;overflow-y:auto;display:flex;flex-direction:column;gap:.1rem}
+.rank button{width:100%;display:grid;grid-template-columns:1.6rem 1fr auto;gap:.2rem .6rem;align-items:center;background:none;border:0;border-radius:.5rem;padding:.4rem .5rem;text-align:left;cursor:pointer;font-size:.88rem}
+.rank button:hover,.rank button[aria-current="true"]{background:var(--sand)}
+.rank .rn{color:var(--muted);font-variant-numeric:tabular-nums;font-size:.78rem}
+.rank .rv{font-variant-numeric:tabular-nums;font-weight:600}
+.rank .rb{grid-column:2/-1;height:.3rem;border-radius:999px;background:var(--line);background:color-mix(in srgb,var(--ink) 7%,transparent);overflow:hidden}
+.rank .rb i{display:block;height:100%;background:var(--brand);border-radius:999px}
+.pmap{margin-top:2.5rem;max-width:64rem}
+.pmap .h2{font-size:clamp(1.35rem,2.2vw,1.7rem);margin-bottom:1rem}
+.voicebox{margin-top:2.5rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:1.25rem 1.4rem;display:flex;flex-wrap:wrap;gap:.75rem 1rem;align-items:center}
+.voicebox label{font-weight:600;flex-basis:100%}
+.voicebox .sel select{padding-left:1rem;max-width:min(26rem,calc(100vw - 6rem))}
+.voicebox p{flex-basis:100%;margin:0;color:var(--muted);font-size:.85rem}
+@media (max-width:860px){ .mapgrid{grid-template-columns:1fr} .rank{max-height:20rem} }
+@media (max-width:1000px){
+  .card,.card:nth-child(n+5){grid-column:span 6}
+  .card:last-child{grid-column:span 12}
+  .card:last-child .ph{height:14rem}
+  .steps{grid-template-columns:repeat(2,1fr)} .steps li::after{display:none}
+  .money{grid-template-columns:1fr}
+  .glance{grid-template-columns:repeat(2,1fr)}
+  .glance div:nth-child(3){border-left:0;padding-left:0}
+  .glance div:nth-child(n+3){border-top:1px solid var(--line)}
+}
+@media (max-width:800px){
+  .hero{grid-template-columns:1fr;padding-top:1.25rem}
+  .hero figure{order:-1;aspect-ratio:4/3}
+  .ease{grid-template-columns:1fr;gap:.6rem}
+  .ease button{padding:.85rem 1rem}
+}
+@media (max-width:640px){
+  .grid{gap:.85rem}
+  .card,.card:nth-child(n+5),.card:last-child{grid-column:1/-1}
+  .card{border:0}
+  .card .ph,.card:last-child .ph{height:11rem}
+  .card .bd{position:absolute;left:0;right:0;bottom:0;padding:3.5rem 1rem 1rem;background:linear-gradient(180deg,transparent,var(--scrim));color:var(--on-photo)}
+  .card .ln{display:none}
+  .card .pi{grid-row:1;background:var(--glass);color:var(--on-photo);border:1px solid var(--glass-line);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+  .card .nm{align-self:center;font-size:1.08rem}
+  .card .go{grid-row:1;width:2.2rem;height:2.2rem;border-radius:50%;background:var(--on-photo);color:var(--photo-ink);display:grid;place-items:center}
+  .card .go .ico{width:1.05rem;height:1.05rem}
+  .tools .t{display:none}
+  .pill{padding:0 .7rem}
+  .sel select{padding-right:1.9rem}
+  .brand b{font-size:1.05rem}
+  .pb::after{background:linear-gradient(0deg,rgba(24,9,4,.85) 0%,rgba(24,9,4,.55) 45%,rgba(24,9,4,.1) 100%)}
+  .facts{grid-template-columns:1fr;margin:-1.75rem .6rem 0}
+  .facts>div+div{border-left:0;border-top:1px solid var(--line)}
+  .steps{grid-template-columns:1fr}
+  .steps li{display:grid;grid-template-columns:auto 1fr;column-gap:1rem;row-gap:.25rem;align-items:start}
+  .steps .num{position:absolute;top:.9rem;left:.9rem;width:1.6rem;height:1.6rem;font-size:.8rem;z-index:1}
+  .steps .si{grid-row:1/span 2;margin:0;width:3.75rem;height:3.75rem}
+  .steps b{align-self:end}
+  .pstats{grid-template-columns:1fr}
+  .dots{display:none}
+  .navbtn{flex:1;justify-content:center}
+}
+@media (max-width:400px){ .brand small{display:none} }
+@media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation:none!important;transition:none!important} }
+
+/* deploy additions */
+.skip{position:absolute;left:-9999px;top:0}
+.skip:focus{left:max(1rem,env(safe-area-inset-left,0px));top:calc(.75rem + env(safe-area-inset-top,0px));z-index:60;background:var(--brand);color:var(--brand-ink);border:0;padding:.65rem 1.1rem;border-radius:999px;font-weight:600}
+main:focus{outline:none}
+.mini-lang{display:none}
+.tabs::-webkit-scrollbar{display:none}
+@media (max-width:440px){
+  .tools .sel{display:none}
+  .mini-lang{display:inline-flex}
+  .tools{gap:.4rem}
+  .bar .wrap{gap:.5rem}
+  .brand b{font-size:17px}
+  .tools .pill{height:40px;min-width:40px;padding:0 9px;justify-content:center}
+  .tools .aa{font-size:15px}
+  .tools .ico{width:20px;height:20px}
+}
+@media (max-width:340px){ .brand b{font-size:15px} .tools .pill{height:38px;min-width:38px;padding:0 8px} }
+@media (max-width:640px){ .chip{left:.75rem;bottom:.75rem;padding:.6rem .85rem} .chip b{font-size:1.15rem} .chip span{font-size:.72rem} }
+@media (hover:none){
+  .card:hover,.ease button:hover,.lang:hover{transform:none}
+  .card:hover img{transform:none}
+}
+@media (min-width:1700px){ html{font-size:106.25%} html.lg{font-size:125%} }
+noscript p{max-width:40rem;margin:4rem auto;padding:0 1.5rem;font:1.1rem/1.6 system-ui,sans-serif}
+
+</style>
+<link rel="preload" as="image" type="image/webp" href="hero-662.webp" imagesrcset="hero-480.webp 480w, hero-662.webp 662w" imagesizes="(max-width:800px) 100vw, 46vw">
 </head>
 <body>
 <noscript><p><strong>MoRD Programmes</strong> needs JavaScript to show the programmes, the state map and the six languages. Please turn JavaScript on and reload the page.</p></noscript>
@@ -47,5 +390,515 @@
   <section class="screen" id="s-lang" hidden></section>
 </main>
 <div class="toast" id="toast" role="status" hidden></div>
+<script>
+/* MoRD Programmes · independent explainer · data: PRS Legislative Research, Lok Sabha answers (2025) */
+/* Text in six languages. Edit here; keys must stay the same in every language. */
+const T = {
+en:{ui:{app:'MoRD Programmes',eyebrow:'Ministry of Rural Development · 2026–27',title:'What the Ministry of Rural Development does',sub:'Seven programmes for jobs, homes, roads, women’s groups, skills, pensions and land. What each one does, how far it has reached, and where it falls short.',programmes:'The programmes',budgetTitle:'Where the money goes, 2026–27',budgetTotal:'₹1,97,023 crore',budgetUnit:'Budget estimate, ₹ crore',timeline:'When they began',tabs:['What it does','Progress','Challenges'],started:'Started',budget:'Budget 2026–27',crore:'crore',within:'Funded within DAY-NRLM',closing:'MGNREGA (being phased out)',listen:'Listen',stop:'Stop',home:'All programmes',next:'Next programme',sources:'Sources',disc:'Independent explainer, not an official government website. Figures: PRS Legislative Research, Demand for Grants 2026–27; progress up to December 2025.',source:'Read the PRS analysis',noVoice:'This device has no voice for this language. Read the text, or choose another language.',choose:'Choose a language'},
+p:{
+work:{name:'Rural jobs',line:'A legal guarantee of paid work for rural households',about:['Every rural household can ask for up to 125 days of paid manual work a year, up from 100 under MGNREGA.','The work builds village assets such as ponds, wells, check dams and roads.','States now share the cost 60:40 with the centre (90:10 in North-Eastern and Himalayan states). The new law replaces MGNREGA from 1 July 2026.'],s1v:'125 days',s1l:'of work guaranteed per household each year',s2v:'48 days',s2l:'average work a household actually got each year over the last decade',pct:'On average, households got 48 of the 100 days guaranteed',ch:['Fewer than 1 in 10 households completed 100 days of work.','In 2025–26, wages paid were below the notified rate in 20 of 31 states and UTs.','Only 2% of unemployment allowance dues were paid in 2025–26.']},
+home:{name:'Rural housing',line:'Pucca houses for families without one',about:['Gives ₹1.2 lakh to build a house (₹1.3 lakh in hilly areas), paid in instalments.','Families can also take a bank loan of up to ₹70,000 with interest support.','Launched in 2016, replacing Indira Awaas Yojana; extended to 2028–29.'],s1v:'2.89 crore',s1l:'houses completed (December 2025)',s2v:'4.15 crore',s2l:'houses targeted',pct:'70% of the target is built',ch:['Landless families wait longest, because they first need land.','Spending in 2025–26 was 41% below budget.','A parliamentary committee has recommended raising support to ₹4 lakh per house.']},
+road:{name:'Rural roads',line:'All-weather roads to unconnected villages',about:['Builds paved roads that link villages to markets, schools and hospitals in every season.','Running since 2000. The fourth phase (2024–29) aims to connect 25,000 more habitations with 62,500 km of road.'],s1v:'7.88 lakh km',s1l:'of road built',s2v:'8.36 lakh km',s2l:'sanctioned',pct:'94% of sanctioned roads are complete',ch:['Progress is slowest in tribal and Left Wing Extremism-affected areas.','24% of maintenance inspections by national monitors found roads unsatisfactory.']},
+women:{name:'Women’s self-help groups',line:'Savings, credit and livelihoods through women’s groups',about:['Brings women from poor rural families into self-help groups that save and lend together.','Groups get a revolving fund of ₹20,000–30,000 and up to ₹2.5 lakh to invest in livelihoods.','Groups borrow from banks to start or grow small businesses.'],s1v:'92 lakh',s1l:'self-help groups, reaching over 10 crore households',s2v:'₹1.2 lakh crore',s2l:'in bank loans to 44 lakh groups in 2025–26',pct:'About 48% of groups took a bank loan in 2025–26',ch:['About half of all groups did not take a bank loan in 2025–26.']},
+skills:{name:'Skills for rural youth',line:'Free job training linked to placement',about:['Trains young people from poor rural families for jobs, free of cost.','Training is linked to placement, with a guideline that at least 70% of trainees get jobs.','Part of the National Rural Livelihoods Mission.'],s1v:'14.7 lakh',s1l:'young people trained (2016 to August 2025)',s2v:'69%',s2l:'of those trained got jobs',pct:'69 of every 100 trainees were placed',ch:['Only 629 of 2,369 training centres were running in March 2025.','Placement is just below the 70% guideline.']},
+pension:{name:'Social pensions',line:'Monthly pensions for the elderly, widows and people with disabilities',about:['Five schemes: old age, widow and disability pensions, family benefit, and Annapurna food support.','The centre pays ₹200 a month for old age pension (₹500 from age 80); states add ₹50 to ₹3,200.','Run by states, for families below the poverty line.'],s1v:'₹200–500',s1l:'monthly central old age pension',s2v:'67%',s2l:'of pension funds used in 2025–26',ch:['A CAG audit found delays in transferring funds.','Some states pay quarterly or once a year, not monthly.','Amounts have not kept up with the cost of living.']},
+land:{name:'Land records and watersheds',line:'Digital land records and better use of rain-fed land',about:['Computerises land records and digitises village maps, so ownership is easier to check.','Watershed projects build check dams, ponds and soil works on rain-fed and degraded land.','Run by the Department of Land Resources.'],s1v:'100%',s1l:'of land records (record of rights) computerised',s2v:'15%',s2l:'of planned land surveys and resurveys done',pct:'15% of planned surveys are complete',ch:['Land surveys and resurveys are far behind.','Only 40% of the watershed budget was used in 2025–26.']}
+}},
+hi:{ui:{app:'MoRD Programmes',eyebrow:'ग्रामीण विकास मंत्रालय · 2026–27',title:'ग्रामीण विकास मंत्रालय क्या करता है',sub:'रोज़गार, घर, सड़क, महिला समूह, कौशल, पेंशन और ज़मीन के लिए सात कार्यक्रम। हर कार्यक्रम क्या करता है, कितना पहुँचा है और कहाँ कमी है।',programmes:'कार्यक्रम',budgetTitle:'पैसा कहाँ जाता है, 2026–27',budgetTotal:'₹1,97,023 करोड़',budgetUnit:'बजट अनुमान, ₹ करोड़ में',timeline:'कब शुरू हुए',tabs:['यह क्या करता है','प्रगति','चुनौतियाँ'],started:'शुरुआत',budget:'बजट 2026–27',crore:'करोड़',within:'DAY-NRLM के बजट में शामिल',closing:'मनरेगा (बंद हो रहा है)',listen:'सुनें',stop:'रोकें',home:'सभी कार्यक्रम',next:'अगला कार्यक्रम',sources:'स्रोत',disc:'स्वतंत्र जानकारी, यह सरकारी वेबसाइट नहीं है। आँकड़े: PRS लेजिस्लेटिव रिसर्च, अनुदान माँगें 2026–27; प्रगति दिसंबर 2025 तक।',source:'PRS विश्लेषण पढ़ें',noVoice:'इस डिवाइस में इस भाषा की आवाज़ नहीं है। लिखा हुआ पढ़ें या दूसरी भाषा चुनें।',choose:'भाषा चुनें'},
+p:{
+work:{name:'ग्रामीण रोज़गार',line:'ग्रामीण परिवारों को मज़दूरी वाले काम की कानूनी गारंटी',about:['हर ग्रामीण परिवार साल में 125 दिन तक मज़दूरी वाला काम माँग सकता है। मनरेगा में यह 100 दिन था।','इस काम से गाँव में तालाब, कुएँ, चेक डैम और सड़क जैसी संपत्तियाँ बनती हैं।','अब खर्च केंद्र और राज्य 60:40 में बाँटते हैं (पूर्वोत्तर और हिमालयी राज्यों में 90:10)। नया कानून 1 जुलाई 2026 से मनरेगा की जगह ले रहा है।'],s1v:'125 दिन',s1l:'हर परिवार को हर साल काम की गारंटी',s2v:'48 दिन',s2l:'पिछले दशक में एक परिवार को साल में औसतन असल में मिला काम',pct:'औसतन, परिवारों को गारंटी वाले 100 में से 48 दिन काम मिला',ch:['10 में से 1 से भी कम परिवार ने 100 दिन का काम पूरा किया।','2025–26 में 31 में से 20 राज्यों/केंद्र शासित प्रदेशों में मज़दूरी तय दर से कम दी गई।','2025–26 में बेरोज़गारी भत्ते के बकाया का सिर्फ़ 2% भुगतान हुआ।']},
+home:{name:'ग्रामीण आवास',line:'जिन परिवारों के पास पक्का घर नहीं, उनके लिए घर',about:['घर बनाने के लिए ₹1.2 लाख (पहाड़ी इलाकों में ₹1.3 लाख) किस्तों में देता है।','परिवार ब्याज में मदद के साथ ₹70,000 तक का बैंक लोन भी ले सकते हैं।','2016 में इंदिरा आवास योजना की जगह शुरू हुआ; 2028–29 तक बढ़ाया गया।'],s1v:'2.89 करोड़',s1l:'घर पूरे हुए (दिसंबर 2025)',s2v:'4.15 करोड़',s2l:'घरों का लक्ष्य',pct:'लक्ष्य का 70% पूरा',ch:['भूमिहीन परिवारों को सबसे लंबा इंतज़ार करना पड़ता है, क्योंकि पहले ज़मीन चाहिए।','2025–26 में खर्च बजट से 41% कम रहा।','संसदीय समिति ने सहायता बढ़ाकर ₹4 लाख प्रति घर करने की सिफ़ारिश की है।']},
+road:{name:'ग्रामीण सड़कें',line:'बिना सड़क वाले गाँवों तक हर मौसम की सड़क',about:['पक्की सड़कें बनाता है जो हर मौसम में गाँवों को बाज़ार, स्कूल और अस्पताल से जोड़ती हैं।','2000 से चल रहा है। चौथा चरण (2024–29) 62,500 किमी सड़क से 25,000 और बस्तियों को जोड़ेगा।'],s1v:'7.88 लाख किमी',s1l:'सड़क बनी',s2v:'8.36 लाख किमी',s2l:'मंज़ूर',pct:'मंज़ूर सड़कों का 94% पूरा',ch:['आदिवासी और वामपंथी उग्रवाद प्रभावित इलाकों में काम सबसे धीमा है।','राष्ट्रीय निरीक्षकों की 24% रखरखाव जाँचों में सड़कें असंतोषजनक मिलीं।']},
+women:{name:'महिला स्वयं सहायता समूह',line:'महिला समूहों के ज़रिए बचत, कर्ज़ और रोज़गार',about:['गरीब ग्रामीण परिवारों की महिलाओं को स्वयं सहायता समूहों में जोड़ता है, जो मिलकर बचत करती और कर्ज़ देती हैं।','समूहों को ₹20,000–30,000 का रिवॉल्विंग फंड और रोज़गार में लगाने के लिए ₹2.5 लाख तक मिलते हैं।','समूह छोटे व्यवसाय शुरू करने या बढ़ाने के लिए बैंक से कर्ज़ लेते हैं।'],s1v:'92 लाख',s1l:'स्वयं सहायता समूह, 10 करोड़ से ज़्यादा परिवार',s2v:'₹1.2 लाख करोड़',s2l:'2025–26 में 44 लाख समूहों को बैंक कर्ज़',pct:'2025–26 में लगभग 48% समूहों ने बैंक कर्ज़ लिया',ch:['2025–26 में लगभग आधे समूहों ने बैंक कर्ज़ नहीं लिया।']},
+skills:{name:'ग्रामीण युवाओं के लिए कौशल',line:'नौकरी से जुड़ा मुफ़्त प्रशिक्षण',about:['गरीब ग्रामीण परिवारों के युवाओं को नौकरी के लिए मुफ़्त प्रशिक्षण देता है।','प्रशिक्षण नौकरी से जुड़ा है; कम से कम 70% प्रशिक्षुओं को नौकरी दिलाने का दिशानिर्देश है।','राष्ट्रीय ग्रामीण आजीविका मिशन का हिस्सा है।'],s1v:'14.7 लाख',s1l:'युवाओं को प्रशिक्षण (2016 से अगस्त 2025)',s2v:'69%',s2l:'प्रशिक्षितों को नौकरी मिली',pct:'हर 100 प्रशिक्षितों में से 69 को नौकरी मिली',ch:['मार्च 2025 में 2,369 में से सिर्फ़ 629 प्रशिक्षण केंद्र चल रहे थे।','नौकरी की दर 70% के दिशानिर्देश से थोड़ी कम है।']},
+pension:{name:'सामाजिक पेंशन',line:'बुज़ुर्गों, विधवाओं और दिव्यांगजनों के लिए मासिक पेंशन',about:['पाँच योजनाएँ: वृद्धावस्था, विधवा और दिव्यांग पेंशन, पारिवारिक लाभ, और अन्नपूर्णा खाद्य सहायता।','केंद्र वृद्धावस्था पेंशन के लिए ₹200 महीना (80 साल से ₹500) देता है; राज्य ₹50 से ₹3,200 तक जोड़ते हैं।','राज्य चलाते हैं, गरीबी रेखा से नीचे के परिवारों के लिए।'],s1v:'₹200–500',s1l:'केंद्र की मासिक वृद्धावस्था पेंशन',s2v:'67%',s2l:'2025–26 में पेंशन राशि का उपयोग',ch:['CAG ऑडिट में राशि भेजने में देरी पाई गई।','कुछ राज्य हर महीने नहीं, बल्कि तिमाही या साल में एक बार भुगतान करते हैं।','राशि महँगाई के साथ नहीं बढ़ी है।']},
+land:{name:'भूमि रिकॉर्ड और वाटरशेड',line:'डिजिटल भूमि रिकॉर्ड और बारिश पर निर्भर ज़मीन का बेहतर उपयोग',about:['भूमि रिकॉर्ड को कंप्यूटर पर लाता है और गाँव के नक्शे डिजिटल करता है, ताकि मालिकाना हक जाँचना आसान हो।','वाटरशेड परियोजनाएँ बारिश पर निर्भर और बंजर ज़मीन पर चेक डैम, तालाब और मिट्टी का काम करती हैं।','भूमि संसाधन विभाग चलाता है।'],s1v:'100%',s1l:'भूमि रिकॉर्ड (अधिकार अभिलेख) कंप्यूटर पर',s2v:'15%',s2l:'तय भूमि सर्वे और पुनः सर्वे पूरे',pct:'तय सर्वे का 15% पूरा',ch:['भूमि सर्वे और पुनः सर्वे बहुत पीछे हैं।','2025–26 में वाटरशेड बजट का सिर्फ़ 40% उपयोग हुआ।']}
+}},
+bn:{ui:{app:'MoRD Programmes',eyebrow:'গ্রামোন্নয়ন মন্ত্রক · 2026–27',title:'গ্রামোন্নয়ন মন্ত্রক কী করে',sub:'কাজ, বাড়ি, রাস্তা, মহিলা গোষ্ঠী, দক্ষতা, পেনশন ও জমির জন্য সাতটি কর্মসূচি। প্রতিটি কী করে, কতদূর পৌঁছেছে, আর কোথায় ঘাটতি।',programmes:'কর্মসূচিগুলি',budgetTitle:'টাকা কোথায় যায়, 2026–27',budgetTotal:'₹1,97,023 কোটি',budgetUnit:'বাজেট অনুমান, ₹ কোটিতে',timeline:'কবে শুরু হয়েছে',tabs:['এটি কী করে','অগ্রগতি','চ্যালেঞ্জ'],started:'শুরু',budget:'বাজেট 2026–27',crore:'কোটি',within:'DAY-NRLM-এর বাজেটের মধ্যে',closing:'MGNREGA (বন্ধ হচ্ছে)',listen:'শুনুন',stop:'থামান',home:'সব কর্মসূচি',next:'পরের কর্মসূচি',sources:'সূত্র',disc:'স্বাধীন তথ্য, এটি সরকারি ওয়েবসাইট নয়। তথ্য: PRS লেজিসলেটিভ রিসার্চ, অনুদানের দাবি 2026–27; অগ্রগতি ডিসেম্বর 2025 পর্যন্ত।',source:'PRS বিশ্লেষণ পড়ুন',noVoice:'এই ডিভাইসে এই ভাষার কণ্ঠস্বর নেই। লেখাটি পড়ুন বা অন্য ভাষা বেছে নিন।',choose:'ভাষা বেছে নিন'},
+p:{
+work:{name:'গ্রামীণ কর্মসংস্থান',line:'গ্রামীণ পরিবারের জন্য মজুরির কাজের আইনি নিশ্চয়তা',about:['প্রতিটি গ্রামীণ পরিবার বছরে 125 দিন পর্যন্ত মজুরির কাজ চাইতে পারে। MGNREGA-তে এটি ছিল 100 দিন।','এই কাজে গ্রামে পুকুর, কুয়ো, চেক ড্যাম ও রাস্তার মতো সম্পদ তৈরি হয়।','এখন খরচ কেন্দ্র ও রাজ্য 60:40 ভাগ করে (উত্তর-পূর্ব ও হিমালয়ের রাজ্যে 90:10)। 1 জুলাই 2026 থেকে নতুন আইন MGNREGA-র জায়গা নিচ্ছে।'],s1v:'125 দিন',s1l:'প্রতি বছর প্রতি পরিবারের কাজের নিশ্চয়তা',s2v:'48 দিন',s2l:'গত দশকে একটি পরিবার বছরে গড়ে যত দিন কাজ পেয়েছে',pct:'গড়ে পরিবারগুলি নিশ্চিত 100 দিনের মধ্যে 48 দিন কাজ পেয়েছে',ch:['10টির মধ্যে 1টিরও কম পরিবার 100 দিনের কাজ পূর্ণ করেছে।','2025–26 সালে 31টির মধ্যে 20টি রাজ্য/কেন্দ্রশাসিত অঞ্চলে মজুরি নির্ধারিত হারের কম দেওয়া হয়েছে।','2025–26 সালে বেকার ভাতার বকেয়ার মাত্র 2% দেওয়া হয়েছে।']},
+home:{name:'গ্রামীণ আবাস',line:'পাকা বাড়ি নেই এমন পরিবারের জন্য বাড়ি',about:['বাড়ি তৈরির জন্য ₹1.2 লাখ (পাহাড়ি এলাকায় ₹1.3 লাখ) কিস্তিতে দেয়।','পরিবারগুলি সুদ সহায়তা সহ ₹70,000 পর্যন্ত ব্যাংক ঋণও নিতে পারে।','2016 সালে ইন্দিরা আবাস যোজনার বদলে শুরু; 2028–29 পর্যন্ত বাড়ানো হয়েছে।'],s1v:'2.89 কোটি',s1l:'বাড়ি সম্পূর্ণ (ডিসেম্বর 2025)',s2v:'4.15 কোটি',s2l:'বাড়ির লক্ষ্য',pct:'লক্ষ্যের 70% সম্পূর্ণ',ch:['ভূমিহীন পরিবারগুলিকে সবচেয়ে বেশি অপেক্ষা করতে হয়, কারণ আগে জমি দরকার।','2025–26 সালে খরচ বাজেটের চেয়ে 41% কম হয়েছে।','সংসদীয় কমিটি সহায়তা বাড়িয়ে বাড়ি প্রতি ₹4 লাখ করার সুপারিশ করেছে।']},
+road:{name:'গ্রামীণ রাস্তা',line:'যোগাযোগহীন গ্রামে সব ঋতুর রাস্তা',about:['পাকা রাস্তা তৈরি করে যা সব ঋতুতে গ্রামকে বাজার, স্কুল ও হাসপাতালের সঙ্গে যুক্ত করে।','2000 সাল থেকে চলছে। চতুর্থ পর্যায় (2024–29) 62,500 কিমি রাস্তা দিয়ে আরও 25,000 বসতি যুক্ত করবে।'],s1v:'7.88 লাখ কিমি',s1l:'রাস্তা তৈরি',s2v:'8.36 লাখ কিমি',s2l:'অনুমোদিত',pct:'অনুমোদিত রাস্তার 94% সম্পূর্ণ',ch:['আদিবাসী ও বামপন্থী উগ্রবাদ-প্রভাবিত এলাকায় কাজ সবচেয়ে ধীর।','জাতীয় পরিদর্শকদের রক্ষণাবেক্ষণ পরিদর্শনের 24%-এ রাস্তা অসন্তোষজনক পাওয়া গেছে।']},
+women:{name:'মহিলা স্বনির্ভর গোষ্ঠী',line:'মহিলা গোষ্ঠীর মাধ্যমে সঞ্চয়, ঋণ ও জীবিকা',about:['দরিদ্র গ্রামীণ পরিবারের মহিলাদের স্বনির্ভর গোষ্ঠীতে যুক্ত করে, যারা একসঙ্গে সঞ্চয় ও ঋণ দেন।','গোষ্ঠীগুলি ₹20,000–30,000 আবর্তনশীল তহবিল এবং জীবিকায় বিনিয়োগের জন্য ₹2.5 লাখ পর্যন্ত পায়।','ছোট ব্যবসা শুরু বা বাড়াতে গোষ্ঠীগুলি ব্যাংক থেকে ঋণ নেয়।'],s1v:'92 লাখ',s1l:'স্বনির্ভর গোষ্ঠী, 10 কোটিরও বেশি পরিবার',s2v:'₹1.2 লাখ কোটি',s2l:'2025–26 সালে 44 লাখ গোষ্ঠীকে ব্যাংক ঋণ',pct:'2025–26 সালে প্রায় 48% গোষ্ঠী ব্যাংক ঋণ নিয়েছে',ch:['2025–26 সালে প্রায় অর্ধেক গোষ্ঠী ব্যাংক ঋণ নেয়নি।']},
+skills:{name:'গ্রামীণ যুবকদের দক্ষতা',line:'চাকরির সঙ্গে যুক্ত বিনামূল্যে প্রশিক্ষণ',about:['দরিদ্র গ্রামীণ পরিবারের যুবক-যুবতীদের চাকরির জন্য বিনামূল্যে প্রশিক্ষণ দেয়।','প্রশিক্ষণ চাকরির সঙ্গে যুক্ত; অন্তত 70% প্রশিক্ষণার্থীকে চাকরি দেওয়ার নির্দেশিকা আছে।','জাতীয় গ্রামীণ জীবিকা মিশনের অংশ।'],s1v:'14.7 লাখ',s1l:'যুবক-যুবতী প্রশিক্ষিত (2016 থেকে আগস্ট 2025)',s2v:'69%',s2l:'প্রশিক্ষিতদের চাকরি হয়েছে',pct:'প্রতি 100 জন প্রশিক্ষিতের মধ্যে 69 জন চাকরি পেয়েছেন',ch:['মার্চ 2025-এ 2,369টির মধ্যে মাত্র 629টি প্রশিক্ষণ কেন্দ্র চালু ছিল।','চাকরির হার 70% নির্দেশিকার চেয়ে সামান্য কম।']},
+pension:{name:'সামাজিক পেনশন',line:'বয়স্ক, বিধবা ও প্রতিবন্ধী মানুষদের মাসিক পেনশন',about:['পাঁচটি প্রকল্প: বার্ধক্য, বিধবা ও প্রতিবন্ধী পেনশন, পারিবারিক সুবিধা এবং অন্নপূর্ণা খাদ্য সহায়তা।','বার্ধক্য পেনশনে কেন্দ্র মাসে ₹200 (80 বছর থেকে ₹500) দেয়; রাজ্য ₹50 থেকে ₹3,200 পর্যন্ত যোগ করে।','রাজ্যগুলি চালায়, দারিদ্র্যসীমার নিচের পরিবারের জন্য।'],s1v:'₹200–500',s1l:'কেন্দ্রের মাসিক বার্ধক্য পেনশন',s2v:'67%',s2l:'2025–26 সালে পেনশন তহবিলের ব্যবহার',ch:['CAG অডিটে তহবিল পাঠাতে দেরি পাওয়া গেছে।','কিছু রাজ্য প্রতি মাসে নয়, ত্রৈমাসিক বা বছরে একবার দেয়।','অঙ্ক জীবনযাত্রার খরচের সঙ্গে বাড়েনি।']},
+land:{name:'জমির রেকর্ড ও জলবিভাজিকা',line:'ডিজিটাল জমির রেকর্ড ও বৃষ্টিনির্ভর জমির ভালো ব্যবহার',about:['জমির রেকর্ড কম্পিউটারে তোলে এবং গ্রামের মানচিত্র ডিজিটাল করে, যাতে মালিকানা যাচাই সহজ হয়।','জলবিভাজিকা প্রকল্প বৃষ্টিনির্ভর ও অনুর্বর জমিতে চেক ড্যাম, পুকুর ও মাটির কাজ করে।','ভূমি সম্পদ বিভাগ চালায়।'],s1v:'100%',s1l:'জমির রেকর্ড (স্বত্বলিপি) কম্পিউটারে',s2v:'15%',s2l:'পরিকল্পিত জমি জরিপ ও পুনর্জরিপ সম্পূর্ণ',pct:'পরিকল্পিত জরিপের 15% সম্পূর্ণ',ch:['জমি জরিপ ও পুনর্জরিপ অনেক পিছিয়ে।','2025–26 সালে জলবিভাজিকা বাজেটের মাত্র 40% ব্যবহার হয়েছে।']}
+}},
+ta:{ui:{app:'MoRD Programmes',eyebrow:'ஊரக வளர்ச்சி அமைச்சகம் · 2026–27',title:'ஊரக வளர்ச்சி அமைச்சகம் என்ன செய்கிறது',sub:'வேலை, வீடு, சாலை, மகளிர் குழுக்கள், திறன், ஓய்வூதியம், நிலம் ஆகியவற்றுக்கான ஏழு திட்டங்கள். ஒவ்வொன்றும் என்ன செய்கிறது, எவ்வளவு சென்றடைந்துள்ளது, எங்கே குறைவு.',programmes:'திட்டங்கள்',budgetTitle:'பணம் எங்கே செல்கிறது, 2026–27',budgetTotal:'₹1,97,023 கோடி',budgetUnit:'பட்ஜெட் மதிப்பீடு, ₹ கோடியில்',timeline:'எப்போது தொடங்கின',tabs:['இது என்ன செய்கிறது','முன்னேற்றம்','சவால்கள்'],started:'தொடக்கம்',budget:'பட்ஜெட் 2026–27',crore:'கோடி',within:'DAY-NRLM பட்ஜெட்டுக்குள்',closing:'MGNREGA (படிப்படியாக நிறுத்தப்படுகிறது)',listen:'கேளுங்கள்',stop:'நிறுத்து',home:'அனைத்துத் திட்டங்கள்',next:'அடுத்த திட்டம்',sources:'ஆதாரங்கள்',disc:'சுயாதீன தகவல், இது அரசு இணையதளம் அல்ல. தரவு: PRS லெஜிஸ்லேட்டிவ் ரிசர்ச், மானியக் கோரிக்கைகள் 2026–27; முன்னேற்றம் டிசம்பர் 2025 வரை.',source:'PRS பகுப்பாய்வைப் படிக்கவும்',noVoice:'இந்தச் சாதனத்தில் இந்த மொழிக்கான குரல் இல்லை. எழுத்தைப் படிக்கவும் அல்லது வேறு மொழியைத் தேர்ந்தெடுக்கவும்.',choose:'மொழியைத் தேர்ந்தெடுக்கவும்'},
+p:{
+work:{name:'ஊரக வேலைவாய்ப்பு',line:'கிராமக் குடும்பங்களுக்குக் கூலி வேலைக்குச் சட்டபூர்வ உறுதி',about:['ஒவ்வொரு கிராமக் குடும்பமும் ஆண்டுக்கு 125 நாட்கள் வரை கூலி வேலை கேட்கலாம். MGNREGA-வில் இது 100 நாட்கள்.','இந்த வேலை குளம், கிணறு, தடுப்பணை, சாலை போன்ற ஊர்ச் சொத்துகளை உருவாக்குகிறது.','இனி செலவை மத்திய, மாநில அரசுகள் 60:40 என்ற விகிதத்தில் பகிர்கின்றன (வடகிழக்கு, இமயமலை மாநிலங்களில் 90:10). 1 ஜூலை 2026 முதல் புதிய சட்டம் MGNREGA-வுக்குப் பதிலாக வருகிறது.'],s1v:'125 நாட்கள்',s1l:'ஒவ்வொரு குடும்பத்துக்கும் ஆண்டுதோறும் வேலை உறுதி',s2v:'48 நாட்கள்',s2l:'கடந்த பத்தாண்டில் ஒரு குடும்பம் ஆண்டுக்குச் சராசரியாகப் பெற்ற வேலை',pct:'சராசரியாக, உறுதியளிக்கப்பட்ட 100 நாட்களில் 48 நாட்கள் வேலை கிடைத்தது',ch:['10 குடும்பங்களில் 1-க்கும் குறைவானவர்களே 100 நாட்கள் வேலையை முடித்தனர்.','2025–26-ல் 31-ல் 20 மாநிலங்கள்/யூனியன் பிரதேசங்களில் அறிவிக்கப்பட்ட விகிதத்தை விடக் குறைவான கூலி வழங்கப்பட்டது.','2025–26-ல் வேலையின்மைப் படி நிலுவையில் 2% மட்டுமே வழங்கப்பட்டது.']},
+home:{name:'ஊரக வீட்டுவசதி',line:'நிரந்தர வீடு இல்லாத குடும்பங்களுக்கு வீடு',about:['வீடு கட்ட ₹1.2 லட்சம் (மலைப் பகுதிகளில் ₹1.3 லட்சம்) தவணைகளாக வழங்குகிறது.','வட்டி உதவியுடன் ₹70,000 வரை வங்கிக் கடனும் பெறலாம்.','2016-ல் இந்திரா ஆவாஸ் யோஜனாவுக்குப் பதிலாகத் தொடங்கியது; 2028–29 வரை நீட்டிக்கப்பட்டுள்ளது.'],s1v:'2.89 கோடி',s1l:'வீடுகள் முடிந்தன (டிசம்பர் 2025)',s2v:'4.15 கோடி',s2l:'வீடுகள் இலக்கு',pct:'இலக்கில் 70% முடிந்தது',ch:['நிலமற்ற குடும்பங்கள் முதலில் நிலம் பெற வேண்டியிருப்பதால் நீண்ட காலம் காத்திருக்கின்றன.','2025–26-ல் செலவு பட்ஜெட்டை விட 41% குறைவாக இருந்தது.','உதவியை ஒரு வீட்டுக்கு ₹4 லட்சமாக உயர்த்த நாடாளுமன்றக் குழு பரிந்துரைத்துள்ளது.']},
+road:{name:'ஊரகச் சாலைகள்',line:'இணைப்பு இல்லாத ஊர்களுக்கு அனைத்துப் பருவச் சாலைகள்',about:['எல்லாப் பருவங்களிலும் ஊர்களைச் சந்தை, பள்ளி, மருத்துவமனையுடன் இணைக்கும் தார்ச் சாலைகளை அமைக்கிறது.','2000 முதல் நடைபெறுகிறது. நான்காம் கட்டம் (2024–29) 62,500 கி.மீ சாலை மூலம் மேலும் 25,000 குடியிருப்புகளை இணைக்கும்.'],s1v:'7.88 லட்சம் கி.மீ',s1l:'சாலை அமைக்கப்பட்டது',s2v:'8.36 லட்சம் கி.மீ',s2l:'அனுமதிக்கப்பட்டது',pct:'அனுமதிக்கப்பட்ட சாலைகளில் 94% முடிந்தது',ch:['பழங்குடி மற்றும் இடதுசாரித் தீவிரவாதம் பாதித்த பகுதிகளில் வேலை மிக மெதுவாக நடக்கிறது.','தேசியக் கண்காணிப்பாளர்களின் பராமரிப்புச் சோதனைகளில் 24%-ல் சாலைகள் திருப்தியற்றவையாக இருந்தன.']},
+women:{name:'மகளிர் சுய உதவிக் குழுக்கள்',line:'மகளிர் குழுக்கள் மூலம் சேமிப்பு, கடன், வாழ்வாதாரம்',about:['ஏழைக் கிராமக் குடும்பப் பெண்களை, ஒன்றாகச் சேமித்துக் கடன் வழங்கும் சுய உதவிக் குழுக்களில் இணைக்கிறது.','குழுக்களுக்கு ₹20,000–30,000 சுழல் நிதியும், வாழ்வாதாரத்தில் முதலீடு செய்ய ₹2.5 லட்சம் வரையும் கிடைக்கும்.','சிறு தொழில் தொடங்க அல்லது வளர்க்கக் குழுக்கள் வங்கிக் கடன் பெறுகின்றன.'],s1v:'92 லட்சம்',s1l:'சுய உதவிக் குழுக்கள், 10 கோடிக்கும் மேற்பட்ட குடும்பங்கள்',s2v:'₹1.2 லட்சம் கோடி',s2l:'2025–26-ல் 44 லட்சம் குழுக்களுக்கு வங்கிக் கடன்',pct:'2025–26-ல் சுமார் 48% குழுக்கள் வங்கிக் கடன் பெற்றன',ch:['2025–26-ல் சுமார் பாதிக் குழுக்கள் வங்கிக் கடன் பெறவில்லை.']},
+skills:{name:'ஊரக இளைஞர்களுக்குத் திறன்',line:'வேலைவாய்ப்புடன் இணைந்த இலவசப் பயிற்சி',about:['ஏழைக் கிராமக் குடும்ப இளைஞர்களுக்கு வேலைக்கான இலவசப் பயிற்சி அளிக்கிறது.','பயிற்சி வேலைவாய்ப்புடன் இணைக்கப்பட்டுள்ளது; பயிற்சி பெற்றவர்களில் குறைந்தது 70% பேருக்கு வேலை என்பது வழிகாட்டுதல்.','தேசிய ஊரக வாழ்வாதார இயக்கத்தின் ஒரு பகுதி.'],s1v:'14.7 லட்சம்',s1l:'இளைஞர்கள் பயிற்சி பெற்றனர் (2016 முதல் ஆகஸ்ட் 2025 வரை)',s2v:'69%',s2l:'பயிற்சி பெற்றவர்களுக்கு வேலை கிடைத்தது',pct:'பயிற்சி பெற்ற 100 பேரில் 69 பேருக்கு வேலை கிடைத்தது',ch:['மார்ச் 2025-ல் 2,369 பயிற்சி மையங்களில் 629 மட்டுமே இயங்கின.','வேலைவாய்ப்பு விகிதம் 70% வழிகாட்டுதலை விடச் சற்றுக் குறைவு.']},
+pension:{name:'சமூக ஓய்வூதியங்கள்',line:'முதியோர், விதவைகள், மாற்றுத்திறனாளிகளுக்கு மாத ஓய்வூதியம்',about:['ஐந்து திட்டங்கள்: முதியோர், விதவை, மாற்றுத்திறனாளி ஓய்வூதியம், குடும்ப நலன், அன்னபூர்ணா உணவு உதவி.','முதியோர் ஓய்வூதியத்துக்கு மத்திய அரசு மாதம் ₹200 (80 வயது முதல் ₹500) வழங்குகிறது; மாநிலங்கள் ₹50 முதல் ₹3,200 வரை சேர்க்கின்றன.','வறுமைக் கோட்டுக்குக் கீழ் உள்ள குடும்பங்களுக்காக மாநிலங்கள் செயல்படுத்துகின்றன.'],s1v:'₹200–500',s1l:'மத்திய அரசின் மாத முதியோர் ஓய்வூதியம்',s2v:'67%',s2l:'2025–26-ல் ஓய்வூதிய நிதி பயன்பாடு',ch:['நிதி அனுப்புவதில் தாமதம் இருப்பதாக CAG தணிக்கை கண்டறிந்தது.','சில மாநிலங்கள் மாதந்தோறும் அல்ல, காலாண்டுக்கு அல்லது ஆண்டுக்கு ஒருமுறை வழங்குகின்றன.','தொகை வாழ்க்கைச் செலவுக்கு ஏற்ப உயரவில்லை.']},
+land:{name:'நிலப் பதிவுகள், நீர்வடிப் பகுதிகள்',line:'டிஜிட்டல் நிலப் பதிவுகள், மழையை நம்பிய நிலத்தின் சிறந்த பயன்பாடு',about:['நிலப் பதிவுகளைக் கணினிமயமாக்கி, ஊர் வரைபடங்களை டிஜிட்டல் ஆக்குகிறது; உரிமையைச் சரிபார்ப்பது எளிதாகிறது.','நீர்வடிப் பகுதித் திட்டங்கள் மழையை நம்பிய, தரம் குறைந்த நிலத்தில் தடுப்பணை, குளம், மண் பணிகளைச் செய்கின்றன.','நில வளத் துறை செயல்படுத்துகிறது.'],s1v:'100%',s1l:'நிலப் பதிவுகள் (உரிமைப் பதிவு) கணினியில்',s2v:'15%',s2l:'திட்டமிட்ட நில அளவை, மறு அளவை முடிந்தது',pct:'திட்டமிட்ட அளவைகளில் 15% முடிந்தது',ch:['நில அளவை, மறு அளவைப் பணிகள் மிகவும் பின்தங்கியுள்ளன.','2025–26-ல் நீர்வடிப் பகுதி பட்ஜெட்டில் 40% மட்டுமே பயன்படுத்தப்பட்டது.']}
+}},
+te:{ui:{app:'MoRD Programmes',eyebrow:'గ్రామీణాభివృద్ధి మంత్రిత్వ శాఖ · 2026–27',title:'గ్రామీణాభివృద్ధి మంత్రిత్వ శాఖ ఏమి చేస్తుంది',sub:'పని, ఇల్లు, రోడ్లు, మహిళా సంఘాలు, నైపుణ్యాలు, పింఛన్లు, భూమి కోసం ఏడు కార్యక్రమాలు. ఒక్కొక్కటి ఏమి చేస్తుంది, ఎంత వరకు చేరింది, ఎక్కడ లోటు ఉంది.',programmes:'కార్యక్రమాలు',budgetTitle:'డబ్బు ఎక్కడికి వెళ్తుంది, 2026–27',budgetTotal:'₹1,97,023 కోట్లు',budgetUnit:'బడ్జెట్ అంచనా, ₹ కోట్లలో',timeline:'ఎప్పుడు మొదలయ్యాయి',tabs:['ఇది ఏమి చేస్తుంది','పురోగతి','సవాళ్లు'],started:'ప్రారంభం',budget:'బడ్జెట్ 2026–27',crore:'కోట్లు',within:'DAY-NRLM బడ్జెట్‌లో భాగం',closing:'MGNREGA (దశలవారీగా ముగుస్తోంది)',listen:'వినండి',stop:'ఆపండి',home:'అన్ని కార్యక్రమాలు',next:'తర్వాతి కార్యక్రమం',sources:'ఆధారాలు',disc:'స్వతంత్ర సమాచారం, ఇది ప్రభుత్వ వెబ్‌సైట్ కాదు. సమాచారం: PRS లెజిస్లేటివ్ రీసెర్చ్, గ్రాంట్ల డిమాండ్ 2026–27; పురోగతి డిసెంబర్ 2025 వరకు.',source:'PRS విశ్లేషణ చదవండి',noVoice:'ఈ పరికరంలో ఈ భాషకు గొంతు లేదు. రాసినది చదవండి లేదా వేరే భాష ఎంచుకోండి.',choose:'భాషను ఎంచుకోండి'},
+p:{
+work:{name:'గ్రామీణ ఉపాధి',line:'గ్రామీణ కుటుంబాలకు కూలీ పనికి చట్టబద్ధమైన హామీ',about:['ప్రతి గ్రామీణ కుటుంబం ఏడాదికి 125 రోజుల వరకు కూలీ పని అడగవచ్చు. MGNREGAలో ఇది 100 రోజులు.','ఈ పని ద్వారా చెరువులు, బావులు, చెక్ డ్యామ్‌లు, రోడ్ల వంటి గ్రామ ఆస్తులు ఏర్పడతాయి.','ఇప్పుడు ఖర్చును కేంద్రం, రాష్ట్రాలు 60:40 నిష్పత్తిలో పంచుకుంటాయి (ఈశాన్య, హిమాలయ రాష్ట్రాల్లో 90:10). 1 జూలై 2026 నుండి కొత్త చట్టం MGNREGA స్థానంలో వస్తోంది.'],s1v:'125 రోజులు',s1l:'ప్రతి కుటుంబానికి ఏటా పనికి హామీ',s2v:'48 రోజులు',s2l:'గత దశాబ్దంలో ఒక కుటుంబానికి ఏడాదికి సగటున దొరికిన పని',pct:'సగటున, హామీ ఇచ్చిన 100 రోజుల్లో 48 రోజుల పని దొరికింది',ch:['10 కుటుంబాల్లో 1 కంటే తక్కువ కుటుంబాలే 100 రోజుల పని పూర్తి చేశాయి.','2025–26లో 31లో 20 రాష్ట్రాలు/కేంద్రపాలిత ప్రాంతాల్లో నిర్ణయించిన రేటు కంటే తక్కువ కూలీ చెల్లించారు.','2025–26లో నిరుద్యోగ భృతి బకాయిల్లో 2% మాత్రమే చెల్లించారు.']},
+home:{name:'గ్రామీణ గృహనిర్మాణం',line:'పక్కా ఇల్లు లేని కుటుంబాలకు ఇల్లు',about:['ఇల్లు కట్టుకోవడానికి ₹1.2 లక్షలు (కొండ ప్రాంతాల్లో ₹1.3 లక్షలు) విడతలుగా ఇస్తుంది.','వడ్డీ సహాయంతో ₹70,000 వరకు బ్యాంకు రుణం కూడా తీసుకోవచ్చు.','2016లో ఇందిరా ఆవాస్ యోజన స్థానంలో ప్రారంభమైంది; 2028–29 వరకు పొడిగించారు.'],s1v:'2.89 కోట్లు',s1l:'ఇళ్ళు పూర్తయ్యాయి (డిసెంబర్ 2025)',s2v:'4.15 కోట్లు',s2l:'ఇళ్ళ లక్ష్యం',pct:'లక్ష్యంలో 70% పూర్తయింది',ch:['భూమి లేని కుటుంబాలకు ముందు భూమి కావాలి కాబట్టి ఎక్కువ కాలం ఎదురుచూస్తున్నాయి.','2025–26లో ఖర్చు బడ్జెట్ కంటే 41% తక్కువగా ఉంది.','సహాయాన్ని ఒక్కో ఇంటికి ₹4 లక్షలకు పెంచాలని పార్లమెంటరీ కమిటీ సిఫార్సు చేసింది.']},
+road:{name:'గ్రామీణ రోడ్లు',line:'రోడ్డు లేని గ్రామాలకు అన్ని కాలాల రోడ్లు',about:['అన్ని కాలాల్లో గ్రామాలను మార్కెట్లు, బడులు, ఆసుపత్రులతో కలిపే పక్కా రోడ్లు నిర్మిస్తుంది.','2000 నుండి నడుస్తోంది. నాలుగో దశ (2024–29) 62,500 కి.మీ రోడ్లతో మరో 25,000 నివాస ప్రాంతాలను కలుపుతుంది.'],s1v:'7.88 లక్షల కి.మీ',s1l:'రోడ్లు నిర్మించారు',s2v:'8.36 లక్షల కి.మీ',s2l:'మంజూరు',pct:'మంజూరైన రోడ్లలో 94% పూర్తి',ch:['గిరిజన, వామపక్ష తీవ్రవాద ప్రభావిత ప్రాంతాల్లో పని అత్యంత నెమ్మదిగా ఉంది.','జాతీయ పర్యవేక్షకుల నిర్వహణ తనిఖీల్లో 24%లో రోడ్లు సంతృప్తికరంగా లేవు.']},
+women:{name:'మహిళా స్వయం సహాయక సంఘాలు',line:'మహిళా సంఘాల ద్వారా పొదుపు, రుణం, జీవనోపాధి',about:['పేద గ్రామీణ కుటుంబాల మహిళలను కలిసి పొదుపు చేసి రుణాలిచ్చే స్వయం సహాయక సంఘాల్లో చేర్చుతుంది.','సంఘాలకు ₹20,000–30,000 రివాల్వింగ్ ఫండ్, జీవనోపాధిలో పెట్టుబడికి ₹2.5 లక్షల వరకు లభిస్తాయి.','చిన్న వ్యాపారాలు మొదలుపెట్టడానికి లేదా పెంచడానికి సంఘాలు బ్యాంకు రుణాలు తీసుకుంటాయి.'],s1v:'92 లక్షలు',s1l:'స్వయం సహాయక సంఘాలు, 10 కోట్లకు పైగా కుటుంబాలు',s2v:'₹1.2 లక్షల కోట్లు',s2l:'2025–26లో 44 లక్షల సంఘాలకు బ్యాంకు రుణాలు',pct:'2025–26లో సుమారు 48% సంఘాలు బ్యాంకు రుణం తీసుకున్నాయి',ch:['2025–26లో దాదాపు సగం సంఘాలు బ్యాంకు రుణం తీసుకోలేదు.']},
+skills:{name:'గ్రామీణ యువతకు నైపుణ్యాలు',line:'ఉద్యోగంతో ముడిపడిన ఉచిత శిక్షణ',about:['పేద గ్రామీణ కుటుంబాల యువతకు ఉద్యోగం కోసం ఉచిత శిక్షణ ఇస్తుంది.','శిక్షణ ఉద్యోగ కల్పనతో ముడిపడి ఉంది; శిక్షణ పొందినవారిలో కనీసం 70% మందికి ఉద్యోగం అనేది మార్గదర్శకం.','జాతీయ గ్రామీణ జీవనోపాధి మిషన్‌లో భాగం.'],s1v:'14.7 లక్షలు',s1l:'యువత శిక్షణ పొందారు (2016 నుండి ఆగస్టు 2025 వరకు)',s2v:'69%',s2l:'శిక్షణ పొందినవారికి ఉద్యోగం వచ్చింది',pct:'శిక్షణ పొందిన ప్రతి 100 మందిలో 69 మందికి ఉద్యోగం వచ్చింది',ch:['మార్చి 2025లో 2,369 శిక్షణ కేంద్రాల్లో 629 మాత్రమే నడుస్తున్నాయి.','ఉద్యోగ రేటు 70% మార్గదర్శకం కంటే కొంచెం తక్కువ.']},
+pension:{name:'సామాజిక పింఛన్లు',line:'వృద్ధులు, వితంతువులు, దివ్యాంగులకు నెలవారీ పింఛను',about:['ఐదు పథకాలు: వృద్ధాప్య, వితంతు, వికలాంగ పింఛన్లు, కుటుంబ ప్రయోజనం, అన్నపూర్ణ ఆహార సహాయం.','వృద్ధాప్య పింఛనుకు కేంద్రం నెలకు ₹200 (80 ఏళ్ల నుండి ₹500) ఇస్తుంది; రాష్ట్రాలు ₹50 నుండి ₹3,200 వరకు కలుపుతాయి.','దారిద్ర్య రేఖకు దిగువన ఉన్న కుటుంబాల కోసం రాష్ట్రాలు అమలు చేస్తాయి.'],s1v:'₹200–500',s1l:'కేంద్రం నెలవారీ వృద్ధాప్య పింఛను',s2v:'67%',s2l:'2025–26లో పింఛను నిధుల వినియోగం',ch:['నిధుల బదిలీలో ఆలస్యం ఉందని CAG ఆడిట్ గుర్తించింది.','కొన్ని రాష్ట్రాలు నెలనెలా కాకుండా మూడు నెలలకు లేదా ఏడాదికి ఒకసారి చెల్లిస్తున్నాయి.','మొత్తం జీవన వ్యయానికి తగ్గట్టు పెరగలేదు.']},
+land:{name:'భూ రికార్డులు, వాటర్‌షెడ్లు',line:'డిజిటల్ భూ రికార్డులు, వర్షాధార భూమి మెరుగైన వినియోగం',about:['భూ రికార్డులను కంప్యూటరీకరించి, గ్రామ పటాలను డిజిటల్ చేస్తుంది; యాజమాన్యాన్ని సరిచూడటం సులభమవుతుంది.','వాటర్‌షెడ్ ప్రాజెక్టులు వర్షాధార, క్షీణించిన భూమిపై చెక్ డ్యామ్‌లు, చెరువులు, మట్టి పనులు చేపడతాయి.','భూ వనరుల శాఖ అమలు చేస్తుంది.'],s1v:'100%',s1l:'భూ రికార్డులు (హక్కుల రికార్డు) కంప్యూటర్‌లో',s2v:'15%',s2l:'ప్రణాళికలోని భూ సర్వేలు, రీసర్వేలు పూర్తి',pct:'ప్రణాళికలోని సర్వేల్లో 15% పూర్తి',ch:['భూ సర్వేలు, రీసర్వేలు చాలా వెనుకబడి ఉన్నాయి.','2025–26లో వాటర్‌షెడ్ బడ్జెట్‌లో 40% మాత్రమే వినియోగించారు.']}
+}},
+mr:{ui:{app:'MoRD Programmes',eyebrow:'ग्रामीण विकास मंत्रालय · 2026–27',title:'ग्रामीण विकास मंत्रालय काय करते',sub:'रोजगार, घर, रस्ते, महिला गट, कौशल्य, पेन्शन आणि जमिनीसाठी सात कार्यक्रम. प्रत्येक काय करतो, किती पोहोचला आहे आणि कुठे कमतरता आहे.',programmes:'कार्यक्रम',budgetTitle:'पैसा कुठे जातो, 2026–27',budgetTotal:'₹1,97,023 कोटी',budgetUnit:'अंदाजपत्रक, ₹ कोटींमध्ये',timeline:'कधी सुरू झाले',tabs:['हा काय करतो','प्रगती','आव्हाने'],started:'सुरुवात',budget:'बजेट 2026–27',crore:'कोटी',within:'DAY-NRLM च्या बजेटमध्ये समाविष्ट',closing:'मनरेगा (टप्प्याटप्प्याने बंद)',listen:'ऐका',stop:'थांबवा',home:'सर्व कार्यक्रम',next:'पुढील कार्यक्रम',sources:'स्रोत',disc:'स्वतंत्र माहिती, ही सरकारी वेबसाइट नाही. आकडे: PRS लेजिस्लेटिव्ह रिसर्च, अनुदान मागण्या 2026–27; प्रगती डिसेंबर 2025 पर्यंत.',source:'PRS विश्लेषण वाचा',noVoice:'या उपकरणात या भाषेचा आवाज नाही. मजकूर वाचा किंवा दुसरी भाषा निवडा.',choose:'भाषा निवडा'},
+p:{
+work:{name:'ग्रामीण रोजगार',line:'ग्रामीण कुटुंबांना मजुरीच्या कामाची कायदेशीर हमी',about:['प्रत्येक ग्रामीण कुटुंब वर्षाला 125 दिवसांपर्यंत मजुरीचे काम मागू शकते. मनरेगामध्ये हे 100 दिवस होते.','या कामातून गावात तलाव, विहिरी, बंधारे आणि रस्ते अशी मालमत्ता तयार होते.','आता खर्च केंद्र आणि राज्ये 60:40 प्रमाणात वाटून घेतात (ईशान्य आणि हिमालयीन राज्यांत 90:10). 1 जुलै 2026 पासून नवा कायदा मनरेगाची जागा घेत आहे.'],s1v:'125 दिवस',s1l:'प्रत्येक कुटुंबाला दर वर्षी कामाची हमी',s2v:'48 दिवस',s2l:'गेल्या दशकात एका कुटुंबाला वर्षाला सरासरी प्रत्यक्ष मिळालेले काम',pct:'सरासरी, हमी दिलेल्या 100 पैकी 48 दिवस काम मिळाले',ch:['10 पैकी 1 पेक्षाही कमी कुटुंबांनी 100 दिवसांचे काम पूर्ण केले.','2025–26 मध्ये 31 पैकी 20 राज्ये/केंद्रशासित प्रदेशांत ठरलेल्या दरापेक्षा कमी मजुरी दिली गेली.','2025–26 मध्ये बेरोजगारी भत्त्याच्या थकबाकीपैकी फक्त 2% दिले गेले.']},
+home:{name:'ग्रामीण घरकुल',line:'पक्के घर नसलेल्या कुटुंबांसाठी घर',about:['घर बांधण्यासाठी ₹1.2 लाख (डोंगराळ भागात ₹1.3 लाख) हप्त्यांमध्ये देते.','कुटुंबे व्याज सवलतीसह ₹70,000 पर्यंत बँक कर्जही घेऊ शकतात.','2016 मध्ये इंदिरा आवास योजनेच्या जागी सुरू; 2028–29 पर्यंत वाढवली.'],s1v:'2.89 कोटी',s1l:'घरे पूर्ण (डिसेंबर 2025)',s2v:'4.15 कोटी',s2l:'घरांचे लक्ष्य',pct:'लक्ष्याच्या 70% पूर्ण',ch:['भूमिहीन कुटुंबांना आधी जमीन लागते, म्हणून त्यांना सर्वात जास्त वाट पाहावी लागते.','2025–26 मध्ये खर्च बजेटपेक्षा 41% कमी झाला.','संसदीय समितीने मदत वाढवून प्रति घर ₹4 लाख करण्याची शिफारस केली आहे.']},
+road:{name:'ग्रामीण रस्ते',line:'रस्ता नसलेल्या गावांपर्यंत बारमाही रस्ते',about:['पक्के रस्ते बांधते जे प्रत्येक ऋतूत गावांना बाजार, शाळा आणि दवाखान्याशी जोडतात.','2000 पासून सुरू आहे. चौथा टप्पा (2024–29) 62,500 किमी रस्त्यांनी आणखी 25,000 वस्त्या जोडेल.'],s1v:'7.88 लाख किमी',s1l:'रस्ते बांधले',s2v:'8.36 लाख किमी',s2l:'मंजूर',pct:'मंजूर रस्त्यांपैकी 94% पूर्ण',ch:['आदिवासी आणि डाव्या उग्रवादग्रस्त भागात काम सर्वात संथ आहे.','राष्ट्रीय निरीक्षकांच्या देखभाल तपासण्यांपैकी 24% मध्ये रस्ते असमाधानकारक आढळले.']},
+women:{name:'महिला बचत गट',line:'महिला गटांमार्फत बचत, कर्ज आणि उपजीविका',about:['गरीब ग्रामीण कुटुंबांतील महिलांना बचत गटांमध्ये जोडते, ज्या मिळून बचत करतात आणि कर्ज देतात.','गटांना ₹20,000–30,000 फिरता निधी आणि उपजीविकेत गुंतवणुकीसाठी ₹2.5 लाखांपर्यंत मिळतात.','लहान व्यवसाय सुरू करण्यासाठी किंवा वाढवण्यासाठी गट बँकेकडून कर्ज घेतात.'],s1v:'92 लाख',s1l:'बचत गट, 10 कोटींहून अधिक कुटुंबे',s2v:'₹1.2 लाख कोटी',s2l:'2025–26 मध्ये 44 लाख गटांना बँक कर्ज',pct:'2025–26 मध्ये सुमारे 48% गटांनी बँक कर्ज घेतले',ch:['2025–26 मध्ये जवळपास निम्म्या गटांनी बँक कर्ज घेतले नाही.']},
+skills:{name:'ग्रामीण तरुणांसाठी कौशल्य',line:'नोकरीशी जोडलेले मोफत प्रशिक्षण',about:['गरीब ग्रामीण कुटुंबांतील तरुणांना नोकरीसाठी मोफत प्रशिक्षण देते.','प्रशिक्षण नोकरीशी जोडलेले आहे; किमान 70% प्रशिक्षणार्थींना नोकरी देण्याचे मार्गदर्शक तत्त्व आहे.','राष्ट्रीय ग्रामीण उपजीविका अभियानाचा भाग.'],s1v:'14.7 लाख',s1l:'तरुणांना प्रशिक्षण (2016 ते ऑगस्ट 2025)',s2v:'69%',s2l:'प्रशिक्षितांना नोकरी मिळाली',pct:'दर 100 प्रशिक्षितांपैकी 69 जणांना नोकरी मिळाली',ch:['मार्च 2025 मध्ये 2,369 पैकी फक्त 629 प्रशिक्षण केंद्रे सुरू होती.','नोकरीचे प्रमाण 70% मार्गदर्शक तत्त्वापेक्षा थोडे कमी आहे.']},
+pension:{name:'सामाजिक पेन्शन',line:'ज्येष्ठ, विधवा आणि दिव्यांगांसाठी मासिक पेन्शन',about:['पाच योजना: वृद्धापकाळ, विधवा आणि दिव्यांग पेन्शन, कौटुंबिक लाभ आणि अन्नपूर्णा अन्न सहाय्य.','वृद्धापकाळ पेन्शनसाठी केंद्र दरमहा ₹200 (80 वर्षांपासून ₹500) देते; राज्ये ₹50 ते ₹3,200 पर्यंत भर घालतात.','दारिद्र्यरेषेखालील कुटुंबांसाठी राज्ये राबवतात.'],s1v:'₹200–500',s1l:'केंद्राची मासिक वृद्धापकाळ पेन्शन',s2v:'67%',s2l:'2025–26 मध्ये पेन्शन निधीचा वापर',ch:['CAG लेखापरीक्षणात निधी पाठवण्यात विलंब आढळला.','काही राज्ये दरमहा नव्हे, तर तिमाही किंवा वर्षातून एकदा देतात.','रक्कम राहणीमानाच्या खर्चाप्रमाणे वाढलेली नाही.']},
+land:{name:'जमीन नोंदी आणि पाणलोट',line:'डिजिटल जमीन नोंदी आणि कोरडवाहू जमिनीचा चांगला वापर',about:['जमीन नोंदी संगणकावर आणते आणि गावांचे नकाशे डिजिटल करते, त्यामुळे मालकी तपासणे सोपे होते.','पाणलोट प्रकल्प कोरडवाहू आणि नापीक जमिनीवर बंधारे, तलाव आणि मृदा संधारणाची कामे करतात.','भूसंपदा विभाग राबवतो.'],s1v:'100%',s1l:'जमीन नोंदी (अधिकार अभिलेख) संगणकावर',s2v:'15%',s2l:'नियोजित जमीन सर्वेक्षण व पुनर्सर्वेक्षण पूर्ण',pct:'नियोजित सर्वेक्षणांपैकी 15% पूर्ण',ch:['जमीन सर्वेक्षण आणि पुनर्सर्वेक्षण खूप मागे आहे.','2025–26 मध्ये पाणलोट बजेटपैकी फक्त 40% वापरले गेले.']}
+}}
+};
+const X = {
+en:{ui:{explore:'Explore programmes',listenT:'Listen to this page',listenS:'Hear it read aloud',langT:'Change language',langS:'Available in 6 languages',largeT:'Read in large text',largeS:'Bigger and clearer',closingLine:'Seven programmes for rural India.',scheme:'Scheme',large:'Large text',tabs:['What it does','How it works','Progress','Challenges']},
+st:{
+work:[['Get a job card','The household registers with the gram panchayat.'],['Ask for work','Apply for work whenever the family needs it.'],['Work near home','Build ponds, wells and roads in or near the village.'],['Get paid','Wages go straight into the bank account.']],
+home:[['Families identified','Houseless and kutcha-house families are listed and checked by the gram sabha.'],['House sanctioned','The house is approved and the first instalment is paid.'],['Family builds','The family builds its own house; each stage is photographed.'],['Paid in stages','Instalments reach the bank account as work progresses.']],
+road:[['List villages','Unconnected villages are listed in a district plan.'],['Approve roads','The centre approves roads proposed by the state.'],['Build','Contractors build the road to set standards.'],['Maintain','The contractor maintains the road for five years.']],
+women:[['Form a group','10 to 20 women from poor families come together.'],['Save together','Members save small amounts and lend to each other.'],['Get support','The group receives a revolving fund and investment funds.'],['Borrow and grow','Bank loans help members start or grow a livelihood.']],
+skills:[['Enrol','Young people aged 15 to 35 from poor rural families join.'],['Train free','Free training at a centre, for 3 to 12 months.'],['Get a job','Trainees are placed in jobs.'],['Stay supported','Support continues for some months after placement.']],
+pension:[['Apply','Apply at the panchayat or block office.'],['Check','The state checks age, status and income.'],['Approve','The pension is sanctioned.'],['Get paid','Money reaches the bank or post office account.']],
+land:[['Digitise records','Land records are put on computers.'],['Map villages','Village maps are digitised and land is surveyed.'],['Treat the land','Check dams, ponds and soil works hold rainwater.'],['Benefit','Owners can check records online; farms get more water.']]}},
+hi:{ui:{explore:'कार्यक्रम देखें',listenT:'यह पेज सुनें',listenS:'पढ़कर सुनाया जाएगा',langT:'भाषा बदलें',langS:'6 भाषाओं में उपलब्ध',largeT:'बड़े अक्षरों में पढ़ें',largeS:'बड़ा और साफ़',closingLine:'ग्रामीण भारत के लिए सात कार्यक्रम।',scheme:'योजना',large:'बड़े अक्षर',tabs:['यह क्या करता है','यह कैसे काम करता है','प्रगति','चुनौतियाँ']},
+st:{
+work:[['जॉब कार्ड बनवाएँ','परिवार ग्राम पंचायत में पंजीकरण कराता है।'],['काम माँगें','जब भी ज़रूरत हो, काम के लिए आवेदन करें।'],['गाँव के पास काम','गाँव में या पास में तालाब, कुएँ और सड़कें बनाएँ।'],['मज़दूरी पाएँ','मज़दूरी सीधे बैंक खाते में आती है।']],
+home:[['परिवारों की पहचान','बेघर और कच्चे घर वाले परिवारों की सूची ग्राम सभा जाँचती है।'],['घर मंज़ूर','घर मंज़ूर होता है और पहली किस्त मिलती है।'],['परिवार बनाता है','परिवार खुद घर बनाता है; हर चरण की फ़ोटो ली जाती है।'],['किस्तों में भुगतान','काम बढ़ने के साथ किस्तें बैंक खाते में आती हैं।']],
+road:[['गाँवों की सूची','बिना सड़क वाले गाँवों को ज़िला योजना में शामिल किया जाता है।'],['सड़क मंज़ूर','राज्य के प्रस्ताव पर केंद्र सड़कें मंज़ूर करता है।'],['निर्माण','ठेकेदार तय मानकों पर सड़क बनाते हैं।'],['रखरखाव','ठेकेदार पाँच साल तक सड़क का रखरखाव करता है।']],
+women:[['समूह बनाएँ','गरीब परिवारों की 10 से 20 महिलाएँ साथ आती हैं।'],['मिलकर बचत','सदस्य थोड़ी-थोड़ी बचत करती हैं और एक-दूसरे को कर्ज़ देती हैं।'],['मदद पाएँ','समूह को रिवॉल्विंग फंड और निवेश राशि मिलती है।'],['कर्ज़ लें, आगे बढ़ें','बैंक कर्ज़ से सदस्य रोज़गार शुरू करती या बढ़ाती हैं।']],
+skills:[['नाम लिखवाएँ','गरीब ग्रामीण परिवारों के 15 से 35 साल के युवा जुड़ते हैं।'],['मुफ़्त प्रशिक्षण','केंद्र में 3 से 12 महीने का मुफ़्त प्रशिक्षण।'],['नौकरी पाएँ','प्रशिक्षितों को नौकरी दिलाई जाती है।'],['आगे भी मदद','नौकरी के बाद कुछ महीनों तक मदद जारी रहती है।']],
+pension:[['आवेदन करें','पंचायत या ब्लॉक कार्यालय में आवेदन करें।'],['जाँच','राज्य उम्र, स्थिति और आय की जाँच करता है।'],['मंज़ूरी','पेंशन मंज़ूर होती है।'],['भुगतान','पैसा बैंक या डाकघर खाते में आता है।']],
+land:[['रिकॉर्ड डिजिटल','भूमि रिकॉर्ड कंप्यूटर पर लाए जाते हैं।'],['गाँव के नक्शे','गाँव के नक्शे डिजिटल होते हैं और ज़मीन का सर्वे होता है।'],['ज़मीन का उपचार','चेक डैम, तालाब और मिट्टी के काम बारिश का पानी रोकते हैं।'],['फ़ायदा','मालिक ऑनलाइन रिकॉर्ड देख सकते हैं; खेतों को ज़्यादा पानी मिलता है।']]}},
+bn:{ui:{explore:'কর্মসূচিগুলি দেখুন',listenT:'এই পাতা শুনুন',listenS:'পড়ে শোনানো হবে',langT:'ভাষা বদলান',langS:'6টি ভাষায় পাওয়া যায়',largeT:'বড় অক্ষরে পড়ুন',largeS:'বড় ও স্পষ্ট',closingLine:'গ্রামীণ ভারতের জন্য সাতটি কর্মসূচি।',scheme:'প্রকল্প',large:'বড় অক্ষর',tabs:['এটি কী করে','কীভাবে কাজ করে','অগ্রগতি','চ্যালেঞ্জ']},
+st:{
+work:[['জব কার্ড করুন','পরিবার গ্রাম পঞ্চায়েতে নাম নথিভুক্ত করে।'],['কাজ চান','যখন দরকার, কাজের জন্য আবেদন করুন।'],['গ্রামের কাছে কাজ','গ্রামে বা কাছে পুকুর, কুয়ো ও রাস্তা তৈরি করুন।'],['মজুরি পান','মজুরি সরাসরি ব্যাংক অ্যাকাউন্টে আসে।']],
+home:[['পরিবার চিহ্নিত','গৃহহীন ও কাঁচা বাড়ির পরিবারের তালিকা গ্রামসভা যাচাই করে।'],['বাড়ি অনুমোদিত','বাড়ি অনুমোদিত হয় এবং প্রথম কিস্তি দেওয়া হয়।'],['পরিবার নিজে বানায়','পরিবার নিজেই বাড়ি বানায়; প্রতিটি ধাপের ছবি তোলা হয়।'],['কিস্তিতে টাকা','কাজ এগোলে কিস্তি ব্যাংক অ্যাকাউন্টে আসে।']],
+road:[['গ্রামের তালিকা','রাস্তাহীন গ্রামগুলিকে জেলা পরিকল্পনায় তালিকাভুক্ত করা হয়।'],['রাস্তা অনুমোদন','রাজ্যের প্রস্তাবে কেন্দ্র রাস্তা অনুমোদন করে।'],['নির্মাণ','ঠিকাদাররা নির্দিষ্ট মান মেনে রাস্তা তৈরি করে।'],['রক্ষণাবেক্ষণ','ঠিকাদার পাঁচ বছর রাস্তা রক্ষণাবেক্ষণ করে।']],
+women:[['গোষ্ঠী গড়ুন','দরিদ্র পরিবারের 10 থেকে 20 জন মহিলা একত্র হন।'],['একসঙ্গে সঞ্চয়','সদস্যরা অল্প অল্প সঞ্চয় করেন ও একে অপরকে ঋণ দেন।'],['সহায়তা পান','গোষ্ঠী আবর্তনশীল তহবিল ও বিনিয়োগ তহবিল পায়।'],['ঋণ নিয়ে এগিয়ে চলা','ব্যাংক ঋণে সদস্যরা জীবিকা শুরু করেন বা বাড়ান।']],
+skills:[['নাম লেখান','দরিদ্র গ্রামীণ পরিবারের 15 থেকে 35 বছরের যুবক-যুবতীরা যোগ দেন।'],['বিনামূল্যে প্রশিক্ষণ','কেন্দ্রে 3 থেকে 12 মাসের বিনামূল্যে প্রশিক্ষণ।'],['চাকরি পান','প্রশিক্ষিতদের চাকরিতে নিয়োগ করা হয়।'],['পরেও সহায়তা','চাকরির পরে কয়েক মাস সহায়তা চলে।']],
+pension:[['আবেদন করুন','পঞ্চায়েত বা ব্লক অফিসে আবেদন করুন।'],['যাচাই','রাজ্য বয়স, অবস্থা ও আয় যাচাই করে।'],['অনুমোদন','পেনশন অনুমোদিত হয়।'],['টাকা পান','টাকা ব্যাংক বা ডাকঘর অ্যাকাউন্টে আসে।']],
+land:[['রেকর্ড ডিজিটাল','জমির রেকর্ড কম্পিউটারে তোলা হয়।'],['গ্রামের মানচিত্র','গ্রামের মানচিত্র ডিজিটাল হয় ও জমি জরিপ হয়।'],['জমির উন্নয়ন','চেক ড্যাম, পুকুর ও মাটির কাজ বৃষ্টির জল ধরে রাখে।'],['সুফল','মালিকরা অনলাইনে রেকর্ড দেখতে পারেন; খেতে বেশি জল আসে।']]}},
+ta:{ui:{explore:'திட்டங்களைப் பாருங்கள்',listenT:'இந்தப் பக்கத்தைக் கேளுங்கள்',listenS:'உரக்கப் படித்துக் காட்டும்',langT:'மொழியை மாற்றுங்கள்',langS:'6 மொழிகளில் கிடைக்கும்',largeT:'பெரிய எழுத்தில் படியுங்கள்',largeS:'பெரிதாக, தெளிவாக',closingLine:'ஊரக இந்தியாவுக்கான ஏழு திட்டங்கள்.',scheme:'திட்டம்',large:'பெரிய எழுத்து',tabs:['இது என்ன செய்கிறது','எப்படிச் செயல்படுகிறது','முன்னேற்றம்','சவால்கள்']},
+st:{
+work:[['வேலை அட்டை பெறுங்கள்','குடும்பம் கிராம ஊராட்சியில் பதிவு செய்கிறது.'],['வேலை கேளுங்கள்','தேவைப்படும்போது வேலைக்கு விண்ணப்பிக்கலாம்.'],['ஊருக்கு அருகில் வேலை','ஊரில் அல்லது அருகில் குளம், கிணறு, சாலை அமைக்கலாம்.'],['கூலி பெறுங்கள்','கூலி நேரடியாக வங்கிக் கணக்கில் வரும்.']],
+home:[['குடும்பங்கள் அடையாளம்','வீடற்ற, குடிசை வீட்டுக் குடும்பங்களின் பட்டியலைக் கிராம சபை சரிபார்க்கிறது.'],['வீடு அனுமதி','வீடு அனுமதிக்கப்பட்டு முதல் தவணை வழங்கப்படுகிறது.'],['குடும்பமே கட்டுகிறது','குடும்பம் தானே வீட்டைக் கட்டுகிறது; ஒவ்வொரு கட்டமும் படம் எடுக்கப்படுகிறது.'],['தவணைகளில் பணம்','வேலை முன்னேறும்போது தவணைகள் வங்கிக் கணக்கில் வரும்.']],
+road:[['ஊர்ப் பட்டியல்','சாலை இல்லாத ஊர்கள் மாவட்டத் திட்டத்தில் பட்டியலிடப்படுகின்றன.'],['சாலை அனுமதி','மாநிலம் முன்மொழியும் சாலைகளை மத்திய அரசு அனுமதிக்கிறது.'],['அமைத்தல்','ஒப்பந்ததாரர்கள் நிர்ணயிக்கப்பட்ட தரத்தில் சாலை அமைக்கின்றனர்.'],['பராமரிப்பு','ஒப்பந்ததாரர் ஐந்து ஆண்டுகள் சாலையைப் பராமரிக்கிறார்.']],
+women:[['குழு அமையுங்கள்','ஏழைக் குடும்பங்களைச் சேர்ந்த 10 முதல் 20 பெண்கள் இணைகின்றனர்.'],['சேர்ந்து சேமியுங்கள்','உறுப்பினர்கள் சிறு தொகை சேமித்து ஒருவருக்கொருவர் கடன் தருகின்றனர்.'],['உதவி பெறுங்கள்','குழுவுக்குச் சுழல் நிதியும் முதலீட்டு நிதியும் கிடைக்கும்.'],['கடன் பெற்று வளருங்கள்','வங்கிக் கடன் மூலம் உறுப்பினர்கள் வாழ்வாதாரத்தைத் தொடங்குகின்றனர் அல்லது வளர்க்கின்றனர்.']],
+skills:[['சேருங்கள்','ஏழைக் கிராமக் குடும்பங்களைச் சேர்ந்த 15 முதல் 35 வயது இளைஞர்கள் சேர்கின்றனர்.'],['இலவசப் பயிற்சி','மையத்தில் 3 முதல் 12 மாதம் இலவசப் பயிற்சி.'],['வேலை பெறுங்கள்','பயிற்சி பெற்றவர்களுக்கு வேலை வழங்கப்படுகிறது.'],['தொடர் உதவி','வேலைக்குப் பின்னும் சில மாதங்கள் உதவி தொடர்கிறது.']],
+pension:[['விண்ணப்பியுங்கள்','ஊராட்சி அல்லது வட்டார அலுவலகத்தில் விண்ணப்பிக்கலாம்.'],['சரிபார்ப்பு','மாநிலம் வயது, நிலை, வருமானத்தைச் சரிபார்க்கிறது.'],['அனுமதி','ஓய்வூதியம் அனுமதிக்கப்படுகிறது.'],['பணம் பெறுங்கள்','பணம் வங்கி அல்லது அஞ்சலகக் கணக்கில் வரும்.']],
+land:[['பதிவுகள் டிஜிட்டல்','நிலப் பதிவுகள் கணினியில் ஏற்றப்படுகின்றன.'],['ஊர் வரைபடங்கள்','ஊர் வரைபடங்கள் டிஜிட்டல் ஆக்கப்பட்டு நிலம் அளவிடப்படுகிறது.'],['நிலச் சீரமைப்பு','தடுப்பணை, குளம், மண் பணிகள் மழைநீரைத் தேக்குகின்றன.'],['பயன்','உரிமையாளர்கள் இணையத்தில் பதிவுகளைப் பார்க்கலாம்; வயல்களுக்கு அதிக நீர் கிடைக்கும்.']]}},
+te:{ui:{explore:'కార్యక్రమాలు చూడండి',listenT:'ఈ పేజీ వినండి',listenS:'చదివి వినిపిస్తుంది',langT:'భాష మార్చండి',langS:'6 భాషల్లో అందుబాటులో',largeT:'పెద్ద అక్షరాల్లో చదవండి',largeS:'పెద్దగా, స్పష్టంగా',closingLine:'గ్రామీణ భారతం కోసం ఏడు కార్యక్రమాలు.',scheme:'పథకం',large:'పెద్ద అక్షరాలు',tabs:['ఇది ఏమి చేస్తుంది','ఎలా పనిచేస్తుంది','పురోగతి','సవాళ్లు']},
+st:{
+work:[['జాబ్ కార్డు పొందండి','కుటుంబం గ్రామ పంచాయతీలో నమోదు చేసుకుంటుంది.'],['పని అడగండి','అవసరమైనప్పుడు పని కోసం దరఖాస్తు చేయండి.'],['ఊరి దగ్గరే పని','ఊరిలో లేదా దగ్గరలో చెరువులు, బావులు, రోడ్లు నిర్మించండి.'],['కూలీ పొందండి','కూలీ నేరుగా బ్యాంకు ఖాతాలోకి వస్తుంది.']],
+home:[['కుటుంబాల గుర్తింపు','ఇల్లు లేని, కచ్చా ఇళ్ళ కుటుంబాల జాబితాను గ్రామసభ తనిఖీ చేస్తుంది.'],['ఇల్లు మంజూరు','ఇల్లు మంజూరై మొదటి విడత చెల్లిస్తారు.'],['కుటుంబమే కడుతుంది','కుటుంబం స్వయంగా ఇల్లు కడుతుంది; ప్రతి దశను ఫోటో తీస్తారు.'],['విడతలుగా చెల్లింపు','పని సాగే కొద్దీ విడతలు బ్యాంకు ఖాతాలోకి వస్తాయి.']],
+road:[['గ్రామాల జాబితా','రోడ్డు లేని గ్రామాలను జిల్లా ప్రణాళికలో చేరుస్తారు.'],['రోడ్డు మంజూరు','రాష్ట్రం ప్రతిపాదించిన రోడ్లను కేంద్రం మంజూరు చేస్తుంది.'],['నిర్మాణం','కాంట్రాక్టర్లు నిర్ణీత ప్రమాణాల ప్రకారం రోడ్డు నిర్మిస్తారు.'],['నిర్వహణ','కాంట్రాక్టరు ఐదేళ్ల పాటు రోడ్డును నిర్వహిస్తారు.']],
+women:[['సంఘం ఏర్పాటు','పేద కుటుంబాల 10 నుండి 20 మంది మహిళలు కలుస్తారు.'],['కలిసి పొదుపు','సభ్యులు కొద్ది కొద్దిగా పొదుపు చేసి ఒకరికొకరు రుణాలిస్తారు.'],['సహాయం పొందండి','సంఘానికి రివాల్వింగ్ ఫండ్, పెట్టుబడి నిధులు లభిస్తాయి.'],['రుణం తీసుకుని ఎదగండి','బ్యాంకు రుణాలతో సభ్యులు జీవనోపాధి మొదలుపెడతారు లేదా పెంచుకుంటారు.']],
+skills:[['చేరండి','పేద గ్రామీణ కుటుంబాల 15 నుండి 35 ఏళ్ల యువత చేరుతారు.'],['ఉచిత శిక్షణ','కేంద్రంలో 3 నుండి 12 నెలల ఉచిత శిక్షణ.'],['ఉద్యోగం పొందండి','శిక్షణ పొందినవారికి ఉద్యోగాలు కల్పిస్తారు.'],['తర్వాత కూడా సహాయం','ఉద్యోగం వచ్చాక కొన్ని నెలలు సహాయం కొనసాగుతుంది.']],
+pension:[['దరఖాస్తు చేయండి','పంచాయతీ లేదా మండల కార్యాలయంలో దరఖాస్తు చేయండి.'],['తనిఖీ','రాష్ట్రం వయస్సు, స్థితి, ఆదాయాన్ని తనిఖీ చేస్తుంది.'],['మంజూరు','పింఛను మంజూరవుతుంది.'],['డబ్బు పొందండి','డబ్బు బ్యాంకు లేదా పోస్టాఫీసు ఖాతాలోకి వస్తుంది.']],
+land:[['రికార్డులు డిజిటల్','భూ రికార్డులను కంప్యూటర్‌లో ఎక్కిస్తారు.'],['గ్రామ పటాలు','గ్రామ పటాలను డిజిటల్ చేసి భూమిని సర్వే చేస్తారు.'],['భూమి అభివృద్ధి','చెక్ డ్యామ్‌లు, చెరువులు, మట్టి పనులు వాన నీటిని నిలుపుతాయి.'],['ప్రయోజనం','యజమానులు ఆన్‌లైన్‌లో రికార్డులు చూడవచ్చు; పొలాలకు ఎక్కువ నీరు అందుతుంది.']]}},
+mr:{ui:{explore:'कार्यक्रम पाहा',listenT:'हे पान ऐका',listenS:'वाचून दाखवले जाईल',langT:'भाषा बदला',langS:'6 भाषांमध्ये उपलब्ध',largeT:'मोठ्या अक्षरांत वाचा',largeS:'मोठे आणि स्पष्ट',closingLine:'ग्रामीण भारतासाठी सात कार्यक्रम.',scheme:'योजना',large:'मोठी अक्षरे',tabs:['हा काय करतो','हे कसे काम करते','प्रगती','आव्हाने']},
+st:{
+work:[['जॉब कार्ड काढा','कुटुंब ग्रामपंचायतीत नोंदणी करते.'],['काम मागा','गरज असेल तेव्हा कामासाठी अर्ज करा.'],['गावाजवळ काम','गावात किंवा जवळ तलाव, विहिरी आणि रस्ते बांधा.'],['मजुरी मिळवा','मजुरी थेट बँक खात्यात जमा होते.']],
+home:[['कुटुंबांची ओळख','बेघर आणि कच्च्या घरातील कुटुंबांची यादी ग्रामसभा तपासते.'],['घर मंजूर','घर मंजूर होते आणि पहिला हप्ता मिळतो.'],['कुटुंब बांधते','कुटुंब स्वतः घर बांधते; प्रत्येक टप्प्याचा फोटो घेतला जातो.'],['हप्त्यांत पैसे','काम पुढे जाईल तसे हप्ते बँक खात्यात येतात.']],
+road:[['गावांची यादी','रस्ता नसलेली गावे जिल्हा आराखड्यात नोंदवली जातात.'],['रस्ते मंजूर','राज्याच्या प्रस्तावावर केंद्र रस्ते मंजूर करते.'],['बांधकाम','ठेकेदार ठरलेल्या दर्जानुसार रस्ता बांधतात.'],['देखभाल','ठेकेदार पाच वर्षे रस्त्याची देखभाल करतो.']],
+women:[['गट तयार करा','गरीब कुटुंबांतील 10 ते 20 महिला एकत्र येतात.'],['एकत्र बचत','सदस्य थोडी थोडी बचत करतात आणि एकमेकींना कर्ज देतात.'],['मदत मिळवा','गटाला फिरता निधी आणि गुंतवणूक निधी मिळतो.'],['कर्ज घ्या, प्रगती करा','बँक कर्जातून सदस्य उपजीविका सुरू करतात किंवा वाढवतात.']],
+skills:[['नाव नोंदवा','गरीब ग्रामीण कुटुंबांतील 15 ते 35 वयाचे तरुण सहभागी होतात.'],['मोफत प्रशिक्षण','केंद्रात 3 ते 12 महिन्यांचे मोफत प्रशिक्षण.'],['नोकरी मिळवा','प्रशिक्षितांना नोकरी मिळवून दिली जाते.'],['पुढेही मदत','नोकरीनंतर काही महिने मदत सुरू राहते.']],
+pension:[['अर्ज करा','पंचायत किंवा तालुका कार्यालयात अर्ज करा.'],['तपासणी','राज्य वय, स्थिती आणि उत्पन्न तपासते.'],['मंजुरी','पेन्शन मंजूर होते.'],['पैसे मिळवा','पैसे बँक किंवा पोस्ट खात्यात जमा होतात.']],
+land:[['नोंदी डिजिटल','जमीन नोंदी संगणकावर आणल्या जातात.'],['गावांचे नकाशे','गावांचे नकाशे डिजिटल होतात आणि जमिनीचे सर्वेक्षण होते.'],['जमिनीची कामे','बंधारे, तलाव आणि मृदा संधारणाची कामे पावसाचे पाणी अडवतात.'],['फायदा','मालक ऑनलाइन नोंदी पाहू शकतात; शेतांना जास्त पाणी मिळते.']]}}
+};
+const MS = {"en": {"mapTitle": "Across the states", "mapSub": "Pick a programme, then tap a state to see its figure.", "lakh": "lakh", "under1": "under 1 lakh", "nodata": "Not covered / no data", "allStates": "All states, highest first", "tapHint": "Tap a state on the map", "ofTarget": "{c} of {t} houses", "voice": "Voice for reading aloud", "voiceAuto": "Best available", "voiceTest": "Test voice", "voiceNote": "Voices come from your device. Microsoft Edge and Google Chrome usually have the most natural ones.", "m": {"home": "Share of housing target built", "road": "Road built, 2015–2025", "work": "People who got work in 2024–25", "women": "Self-help groups formed"}, "mn": {"home": "Telangana and Puducherry have no target under this scheme.", "road": "Delhi, Chandigarh, Lakshadweep and Dadra & Nagar Haveli and Daman & Diu are not covered.", "work": "West Bengal shows zero because central funds for the scheme there were stopped from March 2022.", "women": ""}}, "hi": {"mapTitle": "राज्यों में", "mapSub": "कोई कार्यक्रम चुनें, फिर किसी राज्य पर टैप करके उसका आँकड़ा देखें।", "lakh": "लाख", "under1": "1 लाख से कम", "nodata": "शामिल नहीं / आँकड़ा नहीं", "allStates": "सभी राज्य, सबसे ज़्यादा पहले", "tapHint": "नक्शे पर किसी राज्य पर टैप करें", "ofTarget": "{t} में से {c} घर", "voice": "पढ़कर सुनाने की आवाज़", "voiceAuto": "सबसे अच्छी उपलब्ध", "voiceTest": "आवाज़ सुनकर देखें", "voiceNote": "आवाज़ें आपके डिवाइस से आती हैं। Microsoft Edge और Google Chrome में आमतौर पर सबसे स्वाभाविक आवाज़ें होती हैं।", "m": {"home": "आवास लक्ष्य का कितना हिस्सा बना", "road": "बनी सड़क, 2015–2025", "work": "2024–25 में काम पाने वाले लोग", "women": "बने स्वयं सहायता समूह"}, "mn": {"home": "तेलंगाना और पुडुचेरी के लिए इस योजना में कोई लक्ष्य नहीं है।", "road": "दिल्ली, चंडीगढ़, लक्षद्वीप और दादरा-नगर हवेली व दमन-दीव शामिल नहीं हैं।", "work": "पश्चिम बंगाल में शून्य है, क्योंकि वहाँ मार्च 2022 से योजना का केंद्रीय फंड रोक दिया गया था।", "women": ""}}, "bn": {"mapTitle": "রাজ্যে রাজ্যে", "mapSub": "একটি কর্মসূচি বেছে নিন, তারপর কোনো রাজ্যে ট্যাপ করে তার তথ্য দেখুন।", "lakh": "লাখ", "under1": "1 লাখের কম", "nodata": "অন্তর্ভুক্ত নয় / তথ্য নেই", "allStates": "সব রাজ্য, সর্বোচ্চ আগে", "tapHint": "মানচিত্রে কোনো রাজ্যে ট্যাপ করুন", "ofTarget": "{t}-এর মধ্যে {c}টি বাড়ি", "voice": "পড়ে শোনানোর কণ্ঠ", "voiceAuto": "সেরা উপলব্ধ", "voiceTest": "কণ্ঠ পরীক্ষা করুন", "voiceNote": "কণ্ঠগুলি আপনার ডিভাইস থেকে আসে। Microsoft Edge ও Google Chrome-এ সাধারণত সবচেয়ে স্বাভাবিক কণ্ঠ থাকে।", "m": {"home": "আবাস লক্ষ্যের কতটা তৈরি হয়েছে", "road": "তৈরি রাস্তা, 2015–2025", "work": "2024–25-এ কাজ পাওয়া মানুষ", "women": "গঠিত স্বনির্ভর গোষ্ঠী"}, "mn": {"home": "এই প্রকল্পে তেলেঙ্গানা ও পুদুচেরির কোনো লক্ষ্য নেই।", "road": "দিল্লি, চণ্ডীগড়, লাক্ষাদ্বীপ এবং দাদরা-নগর হাভেলি ও দমন-দিউ অন্তর্ভুক্ত নয়।", "work": "পশ্চিমবঙ্গে শূন্য, কারণ মার্চ 2022 থেকে সেখানে প্রকল্পের কেন্দ্রীয় তহবিল বন্ধ রাখা হয়েছিল।", "women": ""}}, "ta": {"mapTitle": "மாநிலவாரியாக", "mapSub": "ஒரு திட்டத்தைத் தேர்ந்தெடுத்து, ஒரு மாநிலத்தைத் தொட்டு அதன் எண்ணிக்கையைப் பாருங்கள்.", "lakh": "லட்சம்", "under1": "1 லட்சத்துக்குக் குறைவு", "nodata": "சேர்க்கப்படவில்லை / தரவு இல்லை", "allStates": "அனைத்து மாநிலங்களும், அதிகம் முதலில்", "tapHint": "வரைபடத்தில் ஒரு மாநிலத்தைத் தொடுங்கள்", "ofTarget": "{t} வீடுகளில் {c}", "voice": "படித்துக் காட்டும் குரல்", "voiceAuto": "சிறந்த குரல் (தானாக)", "voiceTest": "குரலைச் சோதியுங்கள்", "voiceNote": "குரல்கள் உங்கள் சாதனத்திலிருந்து வருகின்றன. Microsoft Edge, Google Chrome-ல் பொதுவாக மிக இயல்பான குரல்கள் இருக்கும்.", "m": {"home": "வீட்டு இலக்கில் கட்டி முடிந்த பங்கு", "road": "அமைக்கப்பட்ட சாலை, 2015–2025", "work": "2024–25-ல் வேலை பெற்றவர்கள்", "women": "அமைக்கப்பட்ட சுய உதவிக் குழுக்கள்"}, "mn": {"home": "இந்தத் திட்டத்தில் தெலங்கானா, புதுச்சேரிக்கு இலக்கு இல்லை.", "road": "டெல்லி, சண்டிகர், லட்சத்தீவு, தாத்ரா-நகர் ஹவேலி மற்றும் டாமன்-டையூ சேர்க்கப்படவில்லை.", "work": "மார்ச் 2022 முதல் மேற்கு வங்கத்துக்கான மத்திய நிதி நிறுத்தப்பட்டதால் அங்கு பூஜ்ஜியம்.", "women": ""}}, "te": {"mapTitle": "రాష్ట్రాల వారీగా", "mapSub": "ఒక కార్యక్రమాన్ని ఎంచుకుని, ఏదైనా రాష్ట్రాన్ని నొక్కి దాని సంఖ్య చూడండి.", "lakh": "లక్షలు", "under1": "1 లక్ష కంటే తక్కువ", "nodata": "చేర్చలేదు / సమాచారం లేదు", "allStates": "అన్ని రాష్ట్రాలు, ఎక్కువ ముందు", "tapHint": "మ్యాప్‌లో ఒక రాష్ట్రాన్ని నొక్కండి", "ofTarget": "{t} ఇళ్లలో {c}", "voice": "చదివి వినిపించే గొంతు", "voiceAuto": "అందుబాటులో ఉన్న ఉత్తమమైనది", "voiceTest": "గొంతు పరీక్షించండి", "voiceNote": "గొంతులు మీ పరికరం నుండి వస్తాయి. Microsoft Edge, Google Chromeలో సాధారణంగా అత్యంత సహజమైన గొంతులు ఉంటాయి.", "m": {"home": "ఇళ్ల లక్ష్యంలో పూర్తయిన భాగం", "road": "నిర్మించిన రోడ్లు, 2015–2025", "work": "2024–25లో పని పొందినవారు", "women": "ఏర్పడిన స్వయం సహాయక సంఘాలు"}, "mn": {"home": "ఈ పథకంలో తెలంగాణ, పుదుచ్చేరికి లక్ష్యం లేదు.", "road": "ఢిల్లీ, చండీగఢ్, లక్షద్వీప్, దాద్రా-నగర్ హవేలీ మరియు డామన్-డయ్యూ చేర్చలేదు.", "work": "మార్చి 2022 నుండి పశ్చిమ బెంగాల్‌కు కేంద్ర నిధులు ఆపివేయడంతో అక్కడ సున్నా.", "women": ""}}, "mr": {"mapTitle": "राज्यनिहाय", "mapSub": "एक कार्यक्रम निवडा, मग राज्यावर टॅप करून त्याचा आकडा पाहा.", "lakh": "लाख", "under1": "1 लाखापेक्षा कमी", "nodata": "समाविष्ट नाही / माहिती नाही", "allStates": "सर्व राज्ये, सर्वाधिक आधी", "tapHint": "नकाशावर एखाद्या राज्यावर टॅप करा", "ofTarget": "{t} पैकी {c} घरे", "voice": "वाचून दाखवण्याचा आवाज", "voiceAuto": "सर्वोत्तम उपलब्ध", "voiceTest": "आवाज तपासा", "voiceNote": "आवाज तुमच्या उपकरणातून येतात. Microsoft Edge आणि Google Chrome मध्ये सहसा सर्वात नैसर्गिक आवाज असतात.", "m": {"home": "घरकुल लक्ष्यापैकी पूर्ण झालेला वाटा", "road": "बांधलेले रस्ते, 2015–2025", "work": "2024–25 मध्ये काम मिळालेले लोक", "women": "स्थापन झालेले बचत गट"}, "mn": {"home": "या योजनेत तेलंगणा आणि पुदुच्चेरीसाठी लक्ष्य नाही.", "road": "दिल्ली, चंदीगड, लक्षद्वीप आणि दादरा-नगर हवेली व दमण-दीव समाविष्ट नाहीत.", "work": "मार्च 2022 पासून पश्चिम बंगालचा केंद्रीय निधी थांबवल्यामुळे तेथे शून्य.", "women": ""}}};
+
+/* MoRD Programmes · independent explainer · data: PRS Legislative Research, Lok Sabha answers (2025) */
+/* State outlines (SVG paths, official boundaries) and state-wise figures. */
+const GEO = {"Mizoram":"M494.7,293.4 496.1,291.2 496.2,285.3 495.5,283.9 498.1,283.8 498.4,285.9 500.3,285.4 500.7,283.9 501.9,283.7 502.2,282.0 503.6,281.5 505.0,278.0 505.8,280.1 507.8,280.7 510.1,280.2 510.4,284.2 509.4,286.8 514.1,288.3 518.0,291.0 518.6,299.8 517.2,304.1 517.9,306.5 517.2,309.8 516.0,311.3 513.9,310.2 512.4,311.3 512.9,313.0 511.9,316.1 512.6,323.1 513.8,324.1 514.0,327.4 513.2,329.5 510.9,329.1 509.9,332.3 508.7,333.1 503.9,330.2 503.5,332.6 501.7,333.3 499.9,317.1 498.6,314.2 497.0,312.8 497.4,310.1 496.5,306.2 497.6,305.5 495.0,297.2Z","Tamil Nadu":"M166.6,564.8 172.2,560.9 173.3,562.7 179.1,563.3 178.9,562.0 180.4,558.9 182.5,558.5 184.5,559.4 188.2,558.6 191.0,559.5 192.4,555.6 196.1,555.4 198.1,551.9 197.6,550.9 194.8,549.8 192.6,550.0 191.9,549.0 194.9,546.2 195.3,543.6 194.3,543.0 194.6,539.6 197.4,539.5 199.3,535.2 201.3,534.7 202.3,535.9 203.9,535.5 205.5,537.1 207.5,537.6 208.9,539.7 211.2,540.5 214.9,537.1 215.5,532.5 221.0,530.2 226.5,531.8 228.0,530.0 227.9,528.8 229.0,529.5 232.2,528.1 231.5,524.9 234.2,524.8 234.2,526.2 237.2,525.7 237.6,527.4 239.4,527.0 239.8,525.3 242.6,524.2 244.5,520.4 245.3,521.5 248.1,521.4 249.2,519.8 250.4,522.4 250.7,526.2 248.9,537.1 246.5,545.3 240.8,553.3 240.4,555.3 239.3,555.2 237.3,557.0 239.8,557.8 238.8,562.7 240.8,572.5 240.6,576.8 238.5,576.5 238.0,578.0 240.6,580.3 240.8,592.3 231.2,591.5 228.7,593.5 227.9,595.5 228.4,597.4 222.8,605.4 221.2,610.2 224.5,614.0 230.1,613.7 229.4,615.2 227.4,614.5 220.6,614.9 214.6,617.7 210.6,618.5 206.2,623.2 206.7,626.1 205.6,627.7 205.7,631.6 203.9,634.3 199.5,637.2 198.5,639.1 194.3,639.6 193.6,641.0 191.4,640.6 187.0,638.7 184.3,636.2 187.6,631.5 187.8,629.9 185.7,626.3 187.5,623.3 185.3,620.4 187.7,617.2 188.0,614.0 190.5,609.0 188.8,607.3 187.8,608.0 185.7,607.1 187.3,603.0 186.6,601.2 188.1,593.4 185.9,590.7 181.9,593.7 180.0,592.8 178.5,589.2 180.3,581.3 178.8,579.3 175.2,577.8 177.2,574.7 176.0,572.8 176.2,571.2 174.7,572.2 170.8,572.0 172.5,570.5 173.0,568.5Z","Madhya Pradesh":"M121.9,326.9 122.2,325.6 124.7,326.4 125.2,323.8 123.3,324.2 122.0,321.4 123.9,322.0 126.2,319.3 128.6,319.5 130.3,315.5 130.2,313.5 128.9,313.7 127.4,310.1 128.7,308.9 131.2,309.5 135.8,306.6 131.7,304.3 132.5,302.1 138.2,299.2 139.7,296.7 140.1,294.5 139.3,292.1 140.8,288.4 138.8,285.5 139.4,284.6 136.3,284.0 138.3,279.9 137.5,279.0 135.1,278.7 136.9,276.4 137.3,273.1 139.0,275.3 141.1,274.0 140.8,272.4 138.5,271.7 137.7,269.5 139.3,268.8 140.5,270.4 142.1,270.6 143.7,269.9 143.6,268.0 145.2,266.4 148.5,266.8 145.1,272.8 153.8,274.3 157.4,272.5 160.2,277.3 159.7,279.5 157.4,279.3 156.2,280.6 158.0,283.9 156.7,286.2 158.4,288.1 155.7,290.1 152.0,288.8 150.8,291.1 152.9,292.5 153.2,293.8 155.4,294.9 157.6,292.3 160.5,291.6 162.6,287.9 164.4,287.4 164.2,285.0 168.4,283.9 173.5,284.7 175.0,283.4 175.6,285.1 178.2,286.7 179.8,286.4 180.7,284.6 178.8,281.4 178.5,277.5 179.4,277.2 181.8,279.1 183.7,277.0 182.9,273.7 181.2,272.6 179.3,272.9 178.3,271.5 181.2,270.1 179.4,268.1 179.7,266.3 182.3,265.6 184.0,266.0 185.8,264.8 188.7,265.4 190.3,264.6 190.7,262.3 189.8,258.2 188.7,257.7 187.1,258.9 186.8,260.2 184.0,259.8 181.1,261.0 179.3,259.9 175.5,259.5 172.3,255.6 172.1,252.4 173.0,248.7 174.9,247.2 177.9,246.4 180.2,243.1 187.8,239.3 191.2,236.2 193.3,236.1 199.1,233.0 200.8,230.6 202.7,229.8 204.5,230.2 205.0,227.6 210.1,226.0 210.8,227.1 213.9,228.3 218.7,228.2 220.6,229.7 223.3,230.3 223.0,232.4 226.0,235.4 226.0,237.7 223.1,240.8 223.4,243.3 218.4,251.3 219.3,253.6 216.2,254.9 212.0,254.6 210.8,257.4 209.7,257.7 209.8,260.0 211.9,264.5 209.6,265.4 209.8,267.0 206.3,270.0 208.4,274.7 208.2,279.4 210.3,281.1 209.5,282.1 210.7,283.5 213.0,280.7 219.2,285.4 222.6,281.6 222.9,279.6 221.5,279.2 222.2,277.2 220.8,275.2 218.1,276.1 218.5,270.4 215.7,268.2 215.8,265.7 213.2,261.1 216.2,258.8 218.5,259.4 217.7,257.1 220.8,255.9 222.0,256.4 220.8,258.7 222.4,259.6 220.8,263.7 221.8,262.7 224.5,262.3 225.9,264.8 228.2,264.7 229.8,263.9 228.6,261.2 229.0,260.1 230.4,260.0 232.1,261.6 231.2,263.5 231.5,264.9 233.3,265.5 234.9,263.5 240.4,265.0 240.7,263.0 244.4,259.7 250.2,258.7 250.1,260.9 252.0,261.9 252.5,263.4 249.1,266.7 250.7,266.9 251.9,265.7 253.5,267.7 253.9,266.3 255.8,265.2 258.3,265.8 258.5,264.6 261.0,263.1 261.7,265.8 260.7,266.5 261.3,268.8 263.1,268.0 266.6,269.4 269.6,266.1 269.8,263.6 272.2,264.3 275.2,263.1 277.0,263.7 277.8,265.9 282.4,267.5 283.5,270.6 289.1,271.8 290.7,275.9 293.2,276.2 293.2,274.9 298.4,273.9 299.1,275.3 300.5,275.1 301.0,276.6 299.3,280.9 300.4,281.2 299.9,285.7 298.3,286.5 301.3,290.2 298.8,291.1 297.7,292.9 294.8,294.1 288.9,292.6 286.3,293.4 283.0,292.2 280.7,293.6 279.0,292.9 277.8,291.0 276.5,291.9 278.4,295.5 276.7,296.8 276.7,300.1 279.7,299.3 281.0,300.0 282.9,299.6 284.3,302.2 286.8,302.6 288.7,304.5 287.2,309.1 283.5,309.7 283.6,311.8 281.8,313.9 280.1,314.2 280.4,316.6 276.9,321.6 273.9,322.7 270.9,321.9 269.3,323.4 268.1,322.7 266.4,323.9 266.6,327.1 265.1,328.2 264.2,332.2 262.3,331.1 260.4,338.8 259.2,338.8 258.3,341.0 258.8,345.1 256.4,348.5 252.3,345.9 249.2,341.9 246.2,342.1 245.0,343.3 242.0,344.0 238.3,342.3 234.2,343.6 233.4,340.7 228.0,339.7 227.8,341.3 221.5,342.5 221.2,344.5 214.7,344.8 213.2,343.9 211.6,344.6 211.3,343.0 209.8,342.6 203.3,346.3 200.4,347.1 198.7,346.6 192.3,347.3 191.6,343.4 194.0,343.9 193.4,340.0 192.0,338.6 188.0,338.8 186.6,340.4 182.2,340.3 180.3,342.4 179.3,342.0 177.8,343.2 177.8,345.3 174.5,348.2 175.3,349.4 174.5,351.5 171.8,351.4 169.6,353.9 165.2,353.8 165.0,350.0 163.7,347.4 145.6,346.5 143.5,345.4 142.4,343.1 138.5,341.6 136.7,342.0 132.8,340.9 131.2,339.5 131.6,335.5 130.1,334.3 129.7,332.9 126.6,335.0 123.8,334.6 122.8,333.1 123.3,328.8Z","Maharashtra":"M93.3,381.3 93.5,379.1 94.9,378.3 94.4,376.0 97.7,372.7 99.6,373.1 99.6,374.9 103.2,375.8 105.4,375.0 106.5,373.0 108.8,373.1 108.6,369.1 110.0,364.8 108.7,363.9 110.1,361.8 113.7,365.2 115.6,365.2 117.5,364.0 118.3,361.6 119.1,361.6 119.6,359.1 117.7,355.6 114.0,352.2 117.0,351.7 117.2,349.6 119.6,349.0 120.0,346.9 121.8,345.7 127.4,344.6 126.5,343.2 124.2,343.0 117.4,344.1 117.0,341.4 118.4,339.8 117.2,338.8 117.1,337.0 123.8,334.6 126.6,335.0 129.7,332.8 130.1,334.3 131.6,335.4 131.2,339.5 132.8,340.9 136.7,342.0 138.5,341.6 142.4,343.1 143.5,345.4 145.6,346.5 163.7,347.4 165.0,350.0 165.2,353.8 169.6,353.9 171.8,351.4 174.5,351.5 175.3,349.4 174.5,348.3 177.8,345.3 177.8,343.2 179.3,342.0 180.3,342.4 182.2,340.3 186.5,340.4 188.0,338.8 192.1,338.6 193.4,340.0 194.0,343.9 191.6,343.4 192.3,347.3 198.7,346.6 200.4,347.1 203.3,346.3 209.8,342.6 211.3,343.0 211.6,344.6 213.2,343.9 214.7,344.8 221.1,344.5 221.5,342.5 227.8,341.3 228.0,339.7 233.4,340.7 234.3,343.6 238.3,342.3 242.0,344.0 245.0,343.3 246.2,342.1 249.2,341.9 252.3,345.9 256.4,348.5 257.2,348.2 256.3,350.6 253.2,351.7 252.7,353.4 253.2,357.1 254.9,357.0 255.6,362.8 254.4,364.8 256.3,364.7 255.8,369.0 256.5,370.3 251.8,372.3 252.5,374.7 254.0,374.5 254.8,375.5 254.5,379.0 253.3,381.5 254.9,381.7 258.3,386.1 262.0,388.3 261.1,391.7 259.1,393.4 256.2,392.9 255.5,391.0 253.6,392.3 250.5,396.6 249.3,401.0 250.8,403.1 249.3,405.9 246.1,406.8 241.9,403.6 242.9,402.7 242.4,399.0 240.8,397.5 242.2,396.3 243.2,390.9 239.7,387.0 238.4,386.3 232.9,388.7 230.7,387.0 228.4,386.7 227.1,389.6 225.2,388.0 221.9,387.6 222.3,385.3 220.3,384.5 220.0,382.9 211.6,381.8 209.1,379.7 210.2,382.5 209.8,384.0 208.4,384.5 209.1,389.1 207.1,390.3 206.3,394.5 201.6,392.2 199.9,393.0 199.9,395.8 198.6,398.2 199.5,401.8 201.7,403.2 199.5,404.1 198.4,406.8 197.2,407.1 197.4,409.6 194.5,409.7 194.2,412.0 193.0,413.6 193.5,415.4 191.8,416.1 190.6,415.2 190.7,413.2 188.7,412.1 187.7,412.5 183.6,418.5 181.3,417.7 180.6,423.7 177.1,424.2 178.0,425.7 176.4,426.7 175.8,428.9 172.5,427.2 171.8,429.4 168.6,430.8 169.6,437.0 166.5,435.9 160.4,436.8 159.6,435.1 158.0,435.7 154.3,433.4 153.0,435.5 154.7,437.9 154.1,440.1 155.1,441.4 154.9,444.4 147.1,444.9 146.7,447.0 145.0,447.4 143.1,445.0 139.3,447.0 139.6,448.9 135.1,450.2 133.7,453.1 132.5,453.8 131.9,452.0 127.3,453.8 127.3,458.8 128.5,460.2 130.7,460.5 130.7,462.8 128.5,464.3 130.3,465.2 127.9,471.2 125.7,471.6 125.1,470.9 123.3,472.2 123.2,473.7 120.6,474.6 119.6,471.7 114.4,472.0 112.4,468.0 110.8,467.4 107.9,458.0 107.5,452.4 106.0,446.3 106.3,441.4 104.9,438.1 105.3,436.8 104.1,435.4 104.0,431.0 99.8,419.1 99.7,416.5 100.9,416.0 98.6,414.0 98.2,411.6 99.0,409.9 97.4,406.4 97.6,404.2 96.3,401.8 97.1,398.7 96.0,396.9 96.2,393.0Z","Chhattisgarh":"M249.2,401.0 250.5,396.6 253.6,392.3 255.5,391.0 256.2,392.9 259.1,393.4 261.1,391.7 262.0,388.3 258.3,386.1 254.9,381.7 253.3,381.5 254.5,379.0 254.8,375.5 254.0,374.5 252.5,374.7 251.8,372.3 256.5,370.3 255.8,369.0 256.3,364.8 254.3,364.9 255.6,362.8 254.9,357.1 253.2,357.2 253.2,351.7 256.3,350.6 258.8,345.1 258.3,341.0 259.2,338.8 260.4,338.7 262.3,331.1 264.3,332.1 265.1,328.2 266.6,327.1 266.4,323.9 268.1,322.7 269.3,323.3 270.9,321.9 273.9,322.7 276.9,321.6 280.4,316.6 280.1,314.2 281.8,313.8 283.6,311.8 283.5,309.7 287.2,309.1 288.7,304.5 286.8,302.6 284.3,302.3 282.9,299.6 281.0,300.0 279.7,299.3 276.7,300.1 276.7,296.8 278.4,295.5 276.5,291.9 277.8,291.0 279.0,292.9 280.7,293.6 283.0,292.2 286.3,293.4 288.9,292.6 294.8,294.1 301.3,290.2 304.0,292.2 307.0,292.2 309.4,291.0 311.9,287.1 314.0,287.4 316.8,292.4 319.6,293.3 321.0,297.9 324.3,298.8 325.9,297.4 325.9,300.3 324.8,302.9 327.1,304.0 326.4,307.6 326.9,308.9 329.3,311.8 333.3,311.9 333.7,313.0 330.5,318.2 325.8,320.8 326.6,323.1 325.8,325.3 322.8,325.9 318.0,329.0 316.1,332.5 317.2,337.4 314.6,340.2 315.1,341.4 313.0,341.9 312.0,344.5 313.3,346.6 313.2,348.0 310.6,347.3 309.1,352.5 306.7,353.1 304.4,351.7 297.8,352.2 296.1,356.8 294.7,357.6 294.1,359.4 291.6,358.4 292.4,363.7 291.5,365.3 293.6,368.1 292.8,370.1 292.8,376.4 299.3,377.9 298.9,381.4 296.8,382.6 295.5,380.4 293.8,379.7 291.7,381.3 290.1,378.2 283.5,375.4 282.1,376.5 281.5,378.7 282.0,379.8 284.0,380.8 284.4,382.0 286.0,382.3 285.2,388.5 286.7,388.3 287.2,390.3 288.5,390.3 287.9,395.3 289.7,401.5 288.3,401.9 287.9,404.4 286.5,405.5 282.6,407.3 282.8,409.3 279.5,414.0 277.6,414.2 275.0,416.5 274.0,422.3 272.4,424.2 272.3,425.9 269.6,426.0 267.6,425.0 264.5,426.4 263.7,418.2 261.4,418.8 261.1,417.3 259.2,418.1 258.1,412.1 256.7,410.3 253.0,407.9 251.3,408.3 249.3,405.9 250.8,403.1Z","Gujarat":"M0.0,296.4 1.5,296.0 2.2,292.1 4.9,290.1 13.4,289.9 13.6,282.8 15.3,284.0 17.3,282.6 18.5,284.4 20.4,283.3 22.4,284.1 24.8,283.1 30.6,282.9 33.4,285.6 39.4,285.6 41.2,282.8 50.6,280.0 50.6,283.8 55.4,284.5 59.1,281.2 60.4,281.4 61.4,279.7 59.4,279.5 59.1,276.2 61.7,274.4 65.3,275.7 69.2,274.3 71.8,274.4 72.8,275.2 81.1,273.6 83.2,275.6 87.0,275.4 87.1,276.9 88.9,278.0 90.0,280.0 90.9,277.9 93.9,279.1 94.8,281.2 99.5,281.4 100.4,278.7 102.1,278.3 101.9,280.6 103.4,281.5 101.7,285.1 104.7,287.6 105.3,289.3 106.8,288.1 108.6,288.4 108.9,291.0 108.1,291.5 107.9,293.4 111.0,298.0 112.1,297.0 113.8,297.7 113.2,301.5 115.8,301.4 117.3,302.0 118.6,304.0 120.0,303.0 123.7,305.5 123.4,307.5 125.9,307.4 128.9,313.7 130.2,313.5 130.3,315.5 128.6,319.5 126.2,319.3 123.9,322.0 122.1,321.4 123.3,324.2 125.2,323.8 124.7,326.4 122.3,325.6 121.9,326.9 123.3,328.8 122.8,333.1 123.8,334.6 117.1,337.0 117.2,338.8 118.4,339.8 117.0,341.4 117.5,344.1 124.2,343.0 126.5,343.2 127.4,344.6 121.8,345.7 120.0,346.9 119.6,349.0 117.2,349.6 117.0,351.7 114.0,352.2 118.5,357.1 119.6,359.1 119.1,361.7 118.3,361.6 117.5,364.0 115.6,365.2 113.7,365.2 110.0,361.8 108.7,363.9 110.0,364.8 108.6,369.1 108.9,373.2 106.5,373.0 105.4,375.0 104.7,375.0 103.1,373.3 103.7,371.3 101.2,370.5 99.0,371.2 99.6,373.1 97.7,372.7 95.7,374.8 95.0,372.3 98.0,367.5 98.4,364.9 94.6,354.5 95.2,354.2 92.6,353.4 92.9,350.9 92.1,348.6 94.9,345.1 92.4,342.8 94.2,341.3 91.0,339.4 92.6,337.7 90.3,334.7 91.5,329.5 93.1,328.7 95.3,329.7 99.2,327.1 93.4,327.3 90.4,326.4 89.3,327.8 87.6,326.6 84.1,335.9 84.8,337.4 83.9,339.0 86.2,341.8 84.7,345.5 82.1,348.9 82.2,351.2 69.8,356.8 68.3,358.5 55.8,362.4 48.1,358.9 40.8,353.1 32.9,343.8 26.0,337.3 26.4,336.1 25.6,337.1 22.9,334.4 17.7,328.3 17.1,326.6 18.5,323.8 21.8,325.8 22.1,328.8 25.4,326.6 36.1,323.3 38.4,321.5 41.5,321.3 43.5,318.9 43.4,317.6 47.1,313.5 48.1,314.8 50.4,310.8 53.0,308.8 53.6,307.3 49.2,307.5 45.3,306.7 40.6,313.2 31.7,315.9 27.0,315.6 21.1,314.2 10.9,307.7 8.8,305.2 9.2,303.6 6.1,302.1 6.4,300.7 4.6,300.5 4.3,298.6 0.9,298.1ZM85.8,334.2 87.5,332.9 88.8,335.1 87.2,338.0 86.2,337.0Z","Odisha":"M272.3,425.9 272.4,424.2 274.0,422.3 275.0,416.5 277.6,414.2 279.5,414.0 282.8,409.3 282.6,407.3 286.5,405.5 287.9,404.4 288.3,401.9 289.7,401.5 287.9,395.3 288.5,390.3 287.2,390.3 286.7,388.3 285.2,388.5 286.0,382.3 284.3,382.0 284.0,380.8 282.0,379.8 281.5,378.7 282.1,376.5 283.5,375.3 285.0,376.6 290.1,378.2 291.7,381.3 293.8,379.7 295.5,380.3 296.8,382.6 298.9,381.4 299.3,377.9 292.8,376.4 292.8,370.1 293.6,368.1 291.5,365.3 292.4,363.7 291.6,358.4 294.1,359.4 297.7,353.6 297.7,352.2 304.4,351.7 306.7,353.1 309.0,352.5 310.6,347.3 313.2,348.0 313.3,346.6 312.0,344.5 313.0,341.9 315.1,341.4 314.6,340.2 317.2,337.4 316.1,332.5 318.0,329.0 322.8,325.9 325.8,325.3 326.6,323.1 325.8,321.8 331.6,325.9 334.4,325.7 336.5,324.1 341.0,324.2 347.5,322.7 347.7,327.8 346.7,330.8 349.8,331.9 350.9,333.3 351.7,331.7 354.2,329.9 360.1,332.2 361.4,331.9 362.1,333.8 364.4,333.9 367.2,329.3 366.0,328.0 367.1,326.1 366.9,324.1 365.8,322.8 367.9,321.2 369.0,322.8 372.3,323.6 373.9,325.8 375.3,326.5 376.7,325.8 381.5,328.7 383.7,331.3 386.3,331.6 387.6,332.6 387.1,335.4 389.1,336.5 389.2,335.2 392.0,334.3 392.8,337.8 396.1,338.6 397.0,342.0 395.4,343.5 390.1,344.3 386.0,347.7 384.2,350.9 384.0,353.5 386.6,358.7 386.4,360.2 384.1,360.5 387.5,360.6 388.2,361.9 382.7,365.9 381.6,367.5 382.5,370.3 377.5,373.7 374.1,378.1 371.2,379.9 360.0,383.3 353.3,386.8 345.7,392.8 341.3,398.0 340.0,397.1 338.4,397.9 337.7,399.2 336.1,398.7 332.1,404.4 327.4,405.1 326.3,403.8 323.4,403.8 321.4,399.4 320.4,399.9 320.6,401.7 318.7,397.6 315.0,399.0 314.5,400.7 312.2,399.4 311.6,400.3 313.6,402.5 309.3,405.2 307.9,404.5 305.1,408.4 306.0,409.8 305.5,411.7 306.7,412.9 304.5,413.9 301.2,411.9 300.5,414.3 296.7,415.7 297.1,413.7 294.6,410.2 292.1,412.5 292.5,413.7 291.1,417.7 291.8,418.0 291.2,420.9 289.8,422.0 288.1,420.7 285.3,420.3 276.8,425.7Z","Andhra Pradesh":"M177.3,488.3 178.2,486.0 182.0,487.8 184.6,487.3 185.5,485.0 184.8,483.1 185.3,481.6 183.5,480.8 182.9,478.5 182.9,474.1 183.9,473.5 182.8,469.6 183.7,468.0 187.3,466.8 195.8,468.6 200.4,468.1 204.4,469.5 206.3,469.2 208.0,465.8 211.1,464.4 214.0,465.1 215.0,464.2 217.9,465.8 221.6,463.3 221.2,462.0 223.8,460.7 227.6,461.0 227.7,454.7 228.5,453.5 231.8,453.2 232.4,452.3 239.4,450.0 242.7,452.0 244.8,449.6 244.8,444.6 247.5,443.5 250.0,444.5 250.3,446.6 255.3,449.0 256.0,445.7 254.6,444.8 251.1,444.4 255.6,440.6 261.0,443.0 261.7,440.4 263.0,439.1 264.1,439.7 267.7,438.8 268.1,436.8 269.8,436.9 270.5,434.9 264.6,432.5 262.3,429.8 261.8,427.7 263.6,426.7 265.4,427.7 267.6,425.0 269.6,426.0 276.8,425.7 285.3,420.3 288.1,420.7 289.8,422.0 291.2,420.8 291.8,418.1 291.1,417.8 292.5,413.7 292.0,412.5 294.6,410.2 297.1,413.7 296.7,415.7 300.5,414.3 301.2,411.9 304.5,413.9 306.7,412.9 305.5,411.7 306.0,409.8 305.1,408.4 307.9,404.5 309.3,405.2 313.5,402.6 311.6,400.3 312.2,399.4 314.5,400.7 315.0,399.0 318.7,397.6 320.5,401.5 320.4,399.9 321.4,399.4 323.4,403.8 326.3,403.8 327.4,405.1 332.1,404.4 336.1,398.7 337.7,399.2 338.4,397.9 340.0,397.1 341.2,398.1 328.2,414.9 318.7,420.1 308.4,431.6 295.7,438.4 291.2,442.7 289.7,445.4 289.8,446.7 292.0,447.1 291.1,453.7 278.8,459.1 272.2,458.4 269.6,459.9 267.2,466.6 264.5,469.3 264.3,471.4 262.9,472.3 260.7,472.5 259.5,469.0 257.6,468.6 254.7,469.3 250.1,472.1 246.2,480.0 244.5,487.9 245.9,493.9 247.7,497.2 246.4,505.1 246.7,509.3 248.9,515.0 248.5,517.8 249.2,519.8 248.1,521.4 245.3,521.5 244.4,520.4 242.6,524.2 239.8,525.3 239.5,527.0 237.6,527.4 237.2,525.7 234.1,526.2 234.2,524.8 231.6,524.9 232.2,528.1 229.0,529.6 227.9,528.8 228.0,529.9 226.5,531.8 221.0,530.2 218.1,531.1 215.5,532.5 214.9,537.1 211.2,540.5 208.9,539.7 207.5,537.6 207.9,535.4 209.1,535.4 210.0,533.6 212.3,532.8 214.7,526.2 210.2,524.3 210.9,519.3 206.7,519.7 206.9,518.4 205.2,516.5 205.1,513.2 202.7,513.0 202.1,511.1 198.9,512.1 198.3,514.2 191.6,517.2 191.1,513.6 186.0,513.1 185.5,514.5 183.6,515.9 181.8,514.0 183.1,511.7 180.9,509.5 181.2,508.1 180.1,506.5 182.3,505.8 182.8,508.8 185.8,509.9 188.8,509.5 190.4,512.2 191.1,511.3 190.2,509.8 190.3,506.3 192.5,506.7 192.1,503.8 190.6,502.8 189.7,504.1 185.1,502.8 184.6,505.2 182.4,505.0 179.9,502.5 180.2,499.4 178.3,498.5 177.4,496.9 179.5,488.8Z","Karnataka":"M122.6,490.3 125.0,489.7 126.9,487.2 126.4,486.0 127.3,484.0 126.1,482.8 127.5,481.8 127.4,480.0 126.5,479.5 126.0,477.2 126.5,476.6 125.7,473.4 123.2,473.7 123.3,472.2 125.1,470.9 125.7,471.6 127.9,471.2 130.3,465.2 128.4,464.3 130.7,462.7 130.6,460.5 128.5,460.2 127.3,458.8 127.3,453.8 132.0,452.0 132.5,453.7 133.7,453.1 135.1,450.2 139.6,448.9 139.3,447.0 143.1,445.0 145.0,447.4 146.7,447.0 147.0,444.9 154.9,444.4 155.1,441.4 154.1,440.1 154.7,437.9 153.0,435.5 154.3,433.4 158.0,435.7 159.6,435.1 160.4,436.8 166.5,435.9 169.6,436.9 168.6,430.8 171.8,429.3 172.5,427.1 175.8,428.8 176.4,426.7 178.0,425.7 176.9,424.1 177.7,424.6 180.6,423.7 181.3,417.7 183.6,418.5 187.7,412.5 188.7,412.1 190.7,413.2 190.6,415.2 191.8,416.0 194.6,415.8 193.8,417.5 194.5,419.8 193.5,420.6 195.7,422.5 191.5,428.6 191.3,431.0 196.3,432.6 192.8,434.4 190.0,439.0 189.7,440.4 191.7,441.5 192.4,443.0 192.0,448.6 191.0,450.1 191.5,452.4 190.8,454.6 187.2,455.6 188.2,457.0 194.4,458.4 192.5,461.1 192.8,467.6 187.3,466.8 183.7,468.0 182.8,469.6 184.0,473.5 182.9,474.1 182.9,478.5 183.5,480.8 185.4,481.6 184.8,483.1 185.5,485.0 184.6,487.3 181.9,487.8 178.1,486.0 177.4,488.3 179.5,488.8 177.4,496.9 178.3,498.5 180.2,499.4 179.9,502.5 182.4,505.0 184.6,505.2 185.1,502.7 189.7,504.1 190.6,502.7 192.1,503.7 192.6,506.7 190.3,506.4 190.2,509.8 191.2,511.3 190.4,512.2 188.8,509.5 185.8,509.9 182.8,508.8 182.3,505.8 180.1,506.5 181.2,508.1 180.9,509.5 183.1,511.7 181.8,514.0 183.6,515.8 185.5,514.5 186.0,513.1 191.1,513.6 191.7,517.2 198.3,514.2 198.9,512.1 202.1,511.1 202.7,513.0 205.1,513.2 205.2,516.5 206.9,518.4 206.8,519.7 210.9,519.3 210.2,524.3 214.7,526.2 212.3,532.8 210.0,533.6 209.1,535.4 207.9,535.4 207.5,537.6 205.5,537.1 203.9,535.5 202.3,535.9 201.3,534.7 199.3,535.2 197.4,539.5 194.6,539.6 194.3,543.0 195.3,543.6 194.8,546.3 191.9,549.0 192.6,550.0 194.8,549.8 197.5,550.9 198.1,551.9 196.1,555.4 192.4,555.6 191.0,559.5 188.2,558.6 184.5,559.4 182.5,558.5 180.4,558.9 178.9,562.0 179.1,563.3 173.2,562.7 172.2,560.9 170.3,561.6 170.2,559.7 168.3,559.9 166.0,557.4 164.1,557.5 164.1,554.8 161.8,555.9 159.1,555.4 157.6,553.1 153.1,550.9 151.2,548.0 149.8,548.0 149.9,546.1 148.8,545.2 149.8,543.3 147.0,542.8 143.6,539.3 138.6,537.6 132.8,511.8 131.4,510.5 128.9,500.9 126.3,496.3 126.2,494.3 123.2,492.8Z","Goa":"M114.4,472.0 118.3,471.5 119.6,471.7 120.7,474.6 123.2,473.7 125.7,473.4 126.5,476.6 126.0,477.3 126.5,479.4 127.4,480.0 127.5,481.9 126.2,482.8 127.3,484.0 126.4,485.9 126.9,487.2 125.0,489.7 122.6,490.3 120.4,486.9 118.4,480.3 119.5,478.5 116.0,477.2Z","Kerala":"M138.6,537.6 143.6,539.3 147.0,542.8 149.8,543.3 148.8,545.2 149.9,546.1 149.8,547.9 151.2,548.0 153.1,550.9 157.6,553.1 159.1,555.4 161.8,555.9 164.1,554.8 164.1,557.5 166.0,557.4 168.3,559.9 170.2,559.7 169.5,563.2 166.6,564.8 173.0,568.5 172.5,570.5 170.9,572.0 174.6,572.1 176.2,571.1 176.0,572.8 177.2,574.7 175.2,577.8 178.8,579.3 180.4,581.3 178.9,585.4 178.9,591.0 180.2,592.9 181.9,593.7 186.0,590.6 188.1,593.4 186.6,601.2 187.3,603.0 185.7,607.1 187.8,608.0 188.8,607.3 190.5,609.0 188.0,614.0 187.7,617.2 185.3,620.4 187.5,623.3 185.7,626.3 187.8,629.9 187.6,631.5 184.3,636.2 173.0,622.8 168.3,610.0 167.5,603.2 163.8,590.1 159.9,581.0 158.2,573.7 155.6,567.1 154.0,565.9 152.6,561.0 148.6,557.5 146.4,554.2 145.4,554.2Z","Telangana":"M187.2,455.6 190.8,454.6 191.5,452.4 191.0,450.1 192.0,448.6 192.4,443.0 191.7,441.5 189.7,440.4 190.0,439.0 192.8,434.4 196.2,432.7 191.3,431.0 191.5,428.6 195.7,422.5 193.5,420.6 194.5,419.8 193.8,417.5 194.6,415.8 193.5,415.4 193.0,413.6 194.2,412.0 194.5,409.7 197.4,409.6 197.2,407.1 198.4,406.8 199.5,404.1 201.6,403.2 199.5,401.8 198.6,398.1 199.9,395.8 199.9,393.0 201.6,392.2 206.3,394.5 207.1,390.3 209.1,389.1 208.4,384.5 209.8,384.0 210.2,382.5 209.0,379.6 211.6,381.8 220.0,382.9 220.3,384.5 222.3,385.3 221.9,387.6 225.2,388.0 227.1,389.6 228.4,386.7 230.7,387.0 232.9,388.7 238.4,386.3 242.5,389.4 243.2,390.9 242.2,396.3 240.8,397.5 242.4,399.0 242.9,402.7 242.0,403.6 246.1,406.8 249.3,405.9 251.3,408.3 253.0,407.9 256.7,410.3 258.1,412.1 259.2,418.1 261.1,417.3 261.4,418.7 263.7,418.2 264.5,426.3 265.9,426.3 265.4,427.7 263.6,426.7 261.9,427.7 262.3,429.8 264.6,432.5 270.5,434.9 269.8,436.9 268.1,436.8 267.7,438.8 264.1,439.7 262.9,439.1 261.7,440.4 261.0,443.0 255.6,440.6 251.2,444.4 256.0,445.7 255.3,449.1 250.3,446.6 249.9,444.5 247.5,443.5 244.8,444.6 244.8,449.6 242.6,452.0 239.4,450.0 232.4,452.3 231.8,453.2 228.5,453.5 227.7,454.7 227.6,461.0 223.8,460.7 221.3,462.0 221.6,463.3 217.9,465.8 215.1,464.2 214.0,465.1 211.1,464.4 208.0,465.8 206.3,469.2 204.4,469.5 200.4,468.1 195.8,468.6 192.8,467.6 192.5,461.1 194.4,458.4 188.1,457.0Z","West Bengal":"M362.9,305.5 364.2,303.7 363.7,301.9 364.2,300.7 367.4,300.4 368.2,298.9 369.8,299.1 370.2,301.0 372.9,302.3 374.0,299.7 376.5,297.4 383.0,296.0 383.5,294.5 383.0,293.0 385.3,291.9 388.8,293.5 389.7,292.6 391.8,292.5 393.1,291.5 391.8,288.8 393.9,288.6 396.1,289.7 400.0,285.7 400.1,283.7 401.5,283.6 403.4,280.9 403.3,276.4 405.2,276.8 405.6,273.4 404.2,272.9 406.7,269.0 406.6,267.8 403.3,265.3 403.0,261.7 401.6,261.5 402.7,261.4 403.8,261.9 404.4,260.7 403.1,259.7 402.7,258.0 404.8,256.3 406.7,255.3 408.8,256.5 407.9,254.1 408.5,251.8 406.8,251.2 403.9,246.6 404.4,244.3 413.2,237.8 412.4,235.0 409.8,233.1 411.3,228.1 410.0,224.2 407.3,220.7 408.3,218.2 410.7,220.6 413.3,220.2 416.2,221.5 418.4,219.2 419.7,218.9 425.2,220.7 425.3,223.8 426.4,223.2 429.8,225.5 430.6,227.3 435.7,226.3 437.3,227.5 439.2,227.2 443.6,229.7 445.4,229.7 445.2,236.7 444.0,237.4 442.3,240.3 442.9,241.4 441.0,240.1 440.5,241.8 441.3,243.7 439.1,245.0 435.1,244.9 432.7,242.4 431.1,242.1 429.9,236.5 427.6,235.3 426.2,236.7 427.7,237.4 426.5,238.9 423.1,237.9 416.1,232.7 415.7,231.0 414.4,234.2 417.4,235.0 418.1,237.1 415.7,237.9 414.7,240.3 411.2,241.9 409.4,246.7 409.6,248.9 410.4,249.7 413.0,250.0 416.8,252.6 416.7,254.1 420.7,256.7 424.1,255.7 424.7,259.2 427.7,261.2 426.1,263.3 416.5,262.8 416.8,265.5 415.6,267.9 413.2,269.7 412.1,268.1 410.4,269.1 411.1,270.3 408.1,274.1 410.2,278.1 414.4,279.5 419.0,282.5 421.5,282.2 422.7,283.7 422.8,286.1 421.9,287.2 422.7,288.6 422.5,291.3 419.9,292.4 419.1,295.7 419.7,297.8 423.1,301.6 422.1,306.3 424.1,305.8 426.8,306.9 425.1,312.1 427.4,314.9 426.2,316.8 427.2,318.2 426.5,319.1 428.0,324.0 427.9,327.1 429.3,328.9 429.4,334.6 428.1,335.7 426.6,334.8 425.0,335.2 426.8,335.4 426.9,338.6 424.3,335.1 424.8,335.1 423.1,334.5 423.1,333.2 420.5,334.5 418.4,336.7 416.6,335.3 413.0,339.5 413.7,340.8 412.8,343.3 410.5,334.5 412.0,331.2 411.3,329.4 409.2,327.7 407.5,328.1 407.8,329.0 410.3,329.4 411.3,331.2 408.8,333.1 406.6,337.2 403.2,340.1 397.0,342.0 396.1,338.6 392.8,337.8 392.0,334.3 389.3,335.2 389.1,336.5 387.1,335.4 387.6,332.6 386.3,331.6 383.7,331.3 381.5,328.7 383.6,326.3 383.9,324.7 382.2,324.1 383.0,322.7 382.2,320.8 380.0,320.8 379.7,319.0 375.1,316.0 375.5,313.0 376.8,311.6 371.5,311.5 367.5,308.2 364.2,307.7ZM428.3,338.4 429.9,341.2 428.8,342.1 428.8,342.1ZM422.8,341.0 421.7,339.0 422.2,335.6 423.4,336.4 424.1,340.8ZM408.2,340.4 409.6,337.0 410.9,337.4 411.0,339.3 410.1,340.7Z","Dadra and Nagar Haveli and Daman and Diu":"M99.0,371.1 101.2,370.5 103.8,371.3 103.1,373.3 104.7,375.0 103.2,375.8 99.6,374.9 99.6,373.1ZM96.8,369.5 97.0,367.7 98.0,367.5 98.0,367.5ZM57.8,361.3 59.4,361.3 59.4,361.3 58.9,362.2Z","Puducherry":"M288.4,449.7 290.2,450.1 290.1,450.7 289.5,450.2 288.7,450.1ZM238.0,578.0 238.5,576.5 240.6,576.8 240.6,580.3 240.0,579.1ZM237.2,557.0 239.3,555.2 240.4,555.3 239.8,557.8ZM152.7,560.5 152.3,560.6 152.4,560.1Z","Lakshadweep":"M100.7,636.6 101.4,636.7 101.4,636.7 101.2,636.9Z","Arunachal Pradesh":"M480.4,209.1 481.7,207.5 481.8,205.4 485.9,205.2 487.0,207.1 489.1,206.1 490.6,206.3 494.7,204.0 495.8,205.8 500.9,204.9 504.4,201.5 503.0,199.5 503.5,198.2 505.8,196.5 507.8,196.5 510.4,194.3 514.4,193.4 513.6,191.4 515.6,189.8 516.9,186.8 520.0,185.9 522.6,186.5 529.6,185.2 530.3,182.4 533.6,179.9 536.3,175.6 537.7,175.5 539.2,173.9 541.8,173.8 542.3,172.7 544.3,171.7 548.3,174.9 556.0,176.5 556.4,177.8 560.1,178.1 561.9,174.2 573.2,168.7 576.3,173.7 579.4,173.3 578.4,175.2 575.8,175.9 574.4,177.8 576.4,180.2 578.4,178.3 580.3,178.1 582.0,179.6 583.8,183.4 583.3,185.1 581.0,185.9 581.4,187.0 578.1,189.7 579.0,190.3 577.8,192.5 584.9,190.8 587.3,192.9 589.7,192.6 591.7,194.1 593.6,193.0 595.3,194.5 599.4,196.2 598.5,199.7 599.7,200.9 599.5,203.0 597.0,203.2 589.8,209.5 589.0,209.2 590.5,211.8 589.8,213.1 595.2,219.9 593.1,221.0 588.9,218.9 589.4,217.3 587.6,215.4 583.8,215.0 581.7,216.5 577.6,216.6 571.8,219.1 570.2,221.9 567.3,222.7 566.1,225.4 564.9,225.2 563.3,227.2 561.0,227.1 559.6,229.7 557.1,230.8 555.7,230.1 554.9,222.3 556.2,222.4 560.0,220.2 560.8,217.7 561.8,217.2 563.8,218.0 568.4,217.1 571.6,215.0 570.1,213.4 568.9,213.4 568.7,211.0 566.8,209.3 566.7,206.9 570.7,201.9 563.3,202.0 561.4,203.6 553.7,205.1 539.8,210.8 535.2,209.1 534.7,209.7 535.8,211.6 526.4,219.8 526.9,221.6 523.5,223.8 519.5,224.5 510.3,225.0 507.6,223.1 503.2,222.4 500.9,224.0 491.7,225.4 491.6,222.9 490.1,221.6 489.9,219.5 490.9,217.0 489.7,212.3 488.2,212.9 482.3,212.4Z","Assam":"M442.3,240.3 444.0,237.4 445.2,236.7 445.6,228.9 449.5,229.0 452.4,228.1 453.2,226.2 457.0,225.2 459.6,227.1 463.1,228.2 470.0,227.9 470.9,227.0 475.8,227.9 477.3,226.6 479.1,227.7 483.3,227.2 487.2,224.9 490.6,226.5 491.7,225.4 500.9,224.0 503.2,222.4 507.6,223.1 510.3,225.0 523.5,223.8 526.9,221.6 526.4,219.8 530.2,215.8 535.8,211.6 534.7,209.7 535.2,209.1 539.8,210.8 553.7,205.1 561.4,203.6 563.3,202.0 570.7,201.9 566.7,206.9 566.8,209.3 568.7,211.0 568.9,213.4 570.1,213.4 571.7,214.9 568.4,217.1 560.8,217.7 560.0,220.2 550.5,225.0 549.3,224.2 545.4,228.6 542.4,229.1 538.6,231.6 538.6,233.4 536.8,235.0 536.2,232.8 534.1,235.1 533.7,237.4 530.4,241.3 529.4,245.8 529.9,247.0 527.9,248.6 525.8,248.5 525.7,245.9 523.9,247.3 524.3,248.4 516.7,255.2 519.2,257.7 519.5,260.5 517.7,261.9 513.5,271.7 512.1,271.4 511.7,276.7 510.1,280.2 507.8,280.7 505.8,280.1 505.0,278.1 503.5,281.5 502.2,282.0 502.0,283.7 500.7,283.9 500.3,285.4 498.3,285.9 498.1,283.8 495.5,283.9 493.9,283.0 494.7,281.4 493.8,278.1 495.5,273.0 494.2,269.5 495.5,269.1 497.3,270.5 499.9,269.9 498.1,266.6 499.3,264.8 502.1,264.7 505.6,261.0 502.8,257.7 501.1,257.0 502.9,254.7 501.4,255.1 498.5,251.3 494.0,251.4 492.5,252.4 492.5,249.2 493.6,247.2 492.8,245.8 495.0,243.7 486.7,244.2 485.8,242.6 483.8,244.4 483.7,245.9 480.8,244.4 478.1,248.7 475.8,248.7 473.5,251.3 471.9,248.5 469.1,249.0 469.5,247.7 467.9,246.3 463.2,246.1 461.4,246.9 457.4,245.4 451.0,246.1 446.4,251.2 448.9,253.8 446.0,255.1 445.4,257.0 446.1,253.6 444.9,251.1 445.2,247.8 446.1,246.3Z","Nagaland":"M516.6,255.3 524.3,248.4 523.8,247.3 525.8,245.8 525.8,248.5 527.9,248.6 529.9,247.0 529.4,245.8 530.4,241.3 533.7,237.4 534.1,235.1 536.2,232.8 536.8,234.9 538.6,233.4 538.6,231.7 542.4,229.1 545.5,228.6 549.3,224.2 550.5,225.0 554.9,222.3 555.7,230.1 552.1,235.2 553.4,237.5 553.2,242.8 554.7,243.5 551.2,247.6 551.7,250.9 549.5,252.5 546.9,256.3 544.2,257.4 541.7,256.1 541.7,254.4 540.4,253.9 537.0,256.1 534.6,256.3 534.3,255.1 532.6,255.7 530.5,254.7 525.6,255.3 526.4,257.0 522.3,262.8 520.2,261.9 519.2,257.7Z","Meghalaya":"M444.7,258.7 446.0,255.1 448.8,253.8 446.4,251.2 451.0,246.1 457.4,245.4 461.4,246.9 463.2,246.1 467.9,246.3 469.5,247.7 469.1,249.0 472.0,248.5 473.5,251.2 475.8,248.7 478.1,248.7 480.8,244.4 483.7,245.9 483.8,244.4 485.9,242.5 486.7,244.2 495.0,243.7 492.8,245.8 493.6,247.2 492.5,249.2 492.5,252.3 494.0,251.4 498.5,251.3 501.4,255.1 503.0,254.6 501.1,257.0 502.8,257.7 505.6,261.0 502.1,264.7 499.3,264.9 498.1,266.6 491.1,263.2 484.2,263.5 482.1,264.5 481.3,263.4 479.0,264.3 476.7,263.3 476.2,262.1 474.1,262.9 457.6,264.1 450.8,262.3 447.9,260.6 445.1,260.7Z","Manipur":"M509.4,286.8 512.1,271.4 513.5,271.7 517.7,261.9 519.5,260.5 520.2,261.9 522.3,262.8 526.4,257.0 525.6,255.3 530.5,254.7 532.6,255.7 534.3,255.1 534.7,256.3 537.0,256.1 540.4,253.9 541.7,254.4 541.7,256.1 544.2,257.4 542.2,262.5 543.8,264.7 545.4,264.7 545.6,266.4 543.3,270.8 543.3,272.6 541.5,273.6 541.3,275.1 538.1,278.4 538.7,279.7 536.3,284.2 533.6,292.7 530.7,290.9 528.2,290.4 526.4,291.0 525.0,289.2 522.7,289.1 520.2,290.6 517.6,287.4 515.1,288.9Z","Tripura":"M472.1,295.0 473.6,295.2 474.0,293.1 473.4,292.0 475.1,289.4 476.6,289.3 478.6,288.0 481.8,287.0 482.4,285.2 484.4,286.2 484.2,283.9 486.5,285.3 487.9,286.9 488.2,283.5 487.8,281.9 488.8,280.9 490.9,281.0 492.3,279.9 492.6,277.7 493.8,278.1 494.7,281.4 493.9,283.0 495.5,283.9 496.2,285.3 495.8,288.2 496.1,291.2 494.7,293.4 494.8,295.4 493.0,295.8 491.9,295.3 490.6,297.2 488.2,296.2 488.9,300.8 488.2,302.0 486.7,301.6 485.5,300.2 486.1,303.2 484.5,305.5 485.6,308.2 485.4,310.0 483.7,311.7 480.8,312.2 480.1,311.4 479.3,307.4 478.3,305.7 475.5,305.3 474.2,300.7 472.2,298.3Z","Andaman and Nicobar Islands":"M523.1,662.0 523.7,660.6 527.0,659.5 527.7,660.3 528.6,665.9 527.9,669.3 526.3,669.9ZM522.9,659.4 522.4,657.9 524.2,655.0 525.1,656.5 524.5,657.9ZM504.1,547.7 504.4,535.9 505.7,535.3 506.6,523.6 507.2,521.8 509.7,519.6 510.8,520.6 510.5,524.7 511.2,526.2 510.6,530.5 509.1,531.9 508.1,531.1 507.0,534.4 508.3,534.8 509.4,542.4 506.5,547.6 507.3,547.7 506.9,550.8 505.2,550.3 504.6,548.9 506.0,547.4ZM504.2,615.8 505.6,615.4 506.3,617.5 504.3,617.8ZM500.4,556.3 501.7,557.6 503.0,549.6 504.9,550.4 504.5,552.5 505.4,553.3 503.9,554.9 505.6,556.9 504.9,560.9 503.0,562.0 504.8,563.0 503.0,565.3 500.7,560.6ZM501.7,568.8 501.4,567.6 502.5,565.2 503.5,568.2ZM497.2,581.3 500.1,578.7 501.4,581.1 501.6,583.5 500.3,587.0 498.3,586.4Z","Uttar Pradesh":"M184.4,164.9 185.4,163.7 184.7,162.2 186.9,158.2 194.2,150.0 194.0,148.0 195.7,148.0 197.0,149.5 201.9,151.5 199.9,154.3 198.7,154.7 196.9,159.3 199.0,164.0 201.2,163.1 203.2,166.0 209.6,161.3 213.2,162.9 213.6,164.8 215.4,166.6 221.7,169.2 218.3,173.1 220.7,174.4 221.7,176.3 223.9,175.2 226.4,176.3 226.1,177.4 228.5,179.1 235.2,182.3 240.0,181.4 242.8,185.0 244.3,184.4 245.0,182.5 249.4,185.3 250.1,187.1 253.1,187.2 255.0,185.7 257.4,186.8 258.3,188.4 268.5,193.1 270.7,196.6 272.9,197.2 274.0,199.1 282.3,204.1 283.8,202.7 286.1,202.7 293.8,208.1 299.1,207.5 300.1,210.1 299.7,212.3 303.7,212.0 305.8,213.2 309.0,213.0 311.1,215.7 312.2,215.7 313.5,213.9 313.2,212.5 317.7,212.7 322.1,214.9 325.5,219.2 324.9,221.2 326.6,222.1 326.8,225.6 330.9,227.4 332.4,230.0 334.2,231.2 331.3,231.9 327.9,231.2 326.7,233.0 323.9,234.1 323.7,235.3 328.8,236.9 329.2,239.3 327.4,240.3 326.8,243.0 338.4,249.8 337.9,251.1 337.0,252.2 332.5,250.8 332.1,252.5 329.8,252.5 328.4,251.1 327.1,251.9 327.2,253.2 324.2,254.9 322.5,257.7 316.1,260.4 312.3,263.2 313.2,272.1 315.1,273.1 315.8,277.2 313.3,278.3 312.9,282.4 313.5,283.4 311.9,287.1 309.4,291.1 307.0,292.2 304.0,292.2 298.2,286.5 299.9,285.7 300.4,281.2 299.3,280.9 301.0,276.6 300.5,275.2 299.1,275.3 298.4,273.9 293.2,274.9 293.2,276.2 290.7,275.9 289.1,271.8 283.5,270.6 282.4,267.5 277.8,265.9 277.0,263.7 275.2,263.1 272.2,264.3 269.9,263.6 269.6,266.1 266.6,269.4 263.1,268.0 261.3,268.8 260.7,266.5 261.7,265.8 261.0,263.1 258.5,264.6 258.3,265.8 255.8,265.2 254.0,266.3 253.5,267.8 251.9,265.7 250.7,266.9 249.1,266.7 252.5,263.4 252.0,261.9 250.1,260.9 250.1,258.7 248.2,258.5 244.3,259.7 240.7,263.0 240.4,265.1 234.9,263.5 233.3,265.5 231.5,264.9 231.2,263.5 232.1,261.6 230.4,260.0 229.0,260.1 228.6,261.2 229.8,263.9 225.9,264.8 224.5,262.3 221.8,262.7 220.7,263.8 222.4,259.6 220.7,258.7 222.0,256.4 220.8,255.9 217.7,257.1 218.6,259.4 216.2,258.8 213.2,261.2 215.8,265.7 215.7,268.2 218.5,270.3 218.1,276.0 220.8,275.2 222.2,277.2 221.5,279.2 222.9,279.6 222.6,281.6 219.2,285.4 213.0,280.7 210.7,283.5 209.5,282.1 210.3,281.0 208.2,279.4 208.4,274.7 206.2,270.0 209.8,267.0 209.6,265.4 211.9,264.5 209.8,260.0 209.7,257.7 210.8,257.4 212.0,254.6 216.2,254.9 219.3,253.5 218.4,251.3 223.4,243.3 223.1,240.8 226.0,237.7 226.0,235.4 223.0,232.4 223.3,230.3 220.6,229.7 218.7,228.2 213.9,228.3 210.8,227.1 210.1,226.0 207.3,226.8 208.3,224.8 205.8,224.2 205.0,225.4 202.5,225.5 197.8,224.6 197.0,225.8 193.0,227.1 191.6,228.7 190.4,226.8 195.8,223.7 193.5,220.6 195.7,219.3 195.5,217.7 189.2,211.4 189.5,208.7 188.1,205.4 193.1,202.6 193.3,201.2 192.0,199.1 192.6,192.8 188.3,188.5 189.2,187.5 186.5,183.5 187.0,180.7 185.2,175.2Z","Rajasthan":"M28.4,227.4 28.9,222.9 30.4,219.0 39.4,210.7 41.6,205.3 46.5,200.7 49.3,200.2 51.0,200.8 52.8,202.7 52.9,204.8 54.4,207.1 57.5,207.4 63.6,204.6 73.0,203.7 77.3,202.0 77.5,202.7 78.4,198.3 84.1,192.3 86.0,186.2 88.1,183.7 99.2,178.3 106.1,166.3 108.5,158.0 116.8,155.3 120.2,152.5 120.3,154.2 118.9,155.7 118.7,157.4 131.6,158.1 132.3,159.7 130.8,160.9 130.7,162.4 133.4,162.3 132.6,166.4 133.6,167.2 132.8,168.8 133.2,170.8 136.9,170.9 138.2,170.0 140.0,170.9 140.5,172.7 142.3,172.6 143.0,173.8 148.4,172.6 149.6,173.2 149.3,177.5 152.1,179.5 151.0,180.5 152.8,187.4 159.6,192.4 162.9,196.1 161.8,198.3 161.2,202.5 160.4,202.6 161.2,204.2 165.4,205.4 166.4,204.7 165.2,203.1 165.0,201.0 167.1,199.5 168.3,200.6 169.1,198.2 168.2,197.0 172.9,200.2 172.9,201.5 175.5,200.7 175.8,199.1 179.3,196.1 181.6,197.9 180.8,201.1 181.1,204.5 180.1,206.9 181.8,208.6 183.2,204.9 188.1,205.4 189.5,208.7 189.2,211.4 195.5,217.7 195.7,219.3 193.6,220.6 195.8,223.7 190.4,226.8 191.5,228.7 193.0,227.1 197.0,225.8 197.8,224.6 202.5,225.5 205.0,225.4 205.8,224.2 208.3,224.8 207.3,226.8 205.0,227.6 204.6,230.2 202.7,229.8 200.8,230.6 199.1,233.0 193.3,236.1 191.2,236.3 187.8,239.3 180.2,243.1 177.9,246.4 174.9,247.2 173.0,248.7 172.1,252.4 172.3,255.6 175.5,259.5 179.3,259.9 181.1,261.0 184.0,259.8 186.8,260.2 187.1,258.9 188.7,257.7 189.8,258.2 190.7,262.3 190.3,264.6 188.6,265.5 185.8,264.8 184.0,266.0 182.3,265.6 179.7,266.4 179.4,268.1 181.2,270.1 178.3,271.5 179.3,272.9 181.2,272.6 183.0,273.7 183.7,277.0 181.8,279.1 179.4,277.2 178.5,277.5 178.8,281.4 180.7,284.6 179.8,286.4 178.2,286.7 175.6,285.1 175.0,283.4 173.5,284.7 168.4,283.9 164.2,285.0 164.4,287.4 162.6,287.9 160.5,291.6 157.6,292.3 155.4,294.9 153.2,293.8 152.9,292.5 150.8,291.1 152.0,288.8 155.7,290.1 158.4,288.1 156.7,286.2 158.0,283.9 156.2,280.6 157.4,279.3 159.7,279.5 160.2,277.3 157.4,272.5 153.8,274.3 145.1,272.8 148.5,266.8 145.2,266.4 143.6,268.0 143.7,269.9 142.1,270.6 140.5,270.4 139.3,268.8 137.8,269.4 138.5,271.7 140.8,272.4 141.1,274.0 139.0,275.3 137.3,273.1 136.9,276.4 135.1,278.6 137.5,279.0 138.3,280.0 136.3,283.9 139.4,284.6 138.8,285.5 140.8,288.4 139.3,292.1 140.1,294.5 139.7,296.7 138.2,299.2 132.5,302.1 131.7,304.3 135.9,306.5 131.2,309.5 128.7,308.9 127.4,310.1 125.9,307.4 123.4,307.5 123.7,305.5 120.0,303.0 118.6,304.0 117.3,302.0 113.2,301.5 113.8,297.7 112.1,297.0 111.1,298.0 107.9,293.4 108.1,291.4 108.9,291.0 108.6,288.4 106.8,288.1 105.3,289.3 104.7,287.6 101.7,285.0 103.4,281.5 101.9,280.6 102.1,278.3 100.4,278.7 99.5,281.4 94.8,281.2 93.8,279.1 90.5,278.3 90.1,280.1 87.1,276.9 86.7,275.4 83.2,275.6 81.1,273.6 72.8,275.2 71.8,274.4 69.2,274.3 65.3,275.7 61.7,274.4 58.1,268.6 57.1,264.0 52.5,258.5 52.7,252.3 51.4,251.5 46.8,252.4 44.4,251.5 40.9,246.5 40.6,243.3 42.5,239.6 42.5,233.0 40.1,231.9 34.6,231.9 28.9,228.7Z","Delhi":"M179.1,188.8 180.0,187.0 181.3,186.2 181.7,185.6 181.1,183.4 181.6,183.1 184.7,182.0 186.7,182.1 186.8,182.6 186.5,183.5 188.4,185.3 188.7,186.8 189.2,187.5 188.4,188.5 189.4,189.5 187.5,190.3 185.8,192.0 184.7,190.2 184.2,189.7 182.4,189.0 179.9,189.9Z","Haryana":"M130.7,162.4 130.7,160.9 132.3,159.7 131.6,158.1 134.1,158.8 135.3,157.4 137.5,157.0 139.8,157.9 141.2,159.7 145.2,160.2 146.2,162.3 144.8,164.2 147.5,166.5 148.4,163.5 150.7,161.1 153.2,162.5 157.2,160.7 160.7,162.8 162.8,162.4 163.8,161.0 166.1,160.3 165.3,158.4 167.0,154.8 170.2,153.6 171.3,154.6 173.6,154.6 174.9,153.5 173.3,151.5 176.3,149.6 177.1,147.3 180.4,147.4 180.7,143.3 178.7,141.8 179.1,138.4 177.7,136.8 179.6,137.5 180.5,136.9 182.8,140.3 185.7,141.7 185.8,143.5 184.8,144.4 186.5,146.0 190.6,147.4 193.0,147.0 194.1,148.4 194.2,150.0 186.9,158.1 184.7,162.2 185.4,163.7 184.4,164.9 185.2,175.2 187.0,180.7 186.7,182.1 181.1,183.3 181.7,185.6 179.1,188.8 179.9,189.9 182.4,189.0 184.2,189.7 185.8,192.0 189.4,189.5 192.6,192.8 192.0,199.1 193.3,201.2 193.1,202.6 188.1,205.4 183.2,205.0 181.8,208.6 180.0,206.9 181.1,204.5 180.8,201.1 181.6,197.9 179.3,196.1 175.8,199.1 175.5,200.7 172.8,201.5 172.9,200.2 168.4,197.2 169.1,198.2 168.3,200.6 167.1,199.5 165.0,201.0 165.2,203.1 166.4,204.7 165.4,205.4 161.2,204.2 160.4,202.6 161.2,202.5 161.8,198.3 162.9,196.1 159.6,192.4 152.8,187.5 151.0,180.5 152.1,179.5 149.3,177.5 149.6,173.2 148.4,172.6 143.0,173.9 142.3,172.6 140.5,172.7 140.0,170.9 138.2,170.0 136.9,170.9 133.2,170.8 132.8,168.8 133.6,167.2 132.6,166.4 133.4,162.3Z","Sikkim":"M408.3,218.2 408.4,212.5 411.5,205.6 411.7,202.3 417.1,200.6 417.7,199.8 420.2,198.8 423.0,199.3 424.8,201.1 424.6,202.5 425.7,204.2 425.0,205.0 424.9,208.3 423.2,210.6 423.8,213.9 426.3,216.0 426.0,217.1 424.0,217.6 423.7,219.0 422.3,220.0 419.8,218.9 418.4,219.2 416.2,221.5 413.3,220.2 410.7,220.6 409.5,220.1Z","Bihar":"M312.3,263.2 316.1,260.4 322.5,257.7 324.2,254.9 327.2,253.2 327.1,251.9 328.5,251.1 329.8,252.5 332.1,252.5 332.5,250.8 337.0,252.2 338.4,249.8 326.7,243.0 327.4,240.3 329.2,239.3 328.8,236.9 323.7,235.3 323.9,234.1 326.6,233.0 327.9,231.2 331.3,231.9 334.1,231.2 332.4,230.1 330.9,227.4 326.8,225.6 326.6,222.1 324.9,221.2 325.5,219.2 322.8,215.7 322.1,213.6 325.9,213.4 327.6,211.7 330.9,213.1 331.3,214.4 338.3,215.6 339.7,218.2 338.8,222.0 345.3,223.9 346.7,225.8 350.0,226.0 349.7,227.5 351.3,228.5 352.9,228.8 359.3,226.3 361.0,227.3 360.9,230.3 363.7,232.6 367.1,230.4 377.7,233.3 381.4,235.8 383.9,235.4 387.9,232.8 388.9,235.2 390.3,236.2 396.5,235.4 400.5,236.8 404.4,235.5 408.2,236.5 409.5,235.1 409.8,233.1 412.4,235.0 413.2,237.9 404.5,244.3 403.9,246.6 406.8,251.2 408.5,251.8 407.9,254.1 408.9,256.6 406.7,255.4 402.8,258.0 403.1,259.7 404.4,260.7 403.8,261.9 401.6,261.5 401.2,260.4 398.4,259.9 396.8,262.9 393.7,262.3 393.1,265.3 390.0,266.8 390.3,269.9 389.3,270.5 388.1,275.5 386.1,275.4 385.2,277.2 382.0,275.7 379.9,276.7 379.1,275.9 376.8,278.1 375.8,281.1 372.2,279.0 372.7,276.9 369.3,276.0 369.2,273.9 367.7,272.1 365.2,273.0 361.2,271.2 359.7,274.7 359.9,276.3 357.2,277.6 353.7,277.1 347.9,281.2 346.7,280.2 344.1,281.1 343.8,279.1 342.0,277.6 337.6,280.5 335.8,283.0 332.6,280.6 332.3,278.5 327.5,277.5 325.8,275.2 324.3,277.2 323.0,277.6 319.8,278.2 315.4,277.7 316.0,275.1 315.1,273.1 313.2,272.1Z","Jharkhand":"M311.9,287.1 313.5,283.4 312.9,282.4 313.3,278.3 323.0,277.6 324.3,277.2 325.8,275.1 327.5,277.5 332.3,278.5 332.6,280.6 335.8,282.9 337.6,280.5 342.0,277.6 343.8,279.1 344.1,281.1 346.7,280.2 347.9,281.1 353.7,277.1 357.2,277.6 359.9,276.3 359.7,274.7 361.2,271.2 365.2,273.0 367.7,272.1 369.2,273.9 369.3,276.0 372.7,276.9 372.2,279.0 375.8,281.1 376.8,278.1 379.1,275.9 379.9,276.7 382.0,275.7 385.2,277.2 386.1,275.4 388.1,275.5 389.3,270.5 390.2,269.8 390.0,266.8 393.1,265.3 393.7,262.3 396.8,262.9 398.3,259.9 401.2,260.4 401.6,261.5 403.0,261.7 403.3,265.3 406.6,267.8 406.7,269.0 404.2,272.8 405.6,273.4 405.3,276.8 403.3,276.5 403.4,280.9 401.5,283.6 400.1,283.7 400.0,285.7 396.0,289.7 393.9,288.6 391.9,288.8 393.1,291.5 391.8,292.5 389.7,292.6 388.8,293.5 385.3,291.9 383.0,293.0 383.5,294.5 383.0,296.0 376.5,297.4 374.0,299.7 372.9,302.3 370.2,301.0 369.8,299.1 368.2,298.9 367.4,300.4 364.2,300.8 363.7,301.9 364.2,303.7 362.9,305.5 364.2,307.7 367.5,308.2 371.5,311.5 376.8,311.5 375.5,313.0 375.1,316.0 379.7,319.0 380.1,320.8 382.2,320.8 383.0,322.7 382.2,324.1 383.9,324.7 383.6,326.3 381.5,328.7 376.7,325.9 375.3,326.5 373.9,325.8 372.3,323.6 369.0,322.8 367.9,321.2 365.8,322.8 366.9,324.1 367.1,326.1 366.0,328.0 367.2,329.3 364.4,333.9 362.1,333.8 361.4,331.9 360.1,332.2 354.2,329.9 351.7,331.7 351.0,333.3 349.8,331.9 346.7,330.8 347.7,327.8 347.5,322.7 341.0,324.2 336.6,324.1 334.4,325.7 331.6,325.9 325.8,321.8 325.8,320.8 327.3,319.4 330.5,318.2 333.7,313.0 333.2,311.9 329.3,311.8 326.9,308.9 326.4,307.6 327.1,304.1 324.8,302.9 325.9,300.3 325.9,297.5 324.3,298.9 321.0,297.9 319.6,293.3 316.8,292.4 314.0,287.4Z","Ladakh":"M90.7,22.7 92.0,18.5 95.8,17.5 97.9,15.8 97.9,14.5 100.2,14.2 102.6,10.8 102.9,9.1 109.4,7.9 114.7,9.2 116.9,8.5 118.0,6.9 115.2,5.9 114.5,4.2 118.3,4.5 122.0,6.5 123.7,5.8 124.3,4.4 126.2,4.7 129.6,2.5 131.7,2.5 132.8,1.2 135.3,0.5 135.9,1.8 138.0,1.7 139.7,4.3 141.6,2.8 143.2,3.5 145.6,1.4 148.3,1.1 148.5,2.6 149.9,3.1 151.0,6.4 153.9,7.5 156.6,11.3 163.3,13.8 167.0,16.6 169.0,16.4 170.6,17.5 171.6,19.6 174.9,20.2 176.5,22.5 178.2,23.3 176.6,25.4 178.4,27.7 180.9,29.1 184.6,28.8 185.7,30.2 191.1,31.9 191.7,33.7 191.2,35.0 194.8,36.0 199.0,35.1 200.7,36.0 202.0,33.8 203.6,33.4 205.5,34.5 206.8,31.6 208.3,30.4 210.6,30.1 211.4,29.1 213.4,29.5 216.3,27.4 222.4,26.7 225.9,27.9 227.2,26.8 227.6,24.8 230.9,24.4 231.8,26.6 241.0,29.1 243.6,27.9 245.9,31.4 249.6,33.0 250.4,36.0 247.4,42.7 247.2,46.3 245.1,50.2 245.1,52.7 240.8,53.3 239.1,54.6 239.4,57.8 233.6,58.0 235.3,62.2 233.6,63.9 233.3,65.5 230.5,67.7 223.6,67.3 221.3,69.0 225.4,76.9 221.4,77.9 223.0,83.2 232.5,84.9 230.9,88.7 231.8,91.4 236.0,96.3 232.4,100.9 229.7,99.6 227.2,102.0 226.0,102.1 225.5,104.2 223.9,104.1 222.8,105.2 220.3,102.9 218.3,98.2 216.3,98.2 210.9,101.0 209.1,100.0 211.0,98.9 210.6,95.9 207.2,98.0 205.7,97.6 204.7,98.7 203.1,98.9 201.0,97.4 201.4,96.6 197.4,91.2 194.6,91.8 191.8,93.7 190.6,93.2 189.2,94.6 185.3,91.1 180.9,89.9 177.6,85.0 172.1,79.2 168.1,77.9 167.2,74.2 165.3,73.0 162.2,68.5 159.0,68.9 155.4,64.9 149.8,62.2 147.8,58.9 148.6,56.8 146.2,54.6 135.8,53.6 132.3,51.5 127.4,51.1 132.4,49.2 132.8,46.2 130.8,44.0 126.0,45.6 116.6,41.0 115.3,41.6 114.7,38.5 116.6,36.2 116.4,34.8 113.3,33.8 108.7,33.9 103.1,30.5 103.5,27.8 102.2,26.9 94.0,28.0 90.8,26.1 92.0,23.7Z","Jammu and Kashmir":"M108.3,60.2 109.5,55.8 113.0,55.5 115.7,51.1 120.1,49.9 122.3,47.7 122.2,45.3 123.8,44.2 126.0,45.6 130.8,44.0 132.8,46.2 132.4,49.2 127.7,51.1 132.3,51.5 135.8,53.6 146.2,54.6 148.6,56.8 147.9,58.9 149.8,62.2 155.4,64.9 159.0,68.9 162.2,68.5 165.3,73.0 167.2,74.2 168.1,77.9 172.1,79.1 177.6,85.0 177.1,86.6 175.0,87.0 173.4,85.9 170.2,86.4 166.3,90.1 164.1,90.4 160.8,93.4 158.7,92.1 157.7,93.1 160.2,96.1 160.1,98.6 158.4,101.3 155.4,104.0 153.5,104.3 151.8,105.8 143.5,102.5 140.2,102.8 139.0,101.2 138.6,101.9 134.8,101.8 133.9,99.1 134.3,95.3 131.3,96.2 130.0,95.2 128.7,95.9 119.9,90.8 113.2,88.6 113.8,85.9 111.9,83.0 113.1,77.9 111.8,76.8 112.6,74.8 111.8,73.4 112.4,71.0 111.0,68.8 110.4,63.6Z","Himachal Pradesh":"M153.5,110.8 154.8,109.6 154.4,107.1 157.1,106.3 159.2,103.9 160.3,103.9 158.4,101.3 160.1,98.6 160.2,96.1 157.7,93.1 158.7,92.1 160.9,93.3 164.1,90.4 166.3,90.1 170.2,86.4 173.4,85.9 175.0,87.0 177.1,86.6 177.6,85.0 180.9,89.9 185.3,91.1 189.2,94.6 190.6,93.1 191.9,93.7 194.6,91.8 197.4,91.2 201.4,96.6 201.1,97.4 203.1,98.9 204.7,98.7 205.7,97.6 207.2,98.0 210.7,95.9 211.0,98.9 209.2,100.0 213.7,103.5 212.6,105.0 212.6,106.5 215.2,107.9 214.8,109.3 218.7,112.8 217.2,117.6 220.1,121.3 217.8,122.9 219.1,124.9 218.1,126.7 218.9,128.0 220.8,128.5 223.4,132.3 220.9,132.6 219.3,130.3 215.2,129.7 212.6,130.3 210.3,128.4 202.1,130.9 200.0,132.3 198.8,138.0 196.7,139.9 199.0,145.6 194.1,148.4 193.0,147.0 190.6,147.4 186.5,146.0 184.8,144.4 185.8,143.5 185.7,141.7 182.8,140.3 180.6,137.0 179.6,137.5 174.6,134.7 175.0,130.1 173.8,128.7 172.0,128.8 169.8,125.6 167.7,127.9 165.9,128.0 164.3,123.7 162.1,120.8 159.9,113.7Z","Punjab":"M118.3,148.9 120.1,147.4 120.1,146.1 125.2,141.5 128.3,137.1 135.3,133.1 134.9,131.9 131.3,131.8 132.1,126.7 134.1,124.6 131.1,118.4 132.3,118.0 132.5,116.2 139.5,111.7 144.9,111.1 149.1,108.6 148.3,105.0 151.8,105.8 158.4,101.3 160.4,103.9 159.2,103.9 157.1,106.3 154.4,107.1 154.8,109.6 153.6,110.8 159.9,113.7 162.1,120.8 164.3,123.7 165.9,128.0 167.7,127.9 169.8,125.6 171.9,128.8 173.8,128.7 175.0,130.1 174.6,134.7 179.1,138.4 178.9,140.1 176.3,140.0 176.9,141.5 178.7,141.8 180.7,143.3 180.4,147.4 177.1,147.3 176.3,149.6 173.3,151.5 174.9,153.5 173.6,154.6 171.3,154.6 170.2,153.6 167.0,154.8 165.3,158.4 166.2,160.3 160.7,162.8 157.2,160.7 153.2,162.6 150.7,161.1 148.4,163.5 147.5,166.5 144.7,164.2 146.2,162.3 145.2,160.3 141.2,159.7 139.8,157.9 137.5,157.0 135.3,157.4 134.1,158.8 118.7,157.4 118.8,155.7 120.3,154.2 120.0,150.8Z","Uttarakhand":"M194.0,148.0 199.0,145.6 196.7,139.9 198.8,138.0 200.0,132.3 202.1,130.9 210.3,128.4 212.6,130.3 215.2,129.7 219.3,130.3 220.9,132.6 223.3,132.3 220.8,128.5 224.7,124.7 228.0,127.4 227.8,129.0 229.3,129.9 229.7,131.7 233.6,134.0 235.5,136.2 238.2,135.2 240.9,135.3 241.4,136.5 245.8,139.4 247.2,139.0 248.8,140.4 248.1,143.9 254.7,146.9 256.1,146.4 260.1,149.7 264.1,150.9 265.1,152.2 262.7,153.0 257.5,157.8 256.0,157.8 255.0,160.1 251.2,162.5 252.1,165.7 248.7,169.1 250.2,172.2 249.0,174.8 246.6,176.6 244.3,184.4 242.8,185.0 240.0,181.4 235.2,182.3 228.5,179.1 226.1,177.4 226.3,176.3 224.0,175.2 221.7,176.3 220.7,174.4 218.3,173.1 221.6,169.2 215.4,166.6 213.6,164.8 213.2,162.9 209.6,161.3 203.1,166.0 201.2,163.1 199.0,164.0 196.9,159.3 198.7,154.7 199.9,154.3 201.9,151.5 197.0,149.5 195.7,148.0Z","Chandigarh":"M176.3,140.0 178.9,140.1 178.7,141.8 176.9,141.5Z"};
+const MAPD = {"home":{"Arunachal Pradesh":[99,35591,35937],"Assam":[70,2077817,2987868],"Bihar":[77,3843375,5012752],"Chhattisgarh":[57,1510844,2642224],"Goa":[94,242,257],"Gujarat":[67,603372,902354],"Haryana":[39,41173,106460],"Himachal Pradesh":[31,37364,121502],"Jammu and Kashmir":[93,313878,336498],"Jharkhand":[78,1572485,2012107],"Kerala":[15,34380,232916],"Madhya Pradesh":[67,3881246,5774572],"Maharashtra":[32,1402311,4370829],"Manipur":[52,56711,108550],"Meghalaya":[80,150086,188034],"Mizoram":[85,25323,29967],"Nagaland":[74,36238,48830],"Odisha":[85,2426175,2849889],"Punjab":[40,41740,103674],"Rajasthan":[70,1753137,2497121],"Sikkim":[100,1393,1399],"Tamil Nadu":[68,647487,957825],"Tripura":[99,371295,376913],"Uttar Pradesh":[99,3638625,3685704],"Uttarakhand":[99,68218,69194],"West Bengal":[75,3419593,4569423],"Andaman and Nicobar Islands":[38,1302,3424],"Dadra and Nagar Haveli and Daman and Diu":[45,5073,11364],"Lakshadweep":[100,45,45],"Puducherry":null,"Andhra Pradesh":[36,88995,247114],"Karnataka":[17,158520,944140],"Telangana":null,"Ladakh":[100,3004,3004]},"road":{"Andaman and Nicobar Islands":127,"Andhra Pradesh":6497,"Arunachal Pradesh":10030,"Assam":19059,"Bihar":33073,"Chhattisgarh":21807,"Goa":0,"Gujarat":6628,"Haryana":3473,"Himachal Pradesh":12540,"Jammu and Kashmir":16378,"Jharkhand":22105,"Karnataka":7803,"Kerala":2456,"Ladakh":848,"Madhya Pradesh":39027,"Maharashtra":9151,"Manipur":7529,"Meghalaya":3864,"Mizoram":2312,"Nagaland":1606,"Odisha":44940,"Puducherry":62,"Punjab":5039,"Rajasthan":22995,"Sikkim":2363,"Tamil Nadu":13346,"Telangana":3970,"Tripura":2144,"Uttar Pradesh":34258,"Uttarakhand":16525,"West Bengal":21530},"work":{"Andhra Pradesh":75,"Arunachal Pradesh":3,"Assam":26,"Bihar":56,"Chhattisgarh":45,"Goa":0,"Gujarat":13,"Haryana":5,"Himachal Pradesh":10,"Jammu and Kashmir":11,"Jharkhand":23,"Karnataka":52,"Kerala":15,"Ladakh":0,"Madhya Pradesh":58,"Maharashtra":51,"Manipur":6,"Meghalaya":5,"Mizoram":2,"Nagaland":2,"Odisha":34,"Punjab":10,"Rajasthan":77,"Sikkim":1,"Tamil Nadu":74,"Telangana":42,"Tripura":8,"Uttar Pradesh":76,"Uttarakhand":6,"West Bengal":0,"Andaman and Nicobar Islands":0,"Dadra and Nagar Haveli and Daman and Diu":0,"Lakshadweep":0,"Puducherry":1},"women":{"Andhra Pradesh":855600,"Assam":361516,"Bihar":1097100,"Chhattisgarh":276375,"Gujarat":279758,"Jharkhand":291601,"Karnataka":360684,"Kerala":271209,"Madhya Pradesh":487291,"Maharashtra":640719,"Odisha":551141,"Rajasthan":321875,"Tamil Nadu":336764,"Telangana":442979,"Uttar Pradesh":842101,"West Bengal":1192980,"Haryana":60301,"Himachal Pradesh":45295,"Jammu and Kashmir":91445,"Punjab":52118,"Uttarakhand":65840,"Arunachal Pradesh":11730,"Manipur":11538,"Meghalaya":45312,"Mizoram":10291,"Nagaland":15419,"Sikkim":5915,"Tripura":51841,"Andaman and Nicobar Islands":1294,"Goa":3891,"Ladakh":1745,"Lakshadweep":348,"Puducherry":4744,"Dadra and Nagar Haveli and Daman and Diu":1645}};
+
+/* MoRD Programmes · independent explainer · data: PRS Legislative Research, Lok Sabha answers (2025) */
+(function(){
+
+
+
+const ORDER = ['work','home','road','women','skills','pension','land'];
+Object.keys(T).forEach(l=>{ Object.assign(T[l].ui, X[l].ui); ORDER.forEach(k=>{ T[l].p[k].st = X[l].st[k]; }); });
+
+const I = {
+  speaker:'<path d="M4 9.5v5h3.5L12 18V6L7.5 9.5z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/>',
+  stop:'<rect x="6.5" y="6.5" width="11" height="11" rx="1.5"/>',
+  arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+  back:'<path d="M19 12H5M11 6l-6 6 6 6"/>',
+  warn:'<path d="M12 4 2.8 19.5h18.4z"/><path d="M12 10v4.5M12 17v.2"/>',
+  grid:'<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>',
+  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.8 3.8 5.8 3.8 9s-1.3 6.2-3.8 9c-2.5-2.8-3.8-5.8-3.8-9S9.5 5.8 12 3z"/>',
+  dot:'<circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/>',
+  down:'<path d="M12 5v14M6 13l6 6 6-6"/>',
+  /* programmes */
+  work:'<path d="M14 3.5 20.5 10"/><path d="M17.2 6.8 10 14"/><path d="M11.8 12.2 5.4 18.6a1.9 1.9 0 0 1-2.7-2.7L9.1 9.5z"/><path d="M8 11l5 5"/>',
+  home:'<path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5h4v5"/>',
+  road:'<path d="M8.5 3 4 21M15.5 3 20 21"/><path d="M12 4v2.5M12 10v3M12 16.5V20"/>',
+  women:'<circle cx="12" cy="8" r="3"/><path d="M6.5 20a5.5 5.5 0 0 1 11 0"/><circle cx="5" cy="10" r="2.1"/><circle cx="19" cy="10" r="2.1"/><path d="M1.8 18a3.4 3.4 0 0 1 4-3M22.2 18a3.4 3.4 0 0 0-4-3"/>',
+  skills:'<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.4-3.4a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/>',
+  pension:'<circle cx="15.5" cy="7" r="3.5"/><path d="M15.5 5.6v2.8"/><path d="M2.5 14.5H6l4.2 1.4h3.3a1.5 1.5 0 0 1 0 3H9.5"/><path d="M13.5 18.4 19 15.6a1.6 1.6 0 0 1 2 2.4L15 21H6"/><path d="M6 13.5V21"/>',
+  land:'<path d="M12 21v-9"/><path d="M12 12c0-4 3-7 8-7 0 4-3 7-8 7z"/><path d="M12 14.5c0-3-2.5-5.5-7-5.5 0 3 2.5 5.5 7 5.5z"/><path d="M5 21h14"/>',
+  /* facts + steps */
+  rupee:'<circle cx="12" cy="12" r="9"/><path d="M8.5 7.5h7M8.5 10.5h7M10.5 7.5c3.6 0 3.6 6 0 6H9l5.5 3.5"/>',
+  cal:'<rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+  tag:'<path d="M3.5 12.2V4.5a1 1 0 0 1 1-1h7.7l8.3 8.3-8.7 8.7z"/><circle cx="8" cy="8" r="1.4"/>',
+  card:'<rect x="3" y="5.5" width="18" height="13" rx="2"/><circle cx="8.5" cy="11" r="2"/><path d="M5.8 16a3 3 0 0 1 5.4 0M14 10h4M14 13.5h3"/>',
+  ask:'<path d="M8 12.5V6a1.5 1.5 0 0 1 3 0v5M11 10.5V4.5a1.5 1.5 0 0 1 3 0v6M14 10.5V6a1.5 1.5 0 0 1 3 0v7.5c0 4-2.5 7-6.2 7-2.4 0-3.9-1.1-5.2-3.1L3.8 14.2a1.4 1.4 0 0 1 2.3-1.6L8 14.5"/>',
+  pin:'<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/>',
+  bank:'<path d="M3 9.5 12 4l9 5.5M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20.5h18"/>',
+  list:'<path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/>',
+  check:'<circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.8 2.8L16.5 9.5"/>',
+  camera:'<path d="M3.5 8h3.2L8.3 5.5h7.4L17.3 8h3.2v11h-17z"/><circle cx="12" cy="13.2" r="3.3"/>',
+  map:'<path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20z"/><path d="M9 4v13.5M15 6.5V20"/>',
+  hammer:'<path d="M13 9 4.6 17.4a2 2 0 0 0 2.8 2.8L15.8 11.8"/><path d="m11.5 6.5 3-3 6 6-3 3z"/>',
+  shield:'<path d="M12 3 5 6v5.5c0 4.4 3 7.9 7 9.5 4-1.6 7-5.1 7-9.5V6z"/><path d="m9 12 2.2 2.2L15.5 10"/>',
+  coins:'<ellipse cx="9" cy="7" rx="5" ry="2.5"/><path d="M4 7v4c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5V7"/><path d="M10 15.6c.9 1.1 2.9 1.9 5 1.9 2.8 0 5-1.1 5-2.5v-4c0-1.4-2.2-2.5-5-2.5"/>',
+  gift:'<rect x="3.5" y="8" width="17" height="4" rx="1"/><path d="M5 12v8h14v-8M12 8v12"/><path d="M12 8C10.5 4.5 6.5 4.5 6.5 6.5S10 8 12 8zm0 0c1.5-3.5 5.5-3.5 5.5-1.5S14 8 12 8z"/>',
+  trend:'<path d="M3 17 9.5 10.5l4 4L21 7"/><path d="M15 7h6v6"/>',
+  enrol:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M19 8v6M16 11h6"/>',
+  book:'<path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5zM12 6.5v13"/>',
+  brief:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M3 12.5h18"/>',
+  heart:'<path d="M12 20s-7.5-4.5-7.5-10A4.3 4.3 0 0 1 12 7.5 4.3 4.3 0 0 1 19.5 10c0 5.5-7.5 10-7.5 10z"/>',
+  form:'<path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 16h5"/>',
+  search:'<circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/>',
+  drop:'<path d="M12 3.5s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/>',
+  monitor:'<rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8.5 20h7M12 16v4"/>'
+};
+const ic = (k,cls) => `<svg class="ico${cls?' '+cls:''}" viewBox="0 0 24 24" aria-hidden="true">${I[k]}</svg>`;
+
+
+Object.keys(MS).forEach(l=>Object.assign(T[l].ui, MS[l]));
+
+
+const MAPK = ['home','road','work','women'];
+const BRK = {home:[40,60,80,95], road:[2000,8000,16000,25000], work:[5,15,35,60], women:[20000,100000,300000,600000]};
+const MSRC = {home:['https://eparlib.sansad.in/bitstream/123456789/2995490/1/AU3744_yZJWba.pdf','Lok Sabha, 12.08.2025'],
+  road:['https://eparlib.sansad.in/bitstream/123456789/3013297/1/AU2852_q1vSiu.pdf','Lok Sabha, 18.03.2025'],
+  work:['https://eparlib.sansad.in/bitstream/123456789/2997031/1/AU456_IxRjkP.pdf','Lok Sabha, 22.07.2025'],
+  women:['https://eparlib.sansad.in/bitstream/123456789/2988504/1/AU1203_MfL9P6.pdf','Lok Sabha, 11.02.2025']};
+let mapMetric='home', mapState=null;
+const STEPI = {work:['card','ask','pin','bank'],home:['list','check','camera','rupee'],road:['map','check','hammer','shield'],women:['women','coins','gift','trend'],skills:['enrol','book','brief','heart'],pension:['form','search','check','bank'],land:['monitor','map','drop','land']};
+const IMGW = {"hero": [480, 662], "band": [480, 960, 1400], "work": [480, 960, 1410], "home": [480, 750], "road": [480, 960, 1600], "women": [480, 960, 1280], "skills": [480, 960, 990], "pension": [480, 960, 1260], "land": [480, 960, 1024]};
+const sa = (k,sizes) => { const w=IMGW[k], d=w[Math.min(1,w.length-1)]; return `src="${k}-${d}.webp" srcset="${w.map(x=>`${k}-${x}.webp ${x}w`).join(', ')}" sizes="${sizes}"`; };
+const IMG = {work:'work.jpg',home:'home.jpg',road:'road.jpg',women:'women.jpg',skills:'skills.jpg',pension:'pension.jpg',land:'land.jpg'};
+const POS = {work:'50% 45%',home:'50% 45%',road:'50% 62%',women:'50% 40%',skills:'50% 40%',pension:'45% 45%',land:'50% 55%'};
+const META = {
+  work:{scheme:'VB-G RAM G',full:'Viksit Bharat – Guarantee for Rozgar and Ajeevika Mission (Gramin)',year:'2026',budget:95692,pct:48},
+  home:{scheme:'PMAY-G',full:'Pradhan Mantri Awaas Yojana – Gramin',year:'2016',budget:54917,pct:70},
+  road:{scheme:'PMGSY',full:'Pradhan Mantri Gram Sadak Yojana',year:'2000',budget:19000,pct:94},
+  women:{scheme:'DAY-NRLM',full:'Deendayal Antyodaya Yojana – National Rural Livelihoods Mission',year:'2011',budget:19200,pct:48},
+  skills:{scheme:'DDU-GKY',full:'Deen Dayal Upadhyaya Grameen Kaushalya Yojana',year:'2014',budget:null,pct:69},
+  pension:{scheme:'NSAP',full:'National Social Assistance Programme',year:'1995',budget:9671,pct:null},
+  land:{scheme:'DILRMP · PMKSY-WDC',full:'Digital India Land Records Modernization Programme · PMKSY Watershed Development',year:'2008',budget:2625,pct:15}
+};
+const BARS = [['work',95692,'VB-G RAM G'],['home',54917,'PMAY-G'],['closing',30000,'MGNREGS'],['women',19200,'DAY-NRLM + DDU-GKY'],['road',19000,'PMGSY'],['pension',9671,'NSAP'],['land',2625,'PMKSY-WDC + DILRMP']];
+const TIMELINE = [['1995','pension','NSAP'],['2000','road','PMGSY'],['2005','work','MGNREGA'],['2008','land','DILRMP'],['2011','women','NRLM'],['2014','skills','DDU-GKY'],['2016','home','PMAY-G'],['2026','work','VB-G RAM G']];
+const SPEECH = {en:'en-IN',hi:'hi-IN',bn:'bn-IN',ta:'ta-IN',te:'te-IN',mr:'mr-IN'};
+const LANGS = [['en','English','English'],['hi','हिन्दी','Hindi'],['bn','বাংলা','Bengali'],['ta','தமிழ்','Tamil'],['te','తెలుగు','Telugu'],['mr','मराठी','Marathi']];
+const PRS = 'https://prsindia.org/files/budget/budget_parliament/2026/DfG_Analysis_2026-27-Rural_Development.pdf';
+
+let lang='en', cur=null, tab=0, screen='home', large=false;
+try { const s=localStorage.getItem('rde-lang'); if (s && T[s]) lang=s; } catch(e) {}
+try { large = localStorage.getItem('rde-large')==='1'; } catch(e) {}
+const $ = id => document.getElementById(id);
+const L = () => T[lang];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const num = n => n.toLocaleString('en-IN');
+const budgetText = k => META[k].budget ? `₹${num(META[k].budget)} ${L().ui.crore}` : L().ui.within;
+const ministry = () => L().ui.eyebrow.split('·')[0].trim();
+const foot = () => `<footer class="foot"><div class="wrap">${esc(L().ui.disc)} <a href="${PRS}" target="_blank" rel="noopener">${esc(L().ui.source)} ↗</a></div></footer>`;
+
+/* speech */
+const synth = window.speechSynthesis; let speakTok=0, speaking=null;
+function allVoices(){ try{ return (synth&&synth.getVoices())||[]; }catch(e){ return []; } }
+function voicesFor(l){ const pre=SPEECH[l].split('-')[0]; return allVoices().filter(v=>v.lang&&v.lang.replace('_','-').toLowerCase().startsWith(pre)); }
+function vScore(v,code){ const n=v.name||''; let s=0;
+  if (/linda/i.test(n)) s+=9;
+  if (/natural|neural|wavenet|studio/i.test(n)) s+=7;
+  if (/google/i.test(n)) s+=5;
+  if (/premium|enhanced/i.test(n)) s+=4;
+  if (/online/i.test(n)) s+=1;
+  if (v.lang.replace('_','-').toLowerCase()===code.toLowerCase()) s+=3;
+  if (/espeak|compact|eloquence/i.test(n)) s-=6;
+  return s; }
+function prefKey(){ return 'rde-voice-'+lang; }
+function pickVoice(){
+  const list=voicesFor(lang); if (!list.length) return allVoices().length?null:undefined;
+  let pref=null; try{ pref=localStorage.getItem(prefKey()); }catch(e){}
+  if (pref){ const v=list.find(x=>x.voiceURI===pref||x.name===pref); if (v) return v; }
+  const code=SPEECH[lang]; return list.slice().sort((a,b)=>vScore(b,code)-vScore(a,code))[0]; }
+function chunks(text){
+  const parts=String(text).replace(/([.!?।])\s+/g,'$1\u0001').split('\u0001'); const out=[]; let cur='';
+  parts.forEach(p=>{ if ((cur+' '+p).length>220 && cur){ out.push(cur); cur=p; } else cur=cur?cur+' '+p:p; });
+  if (cur) out.push(cur); return out; }
+function toast(m){ const t=$('toast'); t.textContent=m; t.hidden=false; clearTimeout(toast._t); toast._t=setTimeout(()=>t.hidden=true,4500); }
+function setListen(b,on){ if(!b) return; b.innerHTML=ic(on?'stop':'speaker')+`<span class="t">${esc(on?L().ui.stop:L().ui.listen)}</span>`; b.classList.toggle('on',on); b.setAttribute('aria-pressed',on?'true':'false'); b.setAttribute('aria-label',on?L().ui.stop:L().ui.listen); }
+function stopSpeak(){ speakTok++; if (synth) synth.cancel(); speaking=null; document.querySelectorAll('.listen').forEach(b=>setListen(b,false)); }
+function speak(text,b){
+  if (!synth || typeof SpeechSynthesisUtterance==='undefined'){ toast(L().ui.noVoice); return; }
+  if (b && speaking===b){ stopSpeak(); return; } stopSpeak();
+  const v=pickVoice(); if (v===null){ toast(L().ui.noVoice); return; }
+  const tok=++speakTok, q=chunks(text); speaking=b||null; setListen(b,true);
+  const next=i=>{ if (tok!==speakTok) return; if (i>=q.length){ if (speaking===b) stopSpeak(); return; }
+    const u=new SpeechSynthesisUtterance(q[i]); u.lang=SPEECH[lang]; if (v) u.voice=v; u.rate=0.95; u.pitch=1;
+    u.onend=()=>next(i+1); u.onerror=()=>{ if (tok===speakTok) stopSpeak(); };
+    synth.speak(u); };
+  setTimeout(()=>next(0), 80);
+}
+function voiceOptions(){ const u=L().ui, list=voicesFor(lang); let pref='auto'; try{ pref=localStorage.getItem(prefKey())||'auto'; }catch(e){}
+  return `<option value="auto">${esc(u.voiceAuto)}${list.length?` (${esc(pickVoice()?.name||'')})`:''}</option>`+
+    list.map(v=>`<option value="${esc(v.voiceURI)}"${v.voiceURI===pref?' selected':''}>${esc(v.name)}</option>`).join(''); }
+if (synth && 'onvoiceschanged' in synth) synth.onvoiceschanged=()=>{ const s=$('voiceSel'); if (s) s.innerHTML=voiceOptions(); };
+function sayText(){
+  const u=L().ui, P=L().p;
+  if (screen==='lang') return u.choose;
+  if (screen==='home') return [u.title, u.sub, ...ORDER.map(k=>P[k].name+'. '+P[k].line)].join('. ').replace(/([.।])\./g,'$1');
+  const p=P[cur], parts=[p.name,p.line,u.tabs[tab]];
+  if (tab===0) parts.push(...p.about);
+  if (tab===1) p.st.forEach(([t,l],j)=>parts.push((j+1)+'. '+t+'. '+l));
+  if (tab===2){ parts.push(p.s1v+' '+p.s1l, p.s2v+' '+p.s2l); if (META[cur].pct!=null&&p.pct) parts.push(p.pct); }
+  if (tab===3) parts.push(...p.ch);
+  return parts.join('. ').replace(/([.।])\./g,'$1');
+}
+
+/* fonts: Latin faces load with the page; Indian scripts load on demand */
+const FONTS = {hi:'Devanagari',mr:'Devanagari',bn:'Bengali',ta:'Tamil',te:'Telugu'};
+function ensureFonts(l){ const s=FONTS[l]; if (!s || document.getElementById('f-'+s)) return;
+  const ln=document.createElement('link'); ln.id='f-'+s; ln.rel='stylesheet';
+  ln.href=`https://fonts.googleapis.com/css2?family=Noto+Sans+${s}:wght@400;500;600&family=Noto+Serif+${s}:wght@500;600&display=swap`;
+  document.head.appendChild(ln); }
+/* chrome */
+function chrome(){
+  const u=L().ui;
+  document.documentElement.lang=lang; ensureFonts(lang);
+  const ml=$('miniLang'); if (ml) ml.setAttribute('aria-label', u.choose);
+  document.documentElement.classList.toggle('lg',large);
+  $('brandName').textContent=u.app; $('brandSub').textContent=ministry();
+  const sel=$('langSel'); sel.innerHTML=LANGS.map(([c,n])=>`<option value="${c}" lang="${c}"${c===lang?' selected':''}>${n}</option>`).join('');
+  sel.setAttribute('aria-label',u.choose);
+  $('lgLabel').textContent=u.large;
+  document.querySelectorAll('[data-large]').forEach(b=>b.setAttribute('aria-pressed',large?'true':'false'));
+  setListen($('hdrListen'), speaking===$('hdrListen'));
+}
+
+
+const mv = (m,st) => { const v=MAPD[m][st]; return (v===undefined||v===null)?null:v; };
+const mn = (m,v) => m==='home'?v[0]:v;
+const mcls = (m,v) => v===null?'nd':'c'+(1+BRK[m].filter(b=>mn(m,v)>=b).length);
+const lk = n => n>=100000 ? `${(n/100000).toLocaleString('en-IN',{maximumFractionDigits:1})} ${L().ui.lakh}` : num(n);
+function mfmt(m,v,st){ const u=L().ui;
+  if (v===null) return u.nodata;
+  if (m==='home') return v[0]+'%';
+  if (m==='road') return num(v)+' km';
+  if (m==='work') return v===0 ? (st==='West Bengal'?'0':u.under1) : `${v} ${u.lakh}`;
+  return num(v); }
+function legendLabels(m){ const b=BRK[m], u=L().ui;
+  const f = m==='home'?(x=>x+'%'):m==='work'?(x=>x):m==='women'?lk:num;
+  const tail = m==='work'?' '+u.lakh:'';
+  return ['< '+f(b[0])+tail, f(b[0])+'–'+f(b[1])+tail, f(b[1])+'–'+f(b[2])+tail, f(b[2])+'–'+f(b[3])+tail, f(b[3])+'+'+tail]; }
+function mapBlock(m, tabs){
+  const u=L().ui, names=Object.keys(GEO);
+  const rows=names.filter(s=>mv(m,s)!==null).sort((a,b)=>mn(m,mv(m,b))-mn(m,mv(m,a)));
+  const max=Math.max(...rows.map(s=>mn(m,mv(m,s))))||1;
+  const sel=mapState && GEO[mapState] ? mapState : null;
+  const order=names.filter(s=>s!==sel).concat(sel?[sel]:[]);
+  const sv=sel?mv(m,sel):null;
+  const card = sel ? `<div class="scard" aria-live="polite"><span class="sn">${esc(sel)}</span><span class="sv">${esc(mfmt(m,sv,sel))}</span>${m==='home'&&sv?`<span class="s2">${esc(u.ofTarget.replace('{c}',num(sv[1])).replace('{t}',num(sv[2])))}</span>`:''}</div>`
+                   : `<div class="scard hint">${ic('pin')}<span>${esc(u.tapHint)}</span></div>`;
+  const lab=legendLabels(m);
+  return `<div class="mapbox" data-metric="${m}" data-tabs="${tabs?1:0}">
+    ${tabs?`<div class="tabs mtabs" role="tablist">${MAPK.map(k=>`<button class="tab" type="button" role="tab" aria-selected="${k===m}" data-metric="${k}">${ic(k)}<span>${esc(L().p[k].name)}</span></button>`).join('')}</div>`:''}
+    <div class="mapgrid">
+      <figure class="map"><svg viewBox="0 0 ${600} ${670}" role="img" aria-label="${esc(u.m[m])}">
+        <defs><pattern id="ndp" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect class="ndp-bg" width="6" height="6"/><line class="ndp-ln" x1="0" y1="0" x2="0" y2="6"/></pattern></defs>
+        ${order.map(s=>{ const v=mv(m,s); return `<path d="${GEO[s]}" class="${mcls(m,v)}${s===sel?' on':''}" data-st="${esc(s)}"><title>${esc(s)}: ${esc(mfmt(m,v,s))}</title></path>`; }).join('')}
+      </svg></figure>
+      <div class="mside">
+        <p class="eyebrow">${esc(u.m[m])}</p>
+        ${card}
+        <div class="legend">${lab.map((x,i)=>`<span><i class="c${i+1}"></i>${esc(x)}</span>`).join('')}<span><i class="nd"></i>${esc(u.nodata)}</span></div>
+        ${u.mn[m]?`<p class="mnote">${esc(u.mn[m])}</p>`:''}
+        <p class="msrc">${esc(u.sources)}: <a href="${MSRC[m][0]}" target="_blank" rel="noopener">${esc(MSRC[m][1])} ↗</a></p>
+        <h3>${esc(u.allStates)}</h3>
+        <ol class="rank">${rows.map((s,i)=>{ const v=mv(m,s); return `<li><button type="button" data-st="${esc(s)}" aria-current="${s===sel}"><span class="rn">${i+1}</span><span>${esc(s)}</span><span class="rv">${esc(mfmt(m,v,s))}</span><span class="rb"><i style="width:${Math.max(mn(m,v)/max*100,.8).toFixed(1)}%"></i></span></button></li>`; }).join('')}</ol>
+      </div>
+    </div></div>`;
+}
+function rerenderMap(box){ box.outerHTML = mapBlock(box.dataset.metric, box.dataset.tabs==='1'); }
+
+function renderHome(){
+  const u=L().ui, P=L().p, max=BARS[0][1];
+  $('s-home').innerHTML = `
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <h1>${esc(u.title)}</h1>
+        <p class="sub">${esc(u.sub)}</p>
+        <button class="cta" type="button" data-scroll="progs"><span>${esc(u.explore)}</span>${ic('arrow')}</button>
+      </div>
+      <figure>
+        <img ${sa('hero','(max-width:800px) 100vw, 46vw')} alt="${esc(P.women.name)}" fetchpriority="high" decoding="async">
+        <figcaption class="chip"><b>${esc(u.budgetTotal)}</b><span>${esc(u.budget)}</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="ease">
+      <button type="button" data-say="page" data-tile="listen"><span class="ic">${ic('speaker')}</span><span><b>${esc(u.listenT)}</b><small>${esc(u.listenS)}</small></span></button>
+      <button type="button" data-go="lang"><span class="ic">${ic('globe')}</span><span><b>${esc(u.langT)}</b><small>${esc(u.langS)}</small></span></button>
+      <button type="button" data-large="1" aria-pressed="${large}"><span class="ic"><span class="aa">Aa</span></span><span><b>${esc(u.largeT)}</b><small>${esc(u.largeS)}</small></span></button>
+    </div>
+
+    <div class="glance">
+      <div><b>${esc(P.home.s1v)}</b><span>${esc(P.home.name)} · ${esc(P.home.s1l)}</span></div>
+      <div><b>${esc(P.road.s1v)}</b><span>${esc(P.road.name)} · ${esc(P.road.s1l)}</span></div>
+      <div><b>${esc(P.women.s1v)}</b><span>${esc(P.women.s1l)}</span></div>
+      <div><b>${esc(P.skills.s1v)}</b><span>${esc(P.skills.s1l)}</span></div>
+    </div>
+
+    <section class="sec" id="progs">
+      <div class="sh"><h2 class="h2">${esc(u.programmes)}</h2></div>
+      <div class="grid">${ORDER.map(k=>`<button class="card" type="button" data-prog="${k}">
+        <span class="ph"><img ${sa(k,'(max-width:640px) 100vw, (max-width:1000px) 50vw, 400px')} alt="" loading="lazy" decoding="async" style="object-position:${POS[k]}"><span class="tag">${esc(META[k].scheme)}</span></span>
+        <span class="bd"><span class="pi">${ic(k)}</span><span class="nm">${esc(P[k].name)}</span><span class="go">${ic('arrow')}</span><span class="ln">${esc(P[k].line)}</span></span></button>`).join('')}</div>
+    </section>
+
+    <section class="sec" id="states">
+      <div class="sh"><h2 class="h2">${esc(u.mapTitle)}</h2><p>${esc(u.mapSub)}</p></div>
+      ${mapBlock(mapMetric,true)}
+    </section>
+
+    <section class="sec">
+      <div class="money">
+        <div>
+          <p class="eyebrow">${esc(u.budget)}</p>
+          <h2 class="h2">${esc(u.budgetTitle)}</h2>
+          <div class="total"><b>${esc(u.budgetTotal)}</b><span>${esc(u.budgetUnit)}</span></div>
+        </div>
+        <div class="bars">${BARS.map(([k,v,ac])=>{
+          const label=k==='closing'?u.closing:P[k].name, isBtn=k!=='closing', tagN=isBtn?'button':'div';
+          return `<${tagN} class="brow${isBtn?'':' dim'}" ${isBtn?`type="button" data-prog="${k}"`:''}>
+            <span class="bl">${esc(label)}<small>${esc(ac)}</small></span><span class="bv">${num(v)}</span>
+            <span class="track"><span class="fill" style="width:${Math.max(v/max*100,1.2).toFixed(1)}%"></span></span></${tagN}>`;}).join('')}</div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sh"><h2 class="h2">${esc(u.timeline)}</h2></div>
+      <div class="rail">${TIMELINE.map(([y,k,ac])=>`<button class="yr" type="button" data-prog="${k}"><span class="y">${y}</span><b>${esc(ac)}</b><span>${esc(P[k].name)}</span></button>`).join('')}</div>
+    </section>
+
+    <section class="sec">
+      <div class="band">
+        <img ${sa('band','(max-width:1216px) 100vw, 1216px')} alt="" loading="lazy" decoding="async">
+        <div class="in"><h2>${esc(u.closingLine)}</h2><button class="cta light" type="button" data-scroll="progs"><span>${esc(u.explore)}</span>${ic('arrow')}</button></div>
+      </div>
+    </section>
+  </div>
+  ${foot()}`;
+}
+
+function renderProg(){
+  const k=cur, p=L().p[k], u=L().ui, m=META[k], i=ORDER.indexOf(k), nextK=ORDER[(i+1)%ORDER.length];
+  let body='';
+  if (tab===0) body=`<ul class="items">${p.about.map(x=>`<li><span class="mk">${ic(k)}</span><span>${esc(x)}</span></li>`).join('')}</ul>`;
+  if (tab===1) body=`<ol class="steps">${p.st.map(([t,l],j)=>`<li><span class="num">${j+1}</span><span class="si">${ic(STEPI[k][j])}</span><b>${esc(t)}</b><span>${esc(l)}</span></li>`).join('')}</ol>`;
+  if (tab===2) body=`<div class="pstats"><div><b>${esc(p.s1v)}</b><span>${esc(p.s1l)}</span></div><div><b>${esc(p.s2v)}</b><span>${esc(p.s2l)}</span></div></div>`+
+    (m.pct!=null&&p.pct?`<div class="meter" role="img" aria-label="${esc(p.pct)}"><div class="top"><p>${esc(p.pct)}</p><b>${m.pct}%</b></div><div class="tr"><div class="fl" style="width:${m.pct}%"></div></div></div>`:'');
+  if (tab===2 && MAPK.includes(k)) body+=`<div class="pmap"><h3 class="h2">${esc(u.mapTitle)}</h3>${mapBlock(k,false)}</div>`;
+  if (tab===3) body=`<ul class="items warn">${p.ch.map(x=>`<li><span class="mk">${ic('warn')}</span><span>${esc(x)}</span></li>`).join('')}</ul>`;
+  const others=ORDER.filter(o=>o!==k);
+  $('s-prog').innerHTML = `
+  <div class="wrap">
+    <div class="crumbrow"><button class="crumb" type="button" data-go="home">${ic('back')}<span>${esc(u.home)}</span></button></div>
+    <div class="pb">
+      <img ${sa(k,'(max-width:1216px) 100vw, 1216px')} alt="${esc(p.name)}" decoding="async" style="object-position:${POS[k]}">
+      <div class="in">
+        <span class="pic">${ic(k)}</span>
+        <h1>${esc(p.name)}</h1>
+        <p class="full" lang="en">${esc(m.full)}</p>
+        <p class="line">${esc(p.line)}</p>
+      </div>
+    </div>
+    <div class="facts">
+      <div><span class="fi">${ic('rupee')}</span><span><span class="dt">${esc(u.budget)}</span><span class="dd">${esc(budgetText(k))}</span></span></div>
+      <div><span class="fi">${ic('cal')}</span><span><span class="dt">${esc(u.started)}</span><span class="dd">${esc(m.year)}</span></span></div>
+      <div><span class="fi">${ic('tag')}</span><span><span class="dt">${esc(u.scheme)}</span><span class="dd">${esc(m.scheme)}</span></span></div>
+    </div>
+    <div class="tabs" role="tablist">${u.tabs.map((t,j)=>`<button class="tab" type="button" role="tab" aria-selected="${j===tab}" data-tab="${j}">${esc(t)}</button>`).join('')}</div>
+    <div role="tabpanel">
+      <div class="phead"><h2 class="h2">${esc(u.tabs[tab])}</h2><button class="pill accent listen" type="button" data-say="page"></button></div>
+      ${body}
+    </div>
+    <div class="navrow">
+      <button class="navbtn" type="button" data-go="home">${ic('grid')}<span>${esc(u.home)}</span></button>
+      <div class="dots" aria-hidden="true">${ORDER.map((o,j)=>`<i class="${j===i?'on':''}"></i>`).join('')}</div>
+      <button class="navbtn primary" type="button" data-prog="${nextK}"><span>${esc(u.next)}</span>${ic('arrow')}</button>
+    </div>
+    <div class="more"><h2 class="h2" style="font-size:clamp(1.4rem,2.4vw,1.8rem)">${esc(u.programmes)}</h2>
+      <div class="row">${others.map(o=>`<button class="mini" type="button" data-prog="${o}"><img ${sa(o,'(max-width:640px) 60vw, 240px')} alt="" loading="lazy" decoding="async" style="object-position:${POS[o]}"><span>${ic(o)}${esc(L().p[o].name)}</span></button>`).join('')}</div></div>
+  </div>
+  ${foot()}`;
+  document.querySelectorAll('#s-prog .listen').forEach(b=>setListen(b,false));
+}
+
+function renderLang(){
+  $('s-lang').innerHTML=`<div class="wrap lwrap">
+    <div class="crumbrow"><button class="crumb" type="button" data-go="back">${ic('back')}<span>${esc(cur&&lastScreen==='prog'?L().p[cur].name:L().ui.home)}</span></button></div>
+    <p class="eyebrow">Language · भाषा · ভাষা · மொழி · భాష</p><h1 class="h2">${esc(L().ui.choose)}</h1>
+    <div class="langs">${LANGS.map(([c,n,e])=>`<button class="lang" type="button" lang="${c}" data-lang="${c}" aria-pressed="${c===lang}"><b>${n}</b><small lang="en">${e}</small></button>`).join('')}</div>
+    <div class="voicebox"><label for="voiceSel">${esc(L().ui.voice)}</label>
+      <span class="sel"><select id="voiceSel">${voiceOptions()}</select><svg class="ico c" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+      <button class="pill accent listen-test" type="button" data-vtest="1">${ic('speaker')}<span>${esc(L().ui.voiceTest)}</span></button>
+      <p>${esc(L().ui.voiceNote)}</p></div></div>`;
+}
+
+let lastScreen='home';
+function show(id){ ['s-home','s-prog','s-lang'].forEach(s=>$(s).hidden=(s!==id)); }
+function setHash(h, push){ const url=h?'#'+h:location.pathname+location.search; if ((location.hash||'')===(h?'#'+h:'')) return;
+  try{ push ? history.pushState(null,'',url) : history.replaceState(null,'',url); }catch(e){} }
+function render(){ if (screen==='prog') renderProg(); else if (screen==='lang') renderLang(); else renderHome(); }
+function go(scr,k,fromHistory){ stopSpeak();
+  if (scr!=='lang') lastScreen=scr;
+  screen=scr; mapState=null; if (scr==='prog'){ cur=k; tab=0; }
+  render(); show('s-'+scr); window.scrollTo(0,0);
+  if (!fromHistory) setHash(scr==='prog'?k:scr==='lang'?'languages':'', true); }
+function setLang(c){ lang=c; try{localStorage.setItem('rde-lang',c);}catch(e){} stopSpeak(); chrome(); }
+function setLarge(on){ large=on; try{localStorage.setItem('rde-large',on?'1':'0');}catch(e){} chrome(); }
+
+document.addEventListener('change', e=>{ if (e.target.id==='voiceSel'){ try{ if (e.target.value==='auto') localStorage.removeItem(prefKey()); else localStorage.setItem(prefKey(), e.target.value); }catch(err){} } });
+document.addEventListener('click', e=>{ const p=e.target.closest('path[data-st]'); if (!p) return; const box=p.closest('.mapbox'); mapState=p.dataset.st; rerenderMap(box); });
+$('langSel').addEventListener('change', e=>{ const y=window.scrollY; setLang(e.target.value); render(); window.scrollTo(0,y); });
+
+document.addEventListener('click', e=>{
+  const b=e.target.closest('button'); if (!b) return;
+  if (b.dataset.skip){ const m=$('main'); m.focus(); m.scrollIntoView(); return; }
+  if (b.dataset.metric){ mapMetric=b.dataset.metric; mapState=null; const box=b.closest('.mapbox'); box.dataset.metric=mapMetric; rerenderMap(box); return; }
+  if (b.dataset.st){ const box=b.closest('.mapbox'); mapState=b.dataset.st; rerenderMap(box); return; }
+  if (b.dataset.vtest){ stopSpeak(); speak(L().ui.title+'. '+L().ui.sub, null); return; }
+  if (b.dataset.lang){ setLang(b.dataset.lang); go(lastScreen, cur); return; }
+  if (b.dataset.prog){ go('prog',b.dataset.prog); return; }
+  if (b.dataset.tab){ stopSpeak(); tab=+b.dataset.tab; renderProg(); return; }
+  if (b.dataset.large){ setLarge(!large); return; }
+  if (b.dataset.scroll){ const t=$(b.dataset.scroll); if (t) t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'}); return; }
+  if (b.dataset.say){ const target = b.dataset.tile ? $('hdrListen') : b; speak(sayText(), target); return; }
+  if (b.dataset.go==='back'){ if (history.length>1 && location.hash==='#languages') history.back(); else go(lastScreen, cur); return; }
+  if (b.dataset.go==='lang'){ go('lang'); return; }
+  if (b.dataset.go==='home'||b.id==='brand'){ go('home'); return; }
+});
+
+chrome();
+function route(fromHistory){ const h=(location.hash||'').replace('#','');
+  if (ORDER.includes(h)) go('prog',h,fromHistory); else if (h==='languages') go('lang',null,fromHistory); else go('home',null,fromHistory); }
+window.addEventListener('popstate', ()=>route(true));
+route(true);
+})();
+
+</script>
 </body>
 </html>
